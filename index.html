@@ -4,11 +4,177 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>儿童学习游戏平台 🎮</title>
+    <!-- 引入汉字笔画动画库 -->
+    <script src="https://cdn.jsdelivr.net/npm/hanzi-writer@3.5/dist/hanzi-writer.min.js"></script>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+        }
+        
+        /* 汉字学习优化样式 */
+        .chinese-learning-container {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin: 20px 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .character-display-area {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .pinyin-text {
+            font-size: 32px;
+            color: #666;
+            font-weight: 300;
+        }
+        
+        .main-character {
+            font-size: 150px;
+            font-family: 'KaiTi', 'SimKai', serif;
+            color: #333;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            cursor: pointer;
+            user-select: none;
+        }
+        
+        .main-character:hover {
+            transform: scale(1.05);
+            color: #667eea;
+            text-shadow: 0 0 20px rgba(102, 126, 234, 0.3);
+        }
+        
+        .main-character:active {
+            transform: scale(0.95);
+        }
+        
+        .stroke-animation-container {
+            width: 200px;
+            height: 200px;
+            border: 3px solid #f093fb;
+            border-radius: 15px;
+            background: linear-gradient(135deg, #fff 0%, #f9f9f9 100%);
+            margin: 20px auto;
+        }
+        
+        .pictograph-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        .pictograph-stage {
+            text-align: center;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            transition: transform 0.3s;
+        }
+        
+        .pictograph-stage:hover {
+            transform: translateY(-5px);
+        }
+        
+        .pictograph-stage img {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            margin-bottom: 10px;
+        }
+        
+        .pictograph-stage .label {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .meaning-image {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .learning-mode-toggle {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        .mode-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            background: #e0e0e0;
+            color: #333;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 16px;
+        }
+        
+        .mode-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .animate-stroke-btn {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(240, 147, 251, 0.3);
+        }
+        
+        .animate-stroke-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(240, 147, 251, 0.4);
+        }
+        
+        .meaning-image-container {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin: 20px 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        @media (max-width: 768px) {
+            .chinese-learning-container {
+                padding: 20px;
+            }
+            
+            .main-character {
+                font-size: 100px;
+            }
+            
+            .pinyin-text {
+                font-size: 24px;
+            }
+            
+            .stroke-animation-container {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .meaning-image {
+                width: 150px;
+                height: 150px;
+            }
         }
 
         body {
@@ -679,13 +845,30 @@
             background: white;
             box-shadow: -5px 0 30px rgba(0, 0, 0, 0.3);
             transition: right 0.3s ease;
-            z-index: 2000;
+            z-index: 2001;
             overflow-y: auto;
             padding: 20px;
         }
-
+        
         .config-panel.show {
             right: 0;
+        }
+        
+        /* 配置面板遮罩层 */
+        .config-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            display: none;
+            cursor: pointer;
+        }
+        
+        .config-overlay.show {
+            display: block;
         }
 
         .panel-header {
@@ -1000,9 +1183,37 @@
             </div>
 
             <div class="game-area">
-                <div class="content-display">
-                    <div class="main-content" id="chineseDisplay" onclick="playCurrentChinese()">人</div>
-                    <p class="hint-text">点击汉字听发音，选择对应的图片</p>
+                <!-- 拼音显示 -->
+                <div style="text-align: center; margin-bottom: 10px;">
+                    <div class="pinyin-text" id="chinesePinyin" style="font-size: 32px; color: #666; font-weight: 300;">rén</div>
+                </div>
+                
+                <!-- 主汉字显示区 -->
+                <div style="text-align: center;">
+                    <div class="main-character" id="chineseDisplay" onclick="playCurrentChinese()" style="font-size: 150px; cursor: pointer;" title="点击发音">人</div>
+                    <p style="color: #888; font-size: 14px; margin-top: 10px;">💡 点击汉字听发音</p>
+                </div>
+                
+                <!-- 笔画动画容器 -->
+                <div style="text-align: center; margin: 20px 0;">
+                    <div class="stroke-animation-container" id="strokeAnimationContainer" style="width: 200px; height: 200px; border: 3px solid #f093fb; border-radius: 15px; margin: 0 auto;"></div>
+                    <button class="animate-stroke-btn" onclick="animateCharacterStroke()" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; border: none; padding: 12px 30px; border-radius: 25px; font-size: 18px; cursor: pointer; margin-top: 15px;">
+                        ✍️ 观看笔画顺序
+                    </button>
+                </div>
+                
+                <!-- 象形字演变展示区 -->
+                <div class="pictograph-container" id="pictographContainer" style="display: none; margin: 20px 0;">
+                    <h3 style="text-align: center; color: #666; margin-bottom: 15px;">
+                        📜 象形字演变过程
+                    </h3>
+                    <div id="pictographStages" style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;"></div>
+                    <p style="text-align: center; color: #888; margin-top: 10px; font-size: 14px;" id="pictographDescription"></p>
+                </div>
+                
+                <!-- 含义图片展示区（非象形字） -->
+                <div id="meaningImageContainer" style="display: none; text-align: center; margin: 20px 0; background: white; border-radius: 20px; padding: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                    <!-- 动态生成emoji显示 -->
                 </div>
 
                 <div class="choices-grid" id="chineseChoices">
@@ -1067,6 +1278,25 @@
 
     <!-- 遮罩层 -->
     <div class="overlay" id="overlay"></div>
+
+    <!-- 配置面板遮罩 -->
+    <div class="config-overlay" id="configOverlay" onclick="closeConfigPanel()"></div>
+    
+    <!-- 配置面板 -->
+    <div class="config-panel" id="configPanel">
+        <div class="panel-header">
+            <h3>🎨 配置图片</h3>
+            <button class="close-panel" onclick="toggleConfigPanel()">×</button>
+        </div>
+        <p style="color: #666; margin-bottom: 15px; font-size: 14px;">点击输入框,输入emoji表情或复制粘贴emoji</p>
+        <div id="emojiConfigList"></div>
+        <button class="btn btn-primary" onclick="saveEmojiConfig()" style="width: 100%; margin-top: 20px;">
+            保存配置 ✅
+        </button>
+        <button class="btn btn-danger" onclick="resetEmojiConfig()" style="width: 100%; margin-top: 10px;">
+            恢复默认 🔄
+        </button>
+    </div>
 
     <script>
         // ===== 游戏数据 =====
@@ -1333,25 +1563,79 @@
             ]
         };
 
-        // 汉字游戏数据 - 基于四五快读第一册
+        // 汉字游戏数据 - 基于四五快读第一册（增强版：添加象形字信息和演变图片）
         const chineseData = {
             lesson1: [
-                { char: "人", pinyin: "rén", emoji: "👤", image: "https://source.unsplash.com/featured/?person,people" },
-                { char: "口", pinyin: "kǒu", emoji: "👄", image: "https://source.unsplash.com/featured/?mouth" },
-                { char: "大", pinyin: "dà", emoji: "📏", image: "https://source.unsplash.com/featured/?big,large" },
-                { char: "中", pinyin: "zhōng", emoji: "🎯", image: "https://source.unsplash.com/featured/?middle,center" },
-                { char: "小", pinyin: "xiǎo", emoji: "🔬", image: "https://source.unsplash.com/featured/?small,little" },
-                { char: "哭", pinyin: "kū", emoji: "😢", image: "https://source.unsplash.com/featured/?crying,sad" },
-                { char: "笑", pinyin: "xiào", emoji: "😄", image: "https://source.unsplash.com/featured/?smile,happy" },
-                { char: "一", pinyin: "yī", emoji: "1️⃣", image: "https://source.unsplash.com/featured/?one" },
-                { char: "上", pinyin: "shàng", emoji: "⬆️", image: "https://source.unsplash.com/featured/?up,above" },
-                { char: "下", pinyin: "xià", emoji: "⬇️", image: "https://source.unsplash.com/featured/?down,below" },
-                { char: "爸", pinyin: "bà", emoji: "👨", image: "https://source.unsplash.com/featured/?father,dad" },
-                { char: "妈", pinyin: "mā", emoji: "👩", image: "https://source.unsplash.com/featured/?mother,mom" },
-                { char: "天", pinyin: "tiān", emoji: "🌤️", image: "https://source.unsplash.com/featured/?sky,heaven" },
-                { char: "太", pinyin: "tài", emoji: "☀️", image: "https://source.unsplash.com/featured/?sun,sunny" },
-                { char: "月", pinyin: "yuè", emoji: "🌙", image: "https://source.unsplash.com/featured/?moon" },
-                { char: "二", pinyin: "èr", emoji: "2️⃣", image: "https://source.unsplash.com/featured/?two" }
+                { 
+                    char: "人", 
+                    pinyin: "rén", 
+                    emoji: "👤", 
+                    image: "https://source.unsplash.com/featured/?person,people",
+                    isPictograph: true,
+                    pictograph: {
+                        origin: "甲骨文",
+                        description: "像人的侧面站立形状",
+                        stages: [
+                            { url: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/U30007_u4eba.svg/120px-U30007_u4eba.svg.png", label: "甲骨文" },
+                            { url: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/%E4%BA%BA-seal.svg/120px-%E4%BA%BA-seal.svg.png", label: "小篆" },
+                            { url: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Seal_%E4%BA%BA.svg/120px-Seal_%E4%BA%BA.svg.png", label: "隶书" }
+                        ]
+                    }
+                },
+                { 
+                    char: "口", 
+                    pinyin: "kǒu", 
+                    emoji: "👄", 
+                    image: "https://source.unsplash.com/featured/?mouth",
+                    isPictograph: true,
+                    pictograph: {
+                        origin: "甲骨文",
+                        description: "像嘴巴张开的形状",
+                        stages: [
+                            { url: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/U53e3_u53e3.svg/120px-U53e3_u53e3.svg.png", label: "甲骨文" },
+                            { url: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/%E5%8F%A3-seal.svg/120px-%E5%8F%A3-seal.svg.png", label: "小篆" }
+                        ]
+                    }
+                },
+                { char: "大", pinyin: "dà", emoji: "📏", image: "https://source.unsplash.com/featured/?big,large", isPictograph: false },
+                { char: "中", pinyin: "zhōng", emoji: "🎯", image: "https://source.unsplash.com/featured/?middle,center", isPictograph: false },
+                { char: "小", pinyin: "xiǎo", emoji: "🔬", image: "https://source.unsplash.com/featured/?small,little", isPictograph: false },
+                { char: "哭", pinyin: "kū", emoji: "😢", image: "https://source.unsplash.com/featured/?crying,sad", isPictograph: false },
+                { char: "笑", pinyin: "xiào", emoji: "😄", image: "https://source.unsplash.com/featured/?smile,happy", isPictograph: false },
+                { 
+                    char: "一", 
+                    pinyin: "yī", 
+                    emoji: "1️⃣", 
+                    image: "https://source.unsplash.com/featured/?one",
+                    isPictograph: true,
+                    pictograph: {
+                        origin: "指事字",
+                        description: "用一横表示数字一",
+                        stages: []
+                    }
+                },
+                { char: "上", pinyin: "shàng", emoji: "⬆️", image: "https://source.unsplash.com/featured/?up,above", isPictograph: false },
+                { char: "下", pinyin: "xià", emoji: "⬇️", image: "https://source.unsplash.com/featured/?down,below", isPictograph: false },
+                { char: "爸", pinyin: "bà", emoji: "👨", image: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=400&h=400&fit=crop", isPictograph: false },
+                { char: "妈", pinyin: "mā", emoji: "👩", image: "https://images.unsplash.com/photo-1544005313-94ddf02805df?w=400&h=400&fit=crop", isPictograph: false },
+                { char: "天", pinyin: "tiān", emoji: "🌤️", image: "https://images.unsplash.com/photo-1534088568595-a066f410bcda?w=400&h=400&fit=crop", isPictograph: false },
+                { char: "太", pinyin: "tài", emoji: "☀️", image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=400&fit=crop", isPictograph: false },
+                { 
+                    char: "月", 
+                    pinyin: "yuè", 
+                    emoji: "🌙", 
+                    image: "https://source.unsplash.com/featured/?moon",
+                    isPictograph: true,
+                    pictograph: {
+                        origin: "甲骨文",
+                        description: "像月亮弯弯的形状",
+                        stages: [
+                            { url: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/U6708_u6708.svg/120px-U6708_u6708.svg.png", label: "甲骨文" },
+                            { url: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/%E6%9C%88-seal.svg/120px-%E6%9C%88-seal.svg.png", label: "小篆" }
+                        ]
+                    }
+                },
+                { char: "二", pinyin: "èr", emoji: "2️⃣", image: "https://source.unsplash.com/featured/?two", isPictograph: false }
             ],
             lesson2: [
                 { char: "地", pinyin: "dì", emoji: "🌍", image: "https://source.unsplash.com/featured/?earth,ground" },
@@ -1549,17 +1833,78 @@
         // ===== 音频管理 =====
         const synth = window.speechSynthesis;
 
+        // 获取最佳语音
+        function getBestVoice(lang) {
+            const voices = synth.getVoices();
+            
+            // 中文语音优先级
+            if (lang.startsWith('zh')) {
+                const chineseVoices = [
+                    'Google 普通话（中国大陆）',
+                    'Microsoft Yaoyao Online (Natural) - Chinese (Mainland)',
+                    'Ting-Ting',
+                    'Sin-Ji',
+                    'Li-mu'
+                ];
+                
+                for (let preferred of chineseVoices) {
+                    const voice = voices.find(v => v.name.includes(preferred));
+                    if (voice) return voice;
+                }
+                
+                // 如果没有找到优先语音，使用第一个中文语音
+                const chineseVoice = voices.find(v => v.lang.includes('zh'));
+                if (chineseVoice) return chineseVoice;
+            }
+            
+            // 英文语音优先级
+            if (lang.startsWith('en')) {
+                const englishVoices = [
+                    'Google US English',
+                    'Microsoft Samantha Online (Natural) - English (United States)',
+                    'Microsoft Mark Online (Natural) - English (United States)',
+                    'Samantha',
+                    'Alex',
+                    'Victoria',
+                    'Daniel'
+                ];
+                
+                for (let preferred of englishVoices) {
+                    const voice = voices.find(v => v.name.includes(preferred));
+                    if (voice) return voice;
+                }
+                
+                // 如果没有找到优先语音，使用第一个英文语音
+                const englishVoice = voices.find(v => v.lang.includes('en-US') || v.lang.includes('en_US'));
+                if (englishVoice) return englishVoice;
+            }
+            
+            // 返回默认语音
+            return voices[0];
+        }
+        
         function speak(text, lang = 'en-US') {
             synth.cancel();
             const utterance = new SpeechSynthesisUtterance(text);
             utterance.lang = lang;
-            utterance.rate = 0.85;
+            utterance.rate = 0.85; // 稍微慢一点，更清晰
             utterance.pitch = 1.0;
+            utterance.volume = 1.0;
+            
+            // 使用最佳语音
+            const bestVoice = getBestVoice(lang);
+            if (bestVoice) {
+                utterance.voice = bestVoice;
+            }
+            
             synth.speak(utterance);
         }
 
         // ===== 页面导航 =====
         function goHome() {
+            // 关闭配置面板
+            closeConfigPanel();
+            
             document.querySelectorAll('.game-page').forEach(page => {
                 page.classList.remove('active');
             });
@@ -1571,6 +1916,9 @@
         }
 
         function startGame(gameType) {
+            // 关闭配置面板
+            closeConfigPanel();
+            
             document.getElementById('homePage').style.display = 'none';
             currentGame = gameType;
 
@@ -1666,7 +2014,7 @@
                 gameState.alphabet.correct++;
                 gameState.alphabet.score += 10;
 
-                showSuccessFeedback();
+                showSuccessFeedback('en-US');  // 字母游戏用英文鼓励
                 updateAlphabetScore();
                 saveProgress(); // 保存进度
 
@@ -1794,7 +2142,7 @@
                 card.classList.add('correct');
                 gameState.word.correct++;
                 gameState.word.score += 10;
-                showSuccessFeedback();
+                showSuccessFeedback('en-US');  // 单词游戏用英文鼓励
                 updateWordScore();
                 saveProgress(); // 保存进度
                 setTimeout(() => {
@@ -1828,29 +2176,175 @@
 
         // ===== 汉字游戏逻辑 =====
         let currentChineseData = null; // 当前汉字数据
+        let currentWriter = null; // 当前汉字笔画动画实例
         
         function startChineseGame() {
-            nextChineseRound();
+            try {
+                nextChineseRound();
+            } catch (error) {
+                console.error('汉字游戏启动失败:', error);
+                alert('游戏启动失败，请刷新页面重试');
+            }
         }
 
-        function nextChineseRound() {
-            document.getElementById('chineseNextBtn').style.display = 'none';
-            gameState.chinese.hasAnswered = false;
+        async function nextChineseRound() {
+            try {
+                document.getElementById('chineseNextBtn').style.display = 'none';
+                gameState.chinese.hasAnswered = false;
+                
+                // 从所有课程中随机选择一个汉字
+                const lessons = Object.keys(chineseData);
+                const randomLesson = lessons[Math.floor(Math.random() * lessons.length)];
+                const characters = chineseData[randomLesson];
+                currentChineseData = characters[Math.floor(Math.random() * characters.length)];
+                
+                // 显示汉字和拼音
+                document.getElementById('chineseDisplay').textContent = currentChineseData.char;
+                document.getElementById('chinesePinyin').textContent = currentChineseData.pinyin;
+                
+                // 初始化笔画动画容器
+                initStrokeAnimation(currentChineseData.char);
+                
+                // 展示象形字演变或含义图片
+                if (currentChineseData.isPictograph && currentChineseData.pictograph) {
+                    displayPictograph();
+                } else {
+                    displayMeaningImage();
+                }
+                
+                // 生成选择项
+                generateChineseChoices();
+            } catch (error) {
+                console.error('汉字游戏初始化失败:', error);
+            }
+        }
+        
+        // 发音函数（汉字专用）
+        async function speakCharacter(char) {
+            return new Promise((resolve) => {
+                const utterance = new SpeechSynthesisUtterance(char);
+                utterance.lang = 'zh-CN';
+                utterance.rate = 0.85;
+                utterance.pitch = 1.0;
+                utterance.volume = 1.0;
+                
+                // 使用最佳中文语音
+                const bestVoice = getBestVoice('zh-CN');
+                if (bestVoice) {
+                    utterance.voice = bestVoice;
+                }
+                
+                utterance.onend = resolve;
+                speechSynthesis.speak(utterance);
+            });
+        }
+        
+        // 初始化笔画动画
+        function initStrokeAnimation(char) {
+            const container = document.getElementById('strokeAnimationContainer');
+            container.innerHTML = '<p style="color: #999; text-align: center; padding: 80px 20px;">加载笔画数据...</p>';
             
-            // 从所有课程中随机选择一个汉字
-            const lessons = Object.keys(chineseData);
-            const randomLesson = lessons[Math.floor(Math.random() * lessons.length)];
-            const characters = chineseData[randomLesson];
-            currentChineseData = characters[Math.floor(Math.random() * characters.length)];
+            // 检查Hanzi Writer是否已加载
+            if (typeof HanziWriter === 'undefined') {
+                console.error('Hanzi Writer库未加载');
+                container.innerHTML = '<p style="color: #999; text-align: center; padding: 80px 20px;">笔画动画库加载失败，请刷新页面</p>';
+                return;
+            }
             
-            // 显示汉字
-            document.getElementById('chineseDisplay').textContent = currentChineseData.char;
+            try {
+                container.innerHTML = ''; // 清空之前的内容
+                
+                // 创建Hanzi Writer实例
+                currentWriter = HanziWriter.create('strokeAnimationContainer', char, {
+                    width: 200,
+                    height: 200,
+                    padding: 5,
+                    strokeColor: '#f093fb',
+                    radicalColor: '#f5576c',
+                    strokeAnimationSpeed: 1,
+                    delayBetweenStrokes: 300,
+                    showOutline: true,
+                    showCharacter: false,
+                    outlineColor: '#e0e0e0',
+                    drawingColor: '#667eea',
+                    onLoadCharDataSuccess: function(data) {
+                        // 笔画数据加载成功
+                    },
+                    onLoadCharDataError: function(reason) {
+                        // 静默处理错误，显示友好提示
+                        container.innerHTML = '<p style="color: #999; text-align: center; padding: 80px 20px; font-size: 14px;">📝 笔画动画暂时不可用<br><span style="font-size: 12px; color: #bbb;">请检查网络连接</span></p>';
+                    }
+                });
+            } catch (error) {
+                console.error('初始化笔画动画失败:', error);
+                container.innerHTML = '<p style="color: #999; text-align: center; padding: 80px 20px;">笔画动画初始化失败</p>';
+            }
+        }
+        
+        // 播放笔画动画
+        function animateCharacterStroke() {
+            if (currentWriter) {
+                currentWriter.animateCharacter({
+                    onComplete: function() {
+                        console.log('笔画动画播放完成');
+                    }
+                });
+            }
+        }
+        
+        // 展示象形字演变
+        function displayPictograph() {
+            const pictographContainer = document.getElementById('pictographContainer');
+            const meaningImageContainer = document.getElementById('meaningImageContainer');
+            const pictographStages = document.getElementById('pictographStages');
+            const pictographDescription = document.getElementById('pictographDescription');
             
-            // 生成选择项
-            generateChineseChoices();
+            // 隐藏含义图片容器
+            meaningImageContainer.style.display = 'none';
             
-            // 自动朗读
-            playCurrentChinese();
+            // 显示象形字容器
+            pictographContainer.style.display = 'flex';
+            
+            // 设置描述
+            pictographDescription.textContent = currentChineseData.pictograph.description;
+            
+            // 清空之前的内容
+            pictographStages.innerHTML = '';
+            
+            // 添加演变阶段
+            if (currentChineseData.pictograph.stages && currentChineseData.pictograph.stages.length > 0) {
+                currentChineseData.pictograph.stages.forEach(stage => {
+                    const stageDiv = document.createElement('div');
+                    stageDiv.className = 'pictograph-stage';
+                    stageDiv.innerHTML = `
+                        <img src="${stage.url}" alt="${stage.label}" onerror="this.style.display='none'">
+                        <div class="label">${stage.label}</div>
+                    `;
+                    pictographStages.appendChild(stageDiv);
+                });
+            } else {
+                pictographStages.innerHTML = '<p style="color: #999; text-align: center;">演变图片暂无</p>';
+            }
+        }
+        
+        // 展示含义图片（非象形字）
+        function displayMeaningImage() {
+            const pictographContainer = document.getElementById('pictographContainer');
+            const meaningImageContainer = document.getElementById('meaningImageContainer');
+            
+            // 隐藏象形字容器
+            pictographContainer.style.display = 'none';
+            
+            // 显示含义图片容器
+            meaningImageContainer.style.display = 'block';
+            
+            // 使用大号emoji显示含义
+            const emojiDisplay = document.getElementById('meaningImageContainer');
+            emojiDisplay.innerHTML = `
+                <h3 style="color: #666; margin-bottom: 15px;">🖼️ 图片含义</h3>
+                <div style="font-size: 120px; line-height: 1;">${currentChineseData.emoji}</div>
+                <p style="color: #888; margin-top: 10px; font-size: 14px;">${currentChineseData.char}: ${currentChineseData.pinyin}</p>
+            `;
         }
 
         function generateChineseChoices() {
@@ -1914,7 +2408,7 @@
                 card.classList.add('correct');
                 gameState.chinese.correct++;
                 gameState.chinese.score += 10;
-                showSuccessFeedback();
+                showSuccessFeedback('zh-CN');  // 汉字游戏用中文鼓励
                 updateChineseScore();
                 saveProgress(); // 保存进度
                 setTimeout(() => {
@@ -1931,7 +2425,7 @@
 
         function playCurrentChinese() {
             const char = document.getElementById('chineseDisplay').textContent;
-            speak(char, 'zh-CN');
+            speakCharacter(char);
         }
 
         function updateChineseScore() {
@@ -2030,15 +2524,21 @@
         }
 
         // ===== 反馈系统 =====
-        function showSuccessFeedback() {
-            const messages = ["太棒了！", "真聪明！", "Excellent!", "Wonderful!"];
-            const message = messages[Math.floor(Math.random() * messages.length)];
+        function showSuccessFeedback(lang = 'en-US') {
+            // 根据语言选择鼓励语
+            const messages = {
+                'en-US': ["Excellent!", "Wonderful!", "Great job!", "Perfect!", "Amazing!"],
+                'zh-CN': ["太棒了！", "真聪明！", "做得好！", "非常棒！", "继续加油！"]
+            };
+            
+            const langMessages = messages[lang] || messages['en-US'];
+            const message = langMessages[Math.floor(Math.random() * langMessages.length)];
 
             showFeedback(message, "#4CAF50");
             showStars();
 
-            // 朗读鼓励语
-            speak(message, 'en-US');
+            // 用对应语言朗读鼓励语
+            speak(message, lang);
         }
 
         function showErrorFeedback(msg) {
@@ -2105,22 +2605,44 @@
             currentConfigType = 'alphabet';
             initAlphabetConfigList();
             document.getElementById('configPanel').classList.add('show');
+            document.getElementById('configOverlay').classList.add('show');
         }
 
         function openWordConfig() {
             currentConfigType = 'word';
             initWordConfigList();
             document.getElementById('configPanel').classList.add('show');
+            document.getElementById('configOverlay').classList.add('show');
         }
 
         function openChineseConfig() {
             currentConfigType = 'chinese';
             initChineseConfigList();
             document.getElementById('configPanel').classList.add('show');
+            document.getElementById('configOverlay').classList.add('show');
         }
 
         function toggleConfigPanel() {
-            document.getElementById('configPanel').classList.toggle('show');
+            const panel = document.getElementById('configPanel');
+            const overlay = document.getElementById('configOverlay');
+            const isOpen = panel.classList.contains('show');
+            
+            if (isOpen) {
+                // 关闭
+                panel.classList.remove('show');
+                overlay.classList.remove('show');
+            } else {
+                // 打开
+                panel.classList.add('show');
+                overlay.classList.add('show');
+            }
+        }
+        
+        function closeConfigPanel() {
+            const panel = document.getElementById('configPanel');
+            const overlay = document.getElementById('configOverlay');
+            panel.classList.remove('show');
+            overlay.classList.remove('show');
         }
 
         function initAlphabetConfigList() {
@@ -2333,19 +2855,3 @@
     </script>
 </body>
 </html>
-
-<!-- 配置面板 -->
-<div class="config-panel" id="configPanel">
-    <div class="panel-header">
-        <h3>🎨 配置图片</h3>
-        <button class="close-panel" onclick="toggleConfigPanel()">×</button>
-    </div>
-    <p style="color: #666; margin-bottom: 15px; font-size: 14px;">点击输入框,输入emoji表情或复制粘贴emoji</p>
-    <div id="emojiConfigList"></div>
-    <button class="btn btn-primary" onclick="saveEmojiConfig()" style="width: 100%; margin-top: 20px;">
-        保存配置 ✅
-    </button>
-    <button class="btn btn-danger" onclick="resetEmojiConfig()" style="width: 100%; margin-top: 10px;">
-        恢复默认 🔄
-    </button>
-</div>
