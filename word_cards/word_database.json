@@ -1,0 +1,1018 @@
+{
+  "metadata": {
+    "created_at": "2026-03-18 18:45:10",
+    "last_updated": "2026-03-24 16:56:28",
+    "total_words": 53
+  },
+  "words": {
+    "Dog": {
+      "chinese": "小狗",
+      "category": "animals",
+      "emoji": "🐕",
+      "color": "#FF8C00",
+      "bg": "FFF8DC",
+      "difficulty": 1,
+      "phrases": [
+        "This is a dog.",
+        "I have a dog.",
+        "The dog is cute."
+      ],
+      "sentences": [
+        "Look at the dog! It's running.",
+        "My dog likes to play with a ball.",
+        "Can you say 'dog'?"
+      ],
+      "added_at": "2026-03-18"
+    },
+    "Cat": {
+      "chinese": "小猫",
+      "category": "animals",
+      "emoji": "🐱",
+      "color": "#FFB6C1",
+      "bg": "FFF0F5",
+      "difficulty": 1,
+      "phrases": [
+        "This is a cat.",
+        "I see a cat.",
+        "The cat is sleeping."
+      ],
+      "sentences": [
+        "The cat says 'meow'.",
+        "Do you like cats?",
+        "The cat is drinking milk."
+      ],
+      "added_at": "2026-03-18"
+    },
+    "Mouse": {
+      "chinese": "老鼠",
+      "category": "animals",
+      "emoji": "🐭",
+      "color": "#A9A9A9",
+      "bg": "F5F5F5",
+      "difficulty": 1,
+      "phrases": [
+        "A little mouse.",
+        "The mouse is small.",
+        "I see a mouse."
+      ],
+      "sentences": [
+        "The mouse likes cheese.",
+        "Be quiet like a mouse!",
+        "The mouse runs fast."
+      ],
+      "added_at": "2026-03-18"
+    },
+    "Lion": {
+      "chinese": "狮子",
+      "category": "animals",
+      "emoji": "🦁",
+      "color": "#FFD700",
+      "bg": "FFFACD",
+      "difficulty": 2,
+      "phrases": [
+        "A big lion.",
+        "The lion is strong.",
+        "I hear a lion."
+      ],
+      "sentences": [
+        "The lion is the king of the jungle.",
+        "Lions say 'roar'!",
+        "Look at the lion's mane."
+      ],
+      "added_at": "2026-03-18"
+    },
+    "Leopard": {
+      "chinese": "豹子",
+      "category": "animals",
+      "emoji": "🐆",
+      "color": "#CD853F",
+      "bg": "FAEBD7",
+      "difficulty": 2,
+      "phrases": [
+        "A spotted leopard.",
+        "The leopard runs fast.",
+        "Look at the leopard."
+      ],
+      "sentences": [
+        "Leopards have spots.",
+        "The leopard is climbing a tree.",
+        "Can you spot the leopard?"
+      ],
+      "added_at": "2026-03-18"
+    },
+    "Apple": {
+      "chinese": "苹果",
+      "category": "food",
+      "emoji": "🍎",
+      "color": "#DC143C",
+      "bg": "FFE4E1",
+      "difficulty": 1,
+      "phrases": [
+        "A red apple.",
+        "I eat an apple.",
+        "Yummy apple!"
+      ],
+      "sentences": [
+        "An apple a day keeps the doctor away!",
+        "Do you want an apple?",
+        "I like to eat apples."
+      ],
+      "added_at": "2026-03-18"
+    },
+    "Cheese": {
+      "chinese": "奶酪",
+      "category": "food",
+      "emoji": "🧀",
+      "color": "#FFD700",
+      "bg": "FFFACD",
+      "difficulty": 1,
+      "phrases": [
+        "Yellow cheese.",
+        "I like cheese.",
+        "Tasty cheese!"
+      ],
+      "sentences": [
+        "Mice love cheese!",
+        "The cheese is yellow.",
+        "Do you want some cheese?"
+      ],
+      "added_at": "2026-03-18"
+    },
+    "Bread": {
+      "chinese": "面包",
+      "category": "food",
+      "emoji": "🍞",
+      "color": "#DEB887",
+      "bg": "FAEBD7",
+      "difficulty": 1,
+      "phrases": [
+        "Fresh bread.",
+        "I eat bread.",
+        "Soft bread."
+      ],
+      "sentences": [
+        "I like bread for breakfast.",
+        "The bread smells good.",
+        "Would you like some bread?"
+      ],
+      "added_at": "2026-03-18"
+    },
+    "Lollipop": {
+      "chinese": "棒棒糖",
+      "category": "food",
+      "emoji": "🍭",
+      "color": "#FF69B4",
+      "bg": "FFE4E6",
+      "difficulty": 1,
+      "phrases": [
+        "A sweet lollipop.",
+        "I love lollipops!",
+        "Colorful lollipop."
+      ],
+      "sentences": [
+        "Can I have a lollipop?",
+        "The lollipop is pink and sweet.",
+        "Don't eat too many lollipops!"
+      ],
+      "added_at": "2026-03-18"
+    },
+    "Milk": {
+      "chinese": "牛奶",
+      "category": "food",
+      "emoji": "🥛",
+      "color": "#87CEEB",
+      "bg": "E6F3FF",
+      "difficulty": 1,
+      "use_image": true,
+      "phrases": [
+        "A glass of milk.",
+        "Drink your milk.",
+        "White milk."
+      ],
+      "sentences": [
+        "Milk is good for you.",
+        "I drink milk every morning.",
+        "The cat wants some milk."
+      ],
+      "added_at": "2026-03-18"
+    },
+    "Yogurt": {
+      "chinese": "酸奶",
+      "category": "food",
+      "emoji": "🥄",
+      "color": "#E91E63",
+      "bg": "FCE4EC",
+      "difficulty": 1,
+      "use_image": true,
+      "phrases": [
+        "A bowl of yogurt.",
+        "Eat yogurt with a spoon.",
+        "Pink yogurt."
+      ],
+      "sentences": [
+        "Yogurt is healthy and yummy.",
+        "I like strawberry yogurt.",
+        "Use a spoon to eat yogurt."
+      ],
+      "added_at": "2026-03-18"
+    },
+    "Elephant": {
+      "chinese": "大象",
+      "category": "animals",
+      "emoji": "🐘",
+      "color": "#708090",
+      "bg": "F5F5F5",
+      "difficulty": 2,
+      "phrases": [
+        "A big elephant.",
+        "The elephant has a trunk.",
+        "Gray elephant."
+      ],
+      "sentences": [
+        "Elephants are the biggest land animals.",
+        "The elephant is using its trunk.",
+        "Look at the elephant's big ears!"
+      ],
+      "added_at": "2026-03-18"
+    },
+    "Donut": {
+      "chinese": "甜甜圈",
+      "category": "food",
+      "emoji": "🍩",
+      "color": "#FF69B4",
+      "bg": "FFE4E6",
+      "difficulty": 1,
+      "phrases": [
+        "A round donut.",
+        "Sweet donut!",
+        "I love donuts."
+      ],
+      "sentences": [
+        "Donuts have a hole in the middle.",
+        "The donut has pink frosting.",
+        "This donut is delicious!"
+      ],
+      "added_at": "2026-03-18"
+    },
+    "Bird": {
+      "chinese": "小鸟",
+      "category": "animals",
+      "emoji": "🐦",
+      "color": "#3498DB",
+      "bg": "EBF5FB",
+      "difficulty": 1,
+      "phrases": [
+        "A little bird.",
+        "The bird can fly.",
+        "I see a bird."
+      ],
+      "sentences": [
+        "Look at the bird in the tree!",
+        "The bird is singing.",
+        "Birds have wings and can fly."
+      ],
+      "added_at": "2026-03-18"
+    },
+    "Fish": {
+      "chinese": "鱼",
+      "category": "animals",
+      "emoji": "🐟",
+      "color": "#5DADE2",
+      "bg": "E8F6F3",
+      "difficulty": 1,
+      "phrases": [
+        "A small fish.",
+        "The fish swims.",
+        "I like fish."
+      ],
+      "sentences": [
+        "Fish live in water.",
+        "The fish is swimming in the pond.",
+        "Can you see the colorful fish?"
+      ],
+      "added_at": "2026-03-18"
+    },
+    "Banana": {
+      "chinese": "香蕉",
+      "category": "food",
+      "emoji": "🍌",
+      "color": "#F4D03F",
+      "bg": "FEF9E7",
+      "difficulty": 1,
+      "phrases": [
+        "A yellow banana.",
+        "I eat a banana.",
+        "Sweet banana!"
+      ],
+      "sentences": [
+        "Monkeys love bananas!",
+        "The banana is yellow and sweet.",
+        "Would you like a banana?"
+      ],
+      "added_at": "2026-03-18"
+    },
+    "Cake": {
+      "chinese": "蛋糕",
+      "category": "food",
+      "emoji": "🎂",
+      "color": "#E91E63",
+      "bg": "FCE4EC",
+      "difficulty": 1,
+      "phrases": [
+        "A birthday cake.",
+        "Yummy cake!",
+        "I love cake."
+      ],
+      "sentences": [
+        "Happy birthday! Here's a cake for you.",
+        "The cake has candles on it.",
+        "Let's eat cake together!"
+      ],
+      "added_at": "2026-03-18"
+    },
+    "Mom": {
+      "chinese": "妈妈",
+      "category": "family",
+      "emoji": "👩",
+      "color": "#E91E63",
+      "bg": "FCE4EC",
+      "difficulty": 1,
+      "phrases": [
+        "My mom.",
+        "I love mom.",
+        "Mom is here."
+      ],
+      "sentences": [
+        "Mom is cooking dinner.",
+        "I love my mom very much.",
+        "Mom reads me a story."
+      ],
+      "added_at": "2026-03-18"
+    },
+    "Dad": {
+      "chinese": "爸爸",
+      "category": "family",
+      "emoji": "👨",
+      "color": "#2196F3",
+      "bg": "E3F2FD",
+      "difficulty": 1,
+      "phrases": [
+        "My dad.",
+        "Dad is tall.",
+        "I love dad."
+      ],
+      "sentences": [
+        "Dad is playing with me.",
+        "My dad is strong.",
+        "Dad helps me with homework."
+      ],
+      "added_at": "2026-03-18"
+    },
+    "Watermelon": {
+      "chinese": "西瓜",
+      "category": "food",
+      "emoji": "🍉",
+      "color": "#2ECC71",
+      "bg": "E8F8F5",
+      "difficulty": 1,
+      "phrases": [
+        "A big watermelon.",
+        "Sweet watermelon.",
+        "I like watermelon."
+      ],
+      "sentences": [
+        "Watermelon is my favorite fruit!",
+        "The watermelon is green outside and red inside.",
+        "Let's eat watermelon on a hot day."
+      ],
+      "added_at": "2026-03-18"
+    },
+    "Water": {
+      "chinese": "水",
+      "category": "food",
+      "emoji": "💧",
+      "color": "#5DADE2",
+      "bg": "EBF5FB",
+      "difficulty": 1,
+      "phrases": [
+        "Drink water.",
+        "A glass of water.",
+        "Fresh water."
+      ],
+      "sentences": [
+        "Water is good for you.",
+        "I drink water every day.",
+        "The plants need water."
+      ],
+      "added_at": "2026-03-18"
+    },
+    "Rice": {
+      "chinese": "米饭",
+      "category": "food",
+      "emoji": "🍚",
+      "color": "#F39C12",
+      "bg": "FEF9E7",
+      "difficulty": 1,
+      "phrases": [
+        "Eat rice.",
+        "White rice.",
+        "A bowl of rice."
+      ],
+      "sentences": [
+        "Rice is a healthy food.",
+        "I eat rice for lunch.",
+        "This rice is yummy!"
+      ],
+      "added_at": "2026-03-18"
+    },
+    "Monkey": {
+      "chinese": "猴子",
+      "category": "animals",
+      "emoji": "🐒",
+      "color": "#D68910",
+      "bg": "FEF5E7",
+      "difficulty": 1,
+      "phrases": [
+        "A funny monkey.",
+        "The monkey climbs.",
+        "Cute monkey!"
+      ],
+      "sentences": [
+        "Monkeys like to climb trees.",
+        "The monkey is eating a banana.",
+        "Look at that silly monkey!"
+      ],
+      "added_at": "2026-03-18"
+    },
+    "Red": {
+      "chinese": "红色",
+      "category": "colors",
+      "emoji": "🔴",
+      "color": "#E74C3C",
+      "bg": "FADBD8",
+      "difficulty": 1,
+      "phrases": [
+        "Red apple.",
+        "The color red.",
+        "I see red."
+      ],
+      "sentences": [
+        "Apples are red.",
+        "I like the red dress.",
+        "The red ball is big."
+      ],
+      "added_at": "2026-03-18"
+    },
+    "Green": {
+      "chinese": "绿色",
+      "category": "colors",
+      "emoji": "🟢",
+      "color": "#27AE60",
+      "bg": "D5F5E3",
+      "difficulty": 1,
+      "phrases": [
+        "Green grass.",
+        "The color green.",
+        "Green leaves."
+      ],
+      "sentences": [
+        "Grass is green.",
+        "I see a green frog.",
+        "The tree has green leaves."
+      ],
+      "added_at": "2026-03-18"
+    },
+    "Blue": {
+      "chinese": "蓝色",
+      "category": "colors",
+      "emoji": "🔵",
+      "color": "#3498DB",
+      "bg": "D6EAF8",
+      "difficulty": 1,
+      "phrases": [
+        "Blue sky.",
+        "The color blue.",
+        "Blue bird."
+      ],
+      "sentences": [
+        "The sky is blue.",
+        "I have a blue car.",
+        "Blue is a beautiful color."
+      ],
+      "added_at": "2026-03-18"
+    },
+    "White": {
+      "chinese": "白色",
+      "category": "colors",
+      "emoji": "⚪",
+      "color": "#BDC3C7",
+      "bg": "F8F9F9",
+      "difficulty": 1,
+      "phrases": [
+        "White snow.",
+        "The color white.",
+        "White clouds."
+      ],
+      "sentences": [
+        "Snow is white.",
+        "I see white clouds in the sky.",
+        "The cat is white and fluffy."
+      ],
+      "added_at": "2026-03-18"
+    },
+    "Black": {
+      "chinese": "黑色",
+      "category": "colors",
+      "emoji": "⚫",
+      "color": "#2C3E50",
+      "bg": "F4F6F7",
+      "difficulty": 1,
+      "phrases": [
+        "Black cat.",
+        "The color black.",
+        "Black bird."
+      ],
+      "sentences": [
+        "The cat has black fur.",
+        "I see a black bird.",
+        "Black and white are opposite colors."
+      ],
+      "added_at": "2026-03-18"
+    },
+    "Brown": {
+      "chinese": "棕色",
+      "category": "colors",
+      "emoji": "🟤",
+      "color": "#8B4513",
+      "bg": "FAF0E6",
+      "difficulty": 1,
+      "phrases": [
+        "Brown bear.",
+        "The color brown.",
+        "Brown bread."
+      ],
+      "sentences": [
+        "The bear has brown fur.",
+        "Chocolate is brown.",
+        "I like brown shoes."
+      ],
+      "added_at": "2026-03-18"
+    },
+    "Yellow": {
+      "chinese": "黄色",
+      "category": "colors",
+      "emoji": "🟡",
+      "color": "#F4D03F",
+      "bg": "FEF9E7",
+      "difficulty": 1,
+      "phrases": [
+        "Yellow sun.",
+        "The color yellow.",
+        "Yellow banana."
+      ],
+      "sentences": [
+        "The sun is yellow.",
+        "Bananas are yellow.",
+        "I see a yellow butterfly."
+      ],
+      "added_at": "2026-03-18"
+    },
+    "Purple": {
+      "chinese": "紫色",
+      "category": "colors",
+      "emoji": "🟣",
+      "color": "#9B59B6",
+      "bg": "F5EEF8",
+      "difficulty": 1,
+      "phrases": [
+        "Purple flower.",
+        "The color purple.",
+        "Purple grapes."
+      ],
+      "sentences": [
+        "Grapes can be purple.",
+        "I like purple flowers.",
+        "The butterfly has purple wings."
+      ],
+      "added_at": "2026-03-18"
+    },
+    "Big": {
+      "chinese": "大的",
+      "category": "adjectives",
+      "emoji": "🐘",
+      "color": "#3498DB",
+      "bg": "EBF5FB",
+      "difficulty": 1,
+      "phrases": [
+        "A big dog.",
+        "Big and small.",
+        "It's big!"
+      ],
+      "sentences": [
+        "The elephant is very big.",
+        "I have a big brother.",
+        "This house is big!"
+      ],
+      "added_at": "2026-03-18"
+    },
+    "Small": {
+      "chinese": "小的",
+      "category": "adjectives",
+      "emoji": "🐭",
+      "color": "#E74C3C",
+      "bg": "FADBD8",
+      "difficulty": 1,
+      "phrases": [
+        "A small mouse.",
+        "Small and cute.",
+        "It's small."
+      ],
+      "sentences": [
+        "The mouse is very small.",
+        "I have a small toy.",
+        "Small things can be precious."
+      ],
+      "added_at": "2026-03-18"
+    },
+    "Tall": {
+      "chinese": "高的",
+      "category": "adjectives",
+      "emoji": "🦒",
+      "color": "#2ECC71",
+      "bg": "D5F5E3",
+      "difficulty": 1,
+      "phrases": [
+        "A tall tree.",
+        "Tall and short.",
+        "He is tall."
+      ],
+      "sentences": [
+        "The giraffe is very tall.",
+        "My dad is tall.",
+        "This building is tall!"
+      ],
+      "added_at": "2026-03-18"
+    },
+    "Short": {
+      "chinese": "矮的/短的",
+      "category": "adjectives",
+      "emoji": "🧸",
+      "color": "#F39C12",
+      "bg": "FEF9E7",
+      "difficulty": 1,
+      "phrases": [
+        "A short dog.",
+        "Short and tall.",
+        "It's short."
+      ],
+      "sentences": [
+        "The dog has short legs.",
+        "This pencil is short.",
+        "My little sister is short."
+      ],
+      "added_at": "2026-03-18"
+    },
+    "Grandpa": {
+      "chinese": "爷爷",
+      "category": "family",
+      "emoji": "👴",
+      "color": "#3498DB",
+      "bg": "EBF5FB",
+      "difficulty": 1,
+      "phrases": [
+        "My grandpa.",
+        "Grandpa loves me.",
+        "Grandpa is kind."
+      ],
+      "sentences": [
+        "Grandpa tells me stories.",
+        "I love my grandpa very much.",
+        "Grandpa has gray hair."
+      ],
+      "added_at": "2026-03-18"
+    },
+    "Grandma": {
+      "chinese": "奶奶",
+      "category": "family",
+      "emoji": "👵",
+      "color": "#E91E63",
+      "bg": "FCE4EC",
+      "difficulty": 1,
+      "phrases": [
+        "My grandma.",
+        "Grandma is sweet.",
+        "I love grandma."
+      ],
+      "sentences": [
+        "Grandma makes yummy cookies.",
+        "My grandma is very kind.",
+        "Grandma reads books to me."
+      ],
+      "added_at": "2026-03-18"
+    },
+    "Baby": {
+      "chinese": "宝宝",
+      "category": "family",
+      "emoji": "👶",
+      "color": "#F39C12",
+      "bg": "FEF9E7",
+      "difficulty": 1,
+      "phrases": [
+        "A cute baby.",
+        "The baby is small.",
+        "My baby brother."
+      ],
+      "sentences": [
+        "The baby is sleeping.",
+        "Look at the cute baby!",
+        "The baby cries when hungry."
+      ],
+      "added_at": "2026-03-18"
+    },
+    "Ear": {
+      "chinese": "耳朵",
+      "category": "body",
+      "emoji": "👂",
+      "color": "#F39C12",
+      "bg": "FEF9E7",
+      "difficulty": 1,
+      "phrases": [
+        "My ear.",
+        "Touch your ear.",
+        "This is my ear."
+      ],
+      "sentences": [
+        "I have two ears.",
+        "Point to your ear.",
+        "Your ear is beautiful."
+      ],
+      "added_at": "2026-03-24"
+    },
+    "Eye": {
+      "chinese": "眼睛",
+      "category": "body",
+      "emoji": "👀",
+      "color": "#3498DB",
+      "bg": "EBF5FB",
+      "difficulty": 1,
+      "phrases": [
+        "My eye.",
+        "Touch your eye.",
+        "This is my eye."
+      ],
+      "sentences": [
+        "I have two eyes.",
+        "Point to your eye.",
+        "Your eye is beautiful."
+      ],
+      "added_at": "2026-03-24"
+    },
+    "Head": {
+      "chinese": "头",
+      "category": "body",
+      "emoji": "🧠",
+      "color": "#E74C3C",
+      "bg": "FADBD8",
+      "difficulty": 1,
+      "phrases": [
+        "My head.",
+        "Touch your head.",
+        "This is my head."
+      ],
+      "sentences": [
+        "I have two heads.",
+        "Point to your head.",
+        "Your head is beautiful."
+      ],
+      "added_at": "2026-03-24"
+    },
+    "Hand": {
+      "chinese": "手",
+      "category": "body",
+      "emoji": "✋",
+      "color": "#F39C12",
+      "bg": "FEF9E7",
+      "difficulty": 1,
+      "phrases": [
+        "My hand.",
+        "Touch your hand.",
+        "This is my hand."
+      ],
+      "sentences": [
+        "I have two hands.",
+        "Point to your hand.",
+        "Your hand is beautiful."
+      ],
+      "added_at": "2026-03-24"
+    },
+    "Leg": {
+      "chinese": "腿",
+      "category": "body",
+      "emoji": "🦵",
+      "color": "#95A5A6",
+      "bg": "F4F6F7",
+      "difficulty": 1,
+      "phrases": [
+        "My leg.",
+        "Touch your leg.",
+        "This is my leg."
+      ],
+      "sentences": [
+        "I have two legs.",
+        "Point to your leg.",
+        "Your leg is beautiful."
+      ],
+      "added_at": "2026-03-24"
+    },
+    "Shoulder": {
+      "chinese": "肩膀",
+      "category": "body",
+      "emoji": "🏋️",
+      "color": "#E67E22",
+      "bg": "FDF2E9",
+      "difficulty": 2,
+      "phrases": [
+        "My shoulder.",
+        "Touch your shoulder.",
+        "This is my shoulder."
+      ],
+      "sentences": [
+        "I have two shoulders.",
+        "Point to your shoulder.",
+        "Your shoulder is beautiful."
+      ],
+      "added_at": "2026-03-24"
+    },
+    "Nose": {
+      "chinese": "鼻子",
+      "category": "body",
+      "emoji": "👃",
+      "color": "#E91E63",
+      "bg": "FCE4EC",
+      "difficulty": 1,
+      "phrases": [
+        "My nose.",
+        "Touch your nose.",
+        "This is my nose."
+      ],
+      "sentences": [
+        "I have two noses.",
+        "Point to your nose.",
+        "Your nose is beautiful."
+      ],
+      "added_at": "2026-03-24"
+    },
+    "Mouth": {
+      "chinese": "嘴巴",
+      "category": "body",
+      "emoji": "👄",
+      "color": "#E91E63",
+      "bg": "FCE4EC",
+      "difficulty": 1,
+      "phrases": [
+        "My mouth.",
+        "Touch your mouth.",
+        "This is my mouth."
+      ],
+      "sentences": [
+        "I have two mouths.",
+        "Point to your mouth.",
+        "Your mouth is beautiful."
+      ],
+      "added_at": "2026-03-24"
+    },
+    "Arm": {
+      "chinese": "手臂",
+      "category": "body",
+      "emoji": "💪",
+      "color": "#E67E22",
+      "bg": "FDF2E9",
+      "difficulty": 1,
+      "phrases": [
+        "My arm.",
+        "Touch your arm.",
+        "This is my arm."
+      ],
+      "sentences": [
+        "I have two arms.",
+        "Point to your arm.",
+        "Your arm is beautiful."
+      ],
+      "added_at": "2026-03-24"
+    },
+    "Foot": {
+      "chinese": "脚",
+      "category": "body",
+      "emoji": "🦶",
+      "color": "#95A5A6",
+      "bg": "F4F6F7",
+      "difficulty": 1,
+      "phrases": [
+        "My foot.",
+        "Touch your foot.",
+        "This is my foot."
+      ],
+      "sentences": [
+        "I have two foots.",
+        "Point to your foot.",
+        "Your foot is beautiful."
+      ],
+      "added_at": "2026-03-24"
+    },
+    "Finger": {
+      "chinese": "手指",
+      "category": "body",
+      "emoji": "🤚",
+      "color": "#F39C12",
+      "bg": "FEF9E7",
+      "difficulty": 1,
+      "phrases": [
+        "My finger.",
+        "Touch your finger.",
+        "This is my finger."
+      ],
+      "sentences": [
+        "I have two fingers.",
+        "Point to your finger.",
+        "Your finger is beautiful."
+      ],
+      "added_at": "2026-03-24"
+    },
+    "Knee": {
+      "chinese": "膝盖",
+      "category": "body",
+      "emoji": "🦵",
+      "color": "#95A5A6",
+      "bg": "F4F6F7",
+      "difficulty": 1,
+      "phrases": [
+        "My knee.",
+        "Touch your knee.",
+        "This is my knee."
+      ],
+      "sentences": [
+        "I have two knees.",
+        "Point to your knee.",
+        "Your knee is beautiful."
+      ],
+      "added_at": "2026-03-24"
+    },
+    "Hair": {
+      "chinese": "头发",
+      "category": "body",
+      "emoji": "👱",
+      "color": "#8B4513",
+      "bg": "FAEBD7",
+      "difficulty": 1,
+      "phrases": [
+        "My hair.",
+        "Touch your hair.",
+        "This is my hair."
+      ],
+      "sentences": [
+        "I have one hair.",
+        "Point to your hair.",
+        "Your hair is beautiful."
+      ],
+      "added_at": "2026-03-24"
+    },
+    "Face": {
+      "chinese": "脸",
+      "category": "body",
+      "emoji": "😀",
+      "color": "#FFB6C1",
+      "bg": "FFF0F5",
+      "difficulty": 1,
+      "phrases": [
+        "My face.",
+        "Touch your face.",
+        "This is my face."
+      ],
+      "sentences": [
+        "I have one face.",
+        "Point to your face.",
+        "Your face is beautiful."
+      ],
+      "added_at": "2026-03-24"
+    },
+    "Neck": {
+      "chinese": "脖子",
+      "category": "body",
+      "emoji": "🗣️",
+      "color": "#E74C3C",
+      "bg": "FADBD8",
+      "difficulty": 1,
+      "phrases": [
+        "My neck.",
+        "Touch your neck.",
+        "This is my neck."
+      ],
+      "sentences": [
+        "I have two necks.",
+        "Point to your neck.",
+        "Your neck is beautiful."
+      ],
+      "added_at": "2026-03-24"
+    }
+  }
+}

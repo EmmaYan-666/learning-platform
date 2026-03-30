@@ -1,0 +1,1358 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>英语单词学习游戏 V3 🎮</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* 顶部信息栏 */
+        .header {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .score-board {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .score-item {
+            text-align: center;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            border-radius: 15px;
+            color: white;
+            font-weight: bold;
+        }
+
+        .score-item .number {
+            font-size: 32px;
+            display: block;
+        }
+
+        .score-item .label {
+            font-size: 14px;
+        }
+
+        .wrong-count {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+        }
+
+        .correct-count {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        /* 类别选择 */
+        .category-selector {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .category-selector h3 {
+            margin-bottom: 15px;
+            color: #333;
+            font-size: 20px;
+        }
+
+        .category-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .category-btn {
+            padding: 12px 24px;
+            border: 3px solid #667eea;
+            background: white;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .category-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .category-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        /* 按钮样式 */
+        .wrong-words-btn, .config-btn {
+            padding: 12px 24px;
+            border: 3px solid #f093fb;
+            background: white;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            color: #f093fb;
+        }
+
+        .config-btn {
+            border-color: #667eea;
+            color: #667eea;
+        }
+
+        .wrong-words-btn:hover, .config-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(240, 147, 251, 0.3);
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+
+        .config-btn:hover {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        /* 游戏区域 */
+        .game-area {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .word-display {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .current-word {
+            font-size: 56px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-block;
+            padding: 10px 30px;
+            border-radius: 15px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+
+        .current-word:hover {
+            transform: scale(1.05);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .hint-text {
+            color: #888;
+            font-size: 16px;
+            font-style: italic;
+            margin-top: 10px;
+        }
+
+        /* 图片选择区域 */
+        .choices-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .choice-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border: 4px solid #e0e0e0;
+            border-radius: 20px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            min-height: 280px;
+        }
+
+        .choice-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            border-color: #667eea;
+        }
+
+        .choice-card.disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .choice-card.correct {
+            background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
+            border-color: #4CAF50;
+            animation: correctPulse 0.6s ease;
+        }
+
+        .choice-card.wrong {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            border-color: #f44336;
+            animation: wrongShake 0.5s ease;
+        }
+
+        @keyframes correctPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes wrongShake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        .choice-emoji {
+            font-size: 100px;
+            line-height: 1.2;
+            margin: 10px 0;
+            transition: transform 0.3s ease;
+        }
+
+        .choice-card:hover .choice-emoji {
+            transform: scale(1.1);
+        }
+
+        .choice-text {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            margin-top: 10px;
+        }
+
+        /* 星星动画容器 */
+        .stars-animation {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1001;
+            display: none;
+        }
+
+        .stars-animation.show {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .star {
+            font-size: 80px;
+            opacity: 0.2;
+            transition: all 0.4s ease;
+        }
+
+        .star.lit {
+            opacity: 1;
+            animation: starPop 0.4s ease;
+        }
+
+        @keyframes starPop {
+            0% { transform: scale(0); opacity: 0; }
+            50% { transform: scale(1.3); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        /* 反馈消息 */
+        .feedback-message {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 40px 60px;
+            border-radius: 25px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            z-index: 1000;
+            animation: feedbackPop 0.3s ease;
+            display: none;
+        }
+
+        .feedback-message.show {
+            display: block;
+        }
+
+        @keyframes feedbackPop {
+            from { transform: translate(-50%, -50%) scale(0); }
+            to { transform: translate(-50%, -50%) scale(1); }
+        }
+
+        .feedback-emoji {
+            font-size: 100px;
+            display: block;
+            margin-bottom: 20px;
+        }
+
+        .feedback-text {
+            font-size: 32px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .feedback-subtext {
+            font-size: 20px;
+            color: #666;
+        }
+
+        /* 按钮 */
+        .btn {
+            padding: 15px 40px;
+            font-size: 20px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            margin: 10px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
+            color: #333;
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+            color: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        /* 音频控制 */
+        .audio-control {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .volume-slider {
+            width: 100px;
+        }
+
+        /* 面板样式 */
+        .wrong-words-panel, .config-panel {
+            position: fixed;
+            right: -400px;
+            top: 0;
+            width: 400px;
+            height: 100vh;
+            background: white;
+            box-shadow: -5px 0 20px rgba(0, 0, 0, 0.2);
+            transition: right 0.3s ease;
+            z-index: 2000;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .wrong-words-panel.show, .config-panel.show {
+            right: 0;
+        }
+
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #f093fb;
+        }
+
+        .panel-header h3 {
+            font-size: 24px;
+            color: #333;
+        }
+
+        .close-panel {
+            background: none;
+            border: none;
+            font-size: 30px;
+            cursor: pointer;
+            color: #999;
+        }
+
+        .wrong-word-item {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .wrong-word-item .emoji {
+            font-size: 40px;
+        }
+
+        .wrong-word-item .word-info {
+            flex: 1;
+        }
+
+        .wrong-word-item .word {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .wrong-word-item .chinese {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .wrong-word-item .count {
+            background: #f44336;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        /* Emoji配置面板样式 */
+        .emoji-config-item {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            border: 2px solid #e0e0e0;
+        }
+
+        .emoji-config-item:hover {
+            border-color: #667eea;
+        }
+
+        .emoji-config-item .word-name {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .emoji-config-item .chinese-name {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 12px;
+        }
+
+        .emoji-picker {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .emoji-picker input {
+            flex: 1;
+            min-width: 100px;
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+        }
+
+        .emoji-preview {
+            font-size: 40px;
+            min-width: 50px;
+            text-align: center;
+        }
+
+        .category-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #667eea;
+            margin: 20px 0 10px 0;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #667eea;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .score-board {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .choice-emoji {
+                font-size: 70px;
+            }
+
+            .current-word {
+                font-size: 40px;
+            }
+
+            .wrong-words-panel, .config-panel {
+                width: 100%;
+                right: -100%;
+            }
+        }
+
+        /* 遮罩层 */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            display: none;
+        }
+
+        .overlay.show {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 顶部信息栏 -->
+        <div class="header">
+            <div class="score-board">
+                <div class="score-item correct-count">
+                    <span class="number" id="correctCount">0</span>
+                    <span class="label">✅ 正确</span>
+                </div>
+                <div class="score-item wrong-count">
+                    <span class="number" id="wrongCount">0</span>
+                    <span class="label">❌ 错误</span>
+                </div>
+                <div class="score-item">
+                    <span class="number" id="score">0</span>
+                    <span class="label">总分</span>
+                </div>
+                <div class="score-item">
+                    <span class="number" id="streak">0</span>
+                    <span class="label">连胜</span>
+                </div>
+            </div>
+            <div class="audio-control">
+                <label>🔊 音量:</label>
+                <input type="range" id="volumeSlider" class="volume-slider" min="0" max="1" step="0.1" value="0.8">
+            </div>
+        </div>
+
+        <!-- 类别选择 -->
+        <div class="category-selector">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+                <h3>📚 选择学习类别</h3>
+                <div style="display: flex; gap: 10px;">
+                    <button class="config-btn" onclick="toggleConfigPanel()">
+                        🎨 配置图片
+                    </button>
+                    <button class="wrong-words-btn" onclick="toggleWrongWordsPanel()">
+                        📓 错题本 (<span id="wrongWordsCount">0</span>)
+                    </button>
+                </div>
+            </div>
+            <div class="category-buttons" id="categoryButtons" style="margin-top: 15px;">
+                <!-- 动态生成 -->
+            </div>
+        </div>
+
+        <!-- 游戏区域 -->
+        <div class="game-area" id="gameArea">
+            <div class="word-display">
+                <div class="current-word" id="currentWord" onclick="speakWord()">
+                    点击开始
+                </div>
+                <div class="hint-text">👆 点击单词听发音（美音女声）</div>
+            </div>
+            <div class="choices-grid" id="choicesGrid">
+                <div class="loading">
+                    <div style="font-size: 60px;">🎮</div>
+                    <p>准备中...</p>
+                </div>
+            </div>
+            <div class="button-container">
+                <button class="btn btn-primary" onclick="startNewRound()" id="nextBtn" style="display: none;">
+                    下一题 ➡️
+                </button>
+                <button class="btn btn-success" onclick="resetGame()">
+                    重新开始 🔄
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 星星动画 -->
+    <div class="stars-animation" id="starsAnimation">
+        <div class="star" id="star1">⭐</div>
+        <div class="star" id="star2">⭐</div>
+        <div class="star" id="star3">⭐</div>
+    </div>
+
+    <!-- 反馈消息 -->
+    <div class="overlay" id="overlay"></div>
+    <div class="feedback-message" id="feedbackMessage">
+        <div class="feedback-emoji" id="feedbackEmoji"></div>
+        <div class="feedback-text" id="feedbackText"></div>
+        <div class="feedback-subtext" id="feedbackSubtext"></div>
+    </div>
+
+    <!-- 错题本面板 -->
+    <div class="wrong-words-panel" id="wrongWordsPanel">
+        <div class="panel-header">
+            <h3>📓 错题本</h3>
+            <button class="close-panel" onclick="toggleWrongWordsPanel()">×</button>
+        </div>
+        <div id="wrongWordsList"></div>
+        <button class="btn btn-danger" onclick="clearWrongWords()" style="width: 100%; margin-top: 20px;">
+            清空错题本 🗑️
+        </button>
+    </div>
+
+    <!-- Emoji配置面板 -->
+    <div class="config-panel" id="configPanel">
+        <div class="panel-header">
+            <h3>🎨 配置图片</h3>
+            <button class="close-panel" onclick="toggleConfigPanel()">×</button>
+        </div>
+        <p style="color: #666; margin-bottom: 15px; font-size: 14px;">点击输入框，输入emoji表情或复制粘贴emoji</p>
+        <div id="emojiConfigList"></div>
+        <button class="btn btn-primary" onclick="saveEmojiConfig()" style="width: 100%; margin-top: 20px;">
+            保存配置 ✅
+        </button>
+        <button class="btn btn-danger" onclick="resetEmojiConfig()" style="width: 100%; margin-top: 10px;">
+            恢复默认 🔄
+        </button>
+    </div>
+
+    <script>
+        // 默认单词数据
+        const defaultWordDatabase = {
+            "animals": [
+                { word: "Dog", emoji: "🐕", chinese: "小狗" },
+                { word: "Cat", emoji: "🐱", chinese: "小猫" },
+                { word: "Mouse", emoji: "🐭", chinese: "老鼠" },
+                { word: "Lion", emoji: "🦁", chinese: "狮子" },
+                { word: "Leopard", emoji: "🐆", chinese: "豹子" },
+                { word: "Elephant", emoji: "🐘", chinese: "大象" },
+                { word: "Bird", emoji: "🐦", chinese: "小鸟" },
+                { word: "Fish", emoji: "🐟", chinese: "鱼" },
+                { word: "Monkey", emoji: "🐒", chinese: "猴子" }
+            ],
+            "food": [
+                { word: "Apple", emoji: "🍎", chinese: "苹果" },
+                { word: "Cheese", emoji: "🧀", chinese: "奶酪" },
+                { word: "Bread", emoji: "🍞", chinese: "面包" },
+                { word: "Lollipop", emoji: "🍭", chinese: "棒棒糖" },
+                { word: "Milk", emoji: "🥛", chinese: "牛奶" },
+                { word: "Yogurt", emoji: "🥄", chinese: "酸奶" },
+                { word: "Donut", emoji: "🍩", chinese: "甜甜圈" },
+                { word: "Banana", emoji: "🍌", chinese: "香蕉" },
+                { word: "Cake", emoji: "🎂", chinese: "蛋糕" },
+                { word: "Watermelon", emoji: "🍉", chinese: "西瓜" },
+                { word: "Water", emoji: "💧", chinese: "水" },
+                { word: "Rice", emoji: "🍚", chinese: "米饭" }
+            ],
+            "family": [
+                { word: "Mom", emoji: "👩", chinese: "妈妈" },
+                { word: "Dad", emoji: "👨", chinese: "爸爸" },
+                { word: "Grandpa", emoji: "👴", chinese: "爷爷" },
+                { word: "Grandma", emoji: "👵", chinese: "奶奶" },
+                { word: "Baby", emoji: "👶", chinese: "宝宝" }
+            ],
+            "colors": [
+                { word: "Red", emoji: "🔴", chinese: "红色" },
+                { word: "Green", emoji: "🟢", chinese: "绿色" },
+                { word: "Blue", emoji: "🔵", chinese: "蓝色" },
+                { word: "White", emoji: "⚪", chinese: "白色" },
+                { word: "Black", emoji: "⚫", chinese: "黑色" },
+                { word: "Brown", emoji: "🟤", chinese: "棕色" },
+                { word: "Yellow", emoji: "🟡", chinese: "黄色" },
+                { word: "Purple", emoji: "🟣", chinese: "紫色" }
+            ],
+            "body": [
+                { word: "Ear", emoji: "👂", chinese: "耳朵" },
+                { word: "Eye", emoji: "👀", chinese: "眼睛" },
+                { word: "Head", emoji: "🧠", chinese: "头" },
+                { word: "Hand", emoji: "✋", chinese: "手" },
+                { word: "Leg", emoji: "🦵", chinese: "腿" },
+                { word: "Shoulder", emoji: "🏋️", chinese: "肩膀" },
+                { word: "Nose", emoji: "👃", chinese: "鼻子" },
+                { word: "Mouth", emoji: "👄", chinese: "嘴巴" },
+                { word: "Arm", emoji: "💪", chinese: "手臂" },
+                { word: "Foot", emoji: "🦶", chinese: "脚" },
+                { word: "Finger", emoji: "🤚", chinese: "手指" },
+                { word: "Knee", emoji: "🦵", chinese: "膝盖" },
+                { word: "Hair", emoji: "👱", chinese: "头发" },
+                { word: "Face", emoji: "😀", chinese: "脸" },
+                { word: "Neck", emoji: "🧣", chinese: "脖子" }
+            ],
+            "adjectives": [
+                { word: "Big", emoji: "🐘", chinese: "大的" },
+                { word: "Small", emoji: "🐭", chinese: "小的" },
+                { word: "Tall", emoji: "🦒", chinese: "高的" },
+                { word: "Short", emoji: "🧸", chinese: "矮的" }
+            ]
+        };
+
+        // 游戏状态
+        let gameState = {
+            score: 0,
+            streak: 0,
+            totalQuestions: 0,
+            correctCount: 0,
+            wrongCount: 0,
+            currentWord: null,
+            selectedCategories: ['animals', 'food'],
+            wrongWords: {},
+            customEmojis: {}, // 用户自定义emoji
+            volume: 0.8,
+            isPlaying: false,
+            hasAnswered: false
+        };
+
+        // 获取单词数据库（合并自定义emoji）
+        function getWordDatabase() {
+            const db = JSON.parse(JSON.stringify(defaultWordDatabase));
+            
+            // 应用自定义emoji
+            Object.keys(gameState.customEmojis).forEach(key => {
+                const [category, word] = key.split('|');
+                if (db[category]) {
+                    const wordItem = db[category].find(w => w.word === word);
+                    if (wordItem) {
+                        wordItem.emoji = gameState.customEmojis[key];
+                    }
+                }
+            });
+            
+            return db;
+        }
+
+        // 初始化
+        document.addEventListener('DOMContentLoaded', () => {
+            initCategoryButtons();
+            loadGameState();
+            updateWrongWordsCount();
+            startNewRound();
+            
+            document.getElementById('volumeSlider').addEventListener('input', (e) => {
+                gameState.volume = parseFloat(e.target.value);
+                saveGameState();
+            });
+        });
+
+        function initCategoryButtons() {
+            const container = document.getElementById('categoryButtons');
+            const categories = {
+                'animals': '🐾 动物',
+                'food': '🍔 食物',
+                'family': '👨‍👩‍👧‍👦 家庭',
+                'colors': '🎨 颜色',
+                'body': '👂 身体',
+                'adjectives': '📏 形容词'
+            };
+
+            container.innerHTML = '';
+            for (let [key, label] of Object.entries(categories)) {
+                const btn = document.createElement('button');
+                btn.className = 'category-btn' + (gameState.selectedCategories.includes(key) ? ' active' : '');
+                btn.textContent = label;
+                btn.onclick = () => toggleCategory(key, btn);
+                container.appendChild(btn);
+            }
+        }
+
+        function toggleCategory(category, btn) {
+            if (gameState.isPlaying) return;
+            
+            const index = gameState.selectedCategories.indexOf(category);
+            if (index > -1) {
+                if (gameState.selectedCategories.length > 1) {
+                    gameState.selectedCategories.splice(index, 1);
+                    btn.classList.remove('active');
+                }
+            } else {
+                gameState.selectedCategories.push(category);
+                btn.classList.add('active');
+            }
+            saveGameState();
+            startNewRound();
+        }
+
+        function getRandomWords() {
+            const wordDatabase = getWordDatabase();
+            let allWords = [];
+            gameState.selectedCategories.forEach(category => {
+                allWords = allWords.concat(wordDatabase[category]);
+            });
+            
+            Object.keys(gameState.wrongWords).forEach(word => {
+                const wordInfo = allWords.find(w => w.word === word);
+                if (wordInfo) {
+                    const repeatCount = Math.min(gameState.wrongWords[word].count, 3);
+                    for (let i = 0; i < repeatCount; i++) {
+                        allWords.push(wordInfo);
+                    }
+                }
+            });
+            
+            for (let i = allWords.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [allWords[i], allWords[j]] = [allWords[j], allWords[i]];
+            }
+            
+            return allWords;
+        }
+
+        function startNewRound() {
+            const words = getRandomWords();
+            gameState.currentWord = words[0];
+            gameState.hasAnswered = false;
+            
+            const choices = [words[0]];
+            const usedWords = new Set([words[0].word]);
+            const otherWords = words.slice(1);
+            
+            let attempts = 0;
+            while (choices.length < 4 && attempts < 100) {
+                const randomIndex = Math.floor(Math.random() * otherWords.length);
+                const candidate = otherWords[randomIndex];
+                
+                if (!usedWords.has(candidate.word)) {
+                    choices.push(candidate);
+                    usedWords.add(candidate.word);
+                }
+                attempts++;
+            }
+            
+            for (let i = choices.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [choices[i], choices[j]] = [choices[j], choices[i]];
+            }
+            
+            document.getElementById('currentWord').textContent = gameState.currentWord.word;
+            
+            const grid = document.getElementById('choicesGrid');
+            grid.innerHTML = '';
+            
+            choices.forEach(choice => {
+                const card = document.createElement('div');
+                card.className = 'choice-card';
+                card.onclick = () => selectChoice(card, choice);
+                card.innerHTML = `
+                    <div class="choice-emoji">${choice.emoji}</div>
+                    <div class="choice-text">${choice.word}</div>
+                `;
+                grid.appendChild(card);
+            });
+            
+            document.getElementById('nextBtn').style.display = 'none';
+            
+            setTimeout(() => speakWord(), 500);
+            
+            saveGameState();
+        }
+
+        function selectChoice(card, choice) {
+            if (gameState.isPlaying) return;
+            
+            if (gameState.hasAnswered) return;
+            
+            const isCorrect = choice.word === gameState.currentWord.word;
+            
+            if (isCorrect) {
+                gameState.hasAnswered = true;
+                gameState.isPlaying = true;
+                
+                const allCards = document.querySelectorAll('.choice-card');
+                allCards.forEach(c => {
+                    c.classList.add('disabled');
+                });
+                
+                card.classList.add('correct');
+                gameState.score += 10;
+                gameState.streak++;
+                gameState.totalQuestions++;
+                gameState.correctCount++;
+                
+                if (gameState.wrongWords[choice.word]) {
+                    gameState.wrongWords[choice.word].count--;
+                    if (gameState.wrongWords[choice.word].count <= 0) {
+                        delete gameState.wrongWords[choice.word];
+                    }
+                    updateWrongWordsCount();
+                }
+                
+                playSound('success');
+                showSuccessFeedback();
+                
+                updateScoreDisplay();
+                
+                setTimeout(() => {
+                    document.getElementById('nextBtn').style.display = 'inline-block';
+                    gameState.isPlaying = false;
+                }, 2000);
+            } else {
+                gameState.streak = 0;
+                gameState.wrongCount++;
+                
+                card.classList.add('wrong');
+                card.classList.add('disabled');
+                card.onclick = null;
+                
+                updateScoreDisplay();
+                
+                playSound('error');
+                
+                showTryAgainHint();
+            }
+        }
+        
+        function showTryAgainHint() {
+            const allCards = document.querySelectorAll('.choice-card:not(.disabled)');
+            if (allCards.length === 1) {
+                setTimeout(() => {
+                    allCards[0].classList.add('correct');
+                    
+                    if (!gameState.wrongWords[gameState.currentWord.word]) {
+                        gameState.wrongWords[gameState.currentWord.word] = {
+                            count: 1,
+                            emoji: gameState.currentWord.emoji,
+                            chinese: gameState.currentWord.chinese
+                        };
+                    } else {
+                        gameState.wrongWords[gameState.currentWord.word].count++;
+                    }
+                    updateWrongWordsCount();
+                    
+                    showErrorFeedback();
+                    
+                    setTimeout(() => {
+                        document.getElementById('nextBtn').style.display = 'inline-block';
+                        gameState.hasAnswered = true;
+                    }, 2000);
+                }, 500);
+            } else {
+                const hint = document.createElement('div');
+                hint.className = 'feedback-message show';
+                hint.id = 'tryAgainHint';
+                hint.style.cssText = 'padding: 20px 40px; z-index: 1000;';
+                hint.innerHTML = `
+                    <div style="font-size: 48px; margin-bottom: 10px;">🤔</div>
+                    <div style="font-size: 24px; font-weight: bold; color: #333;">再试一次！</div>
+                    <div style="font-size: 16px; color: #666; margin-top: 5px;">继续选择正确答案</div>
+                `;
+                document.body.appendChild(hint);
+                document.getElementById('overlay').classList.add('show');
+                
+                setTimeout(() => {
+                    hint.remove();
+                    document.getElementById('overlay').classList.remove('show');
+                }, 1500);
+            }
+        }
+
+        function showSuccessFeedback() {
+            const messages = [
+                { text: 'Excellent!', subtext: '太棒了！你真聪明！' },
+                { text: 'Wonderful!', subtext: '完美！继续保持！' },
+                { text: 'Fantastic!', subtext: '你太厉害了！' },
+                { text: 'Great Job!', subtext: '做得好！为你骄傲！' },
+                { text: 'Amazing!', subtext: '太精彩了！' }
+            ];
+            
+            const message = messages[Math.floor(Math.random() * messages.length)];
+            
+            const starsAnimation = document.getElementById('starsAnimation');
+            starsAnimation.classList.add('show');
+            
+            setTimeout(() => {
+                document.getElementById('star1').classList.add('lit');
+                speakEncouragement('Excellent!');
+            }, 100);
+            
+            setTimeout(() => {
+                document.getElementById('star2').classList.add('lit');
+            }, 500);
+            
+            setTimeout(() => {
+                document.getElementById('star3').classList.add('lit');
+            }, 900);
+            
+            setTimeout(() => {
+                speakEncouragement(message.text);
+            }, 100);
+            
+            setTimeout(() => {
+                starsAnimation.classList.remove('show');
+                
+                document.getElementById('star1').classList.remove('lit');
+                document.getElementById('star2').classList.remove('lit');
+                document.getElementById('star3').classList.remove('lit');
+                
+                document.getElementById('feedbackEmoji').textContent = '🎉';
+                document.getElementById('feedbackText').textContent = message.text;
+                document.getElementById('feedbackSubtext').textContent = message.subtext;
+                document.getElementById('feedbackMessage').classList.add('show');
+                document.getElementById('overlay').classList.add('show');
+                
+                setTimeout(() => {
+                    document.getElementById('feedbackMessage').classList.remove('show');
+                    document.getElementById('overlay').classList.remove('show');
+                }, 1500);
+            }, 1500);
+        }
+
+        function showErrorFeedback() {
+            const messages = [
+                { emoji: '💪', text: 'Almost!', subtext: '差点就对了！再试一次！' },
+                { emoji: '📚', text: 'Keep Trying!', subtext: '继续加油！你可以的！' },
+                { emoji: '🌟', text: 'Good Effort!', subtext: '已经很棒了！再看仔细点！' }
+            ];
+            
+            const message = messages[Math.floor(Math.random() * messages.length)];
+            
+            document.getElementById('feedbackEmoji').textContent = message.emoji;
+            document.getElementById('feedbackText').textContent = message.text;
+            document.getElementById('feedbackSubtext').textContent = message.subtext;
+            document.getElementById('feedbackMessage').classList.add('show');
+            document.getElementById('overlay').classList.add('show');
+            
+            speakEncouragement(message.text + ' Try again!');
+            
+            setTimeout(() => {
+                document.getElementById('feedbackMessage').classList.remove('show');
+                document.getElementById('overlay').classList.remove('show');
+            }, 2500);
+        }
+
+        function updateScoreDisplay() {
+            document.getElementById('score').textContent = gameState.score;
+            document.getElementById('streak').textContent = gameState.streak;
+            document.getElementById('correctCount').textContent = gameState.correctCount;
+            document.getElementById('wrongCount').textContent = gameState.wrongCount;
+            
+            saveGameState();
+        }
+
+        function updateWrongWordsCount() {
+            document.getElementById('wrongWordsCount').textContent = Object.keys(gameState.wrongWords).length;
+            saveGameState();
+        }
+
+        function speakWord() {
+            if (!gameState.currentWord) return;
+            
+            speechSynthesis.cancel();
+            
+            const utterance = new SpeechSynthesisUtterance(gameState.currentWord.word);
+            utterance.lang = 'en-US';
+            utterance.rate = 0.85;
+            utterance.pitch = 1.1;
+            utterance.volume = gameState.volume;
+            
+            const voices = speechSynthesis.getVoices();
+            const femaleVoice = voices.find(voice => 
+                voice.lang === 'en-US' && 
+                (voice.name.includes('Female') || voice.name.includes('Samantha') || voice.name.includes('Karen'))
+            );
+            
+            if (femaleVoice) {
+                utterance.voice = femaleVoice;
+            }
+            
+            speechSynthesis.speak(utterance);
+        }
+
+        function speakEncouragement(text) {
+            speechSynthesis.cancel();
+            
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'en-US';
+            utterance.rate = 0.9;
+            utterance.pitch = 1.2;
+            utterance.volume = gameState.volume * 0.8;
+            
+            const voices = speechSynthesis.getVoices();
+            const femaleVoice = voices.find(voice => 
+                voice.lang === 'en-US' && 
+                (voice.name.includes('Female') || voice.name.includes('Samantha') || voice.name.includes('Karen'))
+            );
+            
+            if (femaleVoice) {
+                utterance.voice = femaleVoice;
+            }
+            
+            speechSynthesis.speak(utterance);
+        }
+
+        function playSound(type) {
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            gainNode.gain.value = gameState.volume * 0.3;
+            
+            if (type === 'success') {
+                oscillator.frequency.setValueAtTime(523.25, audioContext.currentTime);
+                oscillator.frequency.setValueAtTime(659.25, audioContext.currentTime + 0.1);
+                oscillator.frequency.setValueAtTime(783.99, audioContext.currentTime + 0.2);
+            } else {
+                oscillator.frequency.setValueAtTime(392.00, audioContext.currentTime);
+                oscillator.frequency.setValueAtTime(349.23, audioContext.currentTime + 0.1);
+                oscillator.frequency.setValueAtTime(329.63, audioContext.currentTime + 0.2);
+            }
+            
+            oscillator.start(audioContext.currentTime);
+            oscillator.stop(audioContext.currentTime + 0.3);
+        }
+
+        function resetGame() {
+            gameState.score = 0;
+            gameState.streak = 0;
+            gameState.totalQuestions = 0;
+            gameState.correctCount = 0;
+            gameState.wrongCount = 0;
+            updateScoreDisplay();
+            startNewRound();
+        }
+
+        function toggleWrongWordsPanel() {
+            const panel = document.getElementById('wrongWordsPanel');
+            panel.classList.toggle('show');
+            
+            if (panel.classList.contains('show')) {
+                updateWrongWordsList();
+            }
+        }
+
+        function updateWrongWordsList() {
+            const list = document.getElementById('wrongWordsList');
+            list.innerHTML = '';
+            
+            Object.entries(gameState.wrongWords).forEach(([word, info]) => {
+                const item = document.createElement('div');
+                item.className = 'wrong-word-item';
+                item.innerHTML = `
+                    <div class="emoji">${info.emoji}</div>
+                    <div class="word-info">
+                        <div class="word">${word}</div>
+                        <div class="chinese">${info.chinese}</div>
+                    </div>
+                    <div class="count">×${info.count}</div>
+                `;
+                list.appendChild(item);
+            });
+            
+            if (Object.keys(gameState.wrongWords).length === 0) {
+                list.innerHTML = '<p style="text-align: center; color: #999; padding: 20px;">暂无错题 🎉</p>';
+            }
+        }
+
+        function clearWrongWords() {
+            if (confirm('确定要清空错题本吗？')) {
+                gameState.wrongWords = {};
+                updateWrongWordsCount();
+                updateWrongWordsList();
+            }
+        }
+
+        // Emoji配置功能
+        function toggleConfigPanel() {
+            const panel = document.getElementById('configPanel');
+            panel.classList.toggle('show');
+            
+            if (panel.classList.contains('show')) {
+                initEmojiConfigList();
+            }
+        }
+
+        function initEmojiConfigList() {
+            const list = document.getElementById('emojiConfigList');
+            const wordDatabase = getWordDatabase();
+            const categoryNames = {
+                'animals': '🐾 动物',
+                'food': '🍔 食物',
+                'family': '👨‍👩‍👧‍👦 家庭',
+                'colors': '🎨 颜色',
+                'body': '👂 身体',
+                'adjectives': '📏 形容词'
+            };
+            
+            list.innerHTML = '';
+            
+            Object.entries(wordDatabase).forEach(([category, words]) => {
+                // 类别标题
+                const categoryTitle = document.createElement('div');
+                categoryTitle.className = 'category-title';
+                categoryTitle.textContent = categoryNames[category] || category;
+                list.appendChild(categoryTitle);
+                
+                // 每个单词的配置
+                words.forEach(wordItem => {
+                    const item = document.createElement('div');
+                    item.className = 'emoji-config-item';
+                    
+                    const key = `${category}|${wordItem.word}`;
+                    const currentEmoji = gameState.customEmojis[key] || wordItem.emoji;
+                    
+                    item.innerHTML = `
+                        <div class="word-name">${wordItem.word}</div>
+                        <div class="chinese-name">${wordItem.chinese}</div>
+                        <div class="emoji-picker">
+                            <div class="emoji-preview">${currentEmoji}</div>
+                            <input type="text" 
+                                   id="emoji-${key}" 
+                                   value="${currentEmoji}" 
+                                   placeholder="输入emoji"
+                                   onchange="updateEmojiPreview('${key}', this.value)">
+                        </div>
+                    `;
+                    list.appendChild(item);
+                });
+            });
+        }
+
+        function updateEmojiPreview(key, value) {
+            const preview = document.querySelector(`#emoji-${key}`).parentElement.querySelector('.emoji-preview');
+            preview.textContent = value;
+        }
+
+        function saveEmojiConfig() {
+            const wordDatabase = getWordDatabase();
+            
+            Object.entries(wordDatabase).forEach(([category, words]) => {
+                words.forEach(wordItem => {
+                    const key = `${category}|${wordItem.word}`;
+                    const input = document.getElementById(`emoji-${key}`);
+                    if (input && input.value) {
+                        const newEmoji = input.value.trim();
+                        if (newEmoji !== defaultWordDatabase[category].find(w => w.word === wordItem.word).emoji) {
+                            gameState.customEmojis[key] = newEmoji;
+                        } else {
+                            delete gameState.customEmojis[key];
+                        }
+                    }
+                });
+            });
+            
+            saveGameState();
+            alert('✅ 配置已保存！');
+            toggleConfigPanel();
+            startNewRound();
+        }
+
+        function resetEmojiConfig() {
+            if (confirm('确定要恢复所有emoji为默认设置吗？')) {
+                gameState.customEmojis = {};
+                saveGameState();
+                initEmojiConfigList();
+                alert('✅ 已恢复默认设置！');
+            }
+        }
+
+        function saveGameState() {
+            localStorage.setItem('wordGameV3State', JSON.stringify(gameState));
+        }
+
+        function loadGameState() {
+            const saved = localStorage.getItem('wordGameV3State');
+            if (saved) {
+                const loaded = JSON.parse(saved);
+                gameState = { ...gameState, ...loaded };
+                updateScoreDisplay();
+                
+                if (speechSynthesis.onvoiceschanged !== undefined) {
+                    speechSynthesis.onvoiceschanged = () => {};
+                }
+                
+                setTimeout(() => {
+                    document.querySelectorAll('.category-btn').forEach(btn => {
+                        const categories = {
+                            'animals': '动物',
+                            'food': '食物',
+                            'family': '家庭',
+                            'colors': '颜色',
+                            'body': '身体',
+                            'adjectives': '形容词'
+                        };
+                        
+                        Object.entries(categories).forEach(([key, label]) => {
+                            if (btn.textContent.includes(label) && gameState.selectedCategories.includes(key)) {
+                                btn.classList.add('active');
+                            }
+                        });
+                    });
+                }, 100);
+                
+                document.getElementById('volumeSlider').value = gameState.volume;
+            }
+        }
+    </script>
+</body>
+</html>
