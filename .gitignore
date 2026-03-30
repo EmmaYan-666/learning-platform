@@ -1,0 +1,22 @@
+# 系统文件
+.DS_Store
+~$*.pptx
+
+# 工作目录
+.workbuddy/
+
+# 临时文件
+*.py
+system_issue.js
+reminder_hsbcbank.md
+test_chinese.html
+GitHub_Pages部署指南.md
+使用说明.md
+
+# Office 临时文件
+酒店PMS系统模块规划.xlsx
+系统数据同步问题.pptx
+System_Sync_Issue.pptx
+
+# 部署目录（可选，如果想保留版本历史可以去掉这行）
+# deploy/
