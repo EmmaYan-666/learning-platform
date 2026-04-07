@@ -1270,6 +1270,246 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        /* ===== 课程管理模态框样式 ===== */
+        .course-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .course-modal.show {
+            display: flex;
+        }
+
+        .course-modal-content {
+            background: white;
+            border-radius: 25px;
+            padding: 0;
+            width: 90%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.3s ease;
+        }
+
+        .course-modal-header {
+            background: linear-gradient(135deg, #56ab2f 0%, #a8e063 100%);
+            padding: 20px 30px;
+            border-radius: 25px 25px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .course-modal-header h3 {
+            color: white;
+            font-size: 22px;
+            margin: 0;
+        }
+
+        .course-modal-close {
+            background: rgba(255, 255, 255, 0.3);
+            border: none;
+            color: white;
+            font-size: 28px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .course-modal-close:hover {
+            background: rgba(255, 255, 255, 0.5);
+            transform: rotate(90deg);
+        }
+
+        .course-modal-body {
+            padding: 30px;
+        }
+
+        .course-form-group {
+            margin-bottom: 25px;
+        }
+
+        .course-form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+            font-size: 15px;
+        }
+
+        .course-form-group input,
+        .course-form-group textarea,
+        .course-form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            font-size: 15px;
+            transition: all 0.3s;
+            font-family: inherit;
+        }
+
+        .course-form-group input:focus,
+        .course-form-group textarea:focus,
+        .course-form-group select:focus {
+            outline: none;
+            border-color: #56ab2f;
+            box-shadow: 0 0 0 3px rgba(86, 171, 47, 0.1);
+        }
+
+        .course-form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .course-form-hint {
+            font-size: 12px;
+            color: #999;
+            margin-top: 5px;
+            line-height: 1.5;
+        }
+
+        .word-input-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr 80px;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .word-input-row input {
+            padding: 10px;
+            font-size: 14px;
+        }
+
+        .remove-word-btn {
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .remove-word-btn:hover {
+            background: #ee5a6f;
+        }
+
+        .add-word-btn {
+            background: linear-gradient(135deg, #56ab2f 0%, #a8e063 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 12px 20px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            width: 100%;
+            margin-top: 10px;
+            transition: all 0.3s;
+        }
+
+        .add-word-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(86, 171, 47, 0.3);
+        }
+
+        .course-modal-footer {
+            padding: 20px 30px;
+            border-top: 1px solid #f0f0f0;
+            display: flex;
+            gap: 15px;
+            justify-content: flex-end;
+        }
+
+        .course-modal-btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .course-modal-btn.cancel {
+            background: #f0f0f0;
+            color: #666;
+        }
+
+        .course-modal-btn.cancel:hover {
+            background: #e0e0e0;
+        }
+
+        .course-modal-btn.save {
+            background: linear-gradient(135deg, #56ab2f 0%, #a8e063 100%);
+            color: white;
+        }
+
+        .course-modal-btn.save:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(86, 171, 47, 0.4);
+        }
+
+        /* 单词练习页面样式 */
+        .practice-page {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 20px;
+        }
+
+        .practice-question {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .practice-word {
+            font-size: 48px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 15px;
+            cursor: pointer;
+            display: inline-block;
+            padding: 20px 40px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            transition: all 0.3s;
+        }
+
+        .practice-word:hover {
+            transform: scale(1.05);
+            background: linear-gradient(135deg, #56ab2f 0%, #a8e063 100%);
+            color: white;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
     </style>
 </head>
 <body>
@@ -1565,6 +1805,28 @@
                 </div>
             </div>
         </div>
+
+        <!-- 单词练习页面 -->
+        <div id="wordPracticePage" class="game-page">
+            <div class="game-header">
+                <button class="back-btn" onclick="backToCourseDetail()">← 返回</button>
+                <h2>🎯 单词练习</h2>
+                <div class="score-board">
+                    <div class="score-item correct-count">
+                        <span class="number" id="practiceCorrect">0</span>
+                        <span class="label">正确</span>
+                    </div>
+                    <div class="score-item wrong-count">
+                        <span class="number" id="practiceWrong">0</span>
+                        <span class="label">错误</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-area" id="practiceQuestionArea">
+                <!-- 动态生成练习题 -->
+            </div>
+        </div>
     </div>
 
     <!-- 星星动画 -->
@@ -1606,8 +1868,19 @@
             <button class="close-panel" onclick="closeVoiceSettings()">×</button>
         </div>
         
-        <div style="padding: 20px 0;">
-            <h4 style="margin-bottom: 15px; color: #333;">🔤 英语语音参数</h4>
+        <div style="padding: 20px 0; max-height: 70vh; overflow-y: auto;">
+            <!-- 英文语音选择 -->
+            <h4 style="margin-bottom: 15px; color: #333;">🔤 英文语音</h4>
+            
+            <div style="margin-bottom: 15px;">
+                <label style="display: block; margin-bottom: 8px; font-weight: 500;">选择英文语音：</label>
+                <select id="englishVoiceSelect" style="width: 100%; padding: 10px; border-radius: 10px; border: 1px solid #ddd; font-size: 14px;" onchange="updateVoiceParams()">
+                    <option value="">自动选择最佳语音</option>
+                </select>
+                <p style="font-size: 12px; color: #888; margin-top: 8px; line-height: 1.5;">
+                    💡 推荐：选择带"Natural"或"Google"的语音更自然
+                </p>
+            </div>
             
             <!-- 英语语速调节 -->
             <div style="margin-bottom: 20px;">
@@ -1631,7 +1904,18 @@
                 </div>
             </div>
             
-            <h4 style="margin: 25px 0 15px; color: #333; padding-top: 20px; border-top: 1px solid #eee;">🇨🇳 中文句子语速</h4>
+            <h4 style="margin: 25px 0 15px; color: #333; padding-top: 20px; border-top: 1px solid #eee;">🇨🇳 中文语音</h4>
+            
+            <!-- 中文语音选择 -->
+            <div style="margin-bottom: 15px;">
+                <label style="display: block; margin-bottom: 8px; font-weight: 500;">选择中文语音：</label>
+                <select id="chineseVoiceSelect" style="width: 100%; padding: 10px; border-radius: 10px; border: 1px solid #ddd; font-size: 14px;" onchange="updateVoiceParams()">
+                    <option value="">自动选择最佳语音</option>
+                </select>
+                <p style="font-size: 12px; color: #888; margin-top: 8px; line-height: 1.5;">
+                    💡 推荐：选择"Google 普通话"或"Microsoft Yaoyao"更自然
+                </p>
+            </div>
             
             <!-- 中文句子语速调节 -->
             <div style="margin-bottom: 20px;">
@@ -1647,27 +1931,19 @@
                 </p>
             </div>
             
-            <!-- 语音选择 -->
-            <div style="margin-bottom: 20px;">
-                <label style="display: block; margin-bottom: 8px; font-weight: 500;">选择语音</label>
-                <select id="voiceSelect" style="width: 100%; padding: 10px; border-radius: 10px; border: 1px solid #ddd; font-size: 14px;" onchange="saveSelectedVoice()">
-                    <option value="">自动选择最佳语音</option>
-                </select>
-            </div>
-            
             <!-- 测试按钮 -->
             <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee;">
-                <h4 style="margin-bottom: 15px; color: #333;">测试语音</h4>
+                <h4 style="margin-bottom: 15px; color: #333;">🔤 测试英文语音</h4>
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
                     <button class="btn btn-primary" onclick="testVoice('apple')">🍎 Apple</button>
                     <button class="btn btn-primary" onclick="testVoice('hello')">👋 Hello</button>
                     <button class="btn btn-primary" onclick="testVoice('excellent')">⭐ Excellent</button>
                     <button class="btn btn-primary" onclick="testVoice('great')">🎉 Great job</button>
                 </div>
-                <div style="margin-top: 15px;">
-                    <button class="btn btn-primary" onclick="testVoice('sentence')" style="width: 100%;">
-                        🇨🇳 测试中文句子
-                    </button>
+                <h4 style="margin: 20px 0 15px; color: #333;">🇨🇳 测试中文语音</h4>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                    <button class="btn btn-primary" onclick="testVoice('chinese_word')">汉字</button>
+                    <button class="btn btn-primary" onclick="testVoice('sentence')">测试句子</button>
                 </div>
             </div>
             
@@ -1681,7 +1957,72 @@
         </div>
     </div>
 
+    <!-- 课程管理模态框 -->
+    <div id="courseModal" class="course-modal">
+        <div class="course-modal-content">
+            <div class="course-modal-header">
+                <h3 id="courseModalTitle">📚 添加新课程</h3>
+                <button class="course-modal-close" onclick="closeCourseModal()">×</button>
+            </div>
+            <div class="course-modal-body">
+                <form id="courseForm">
+                    <div class="course-form-group">
+                        <label>课程编号 *</label>
+                        <input type="text" id="courseId" placeholder="例如: S3" required>
+                        <p class="course-form-hint">课程编号格式：S + 数字</p>
+                    </div>
+
+                    <div class="course-form-group">
+                        <label>课程标题 *</label>
+                        <input type="text" id="courseTitle" placeholder="例如: My Family" required>
+                    </div>
+
+                    <div class="course-form-group">
+                        <label>上课日期 *</label>
+                        <input type="date" id="courseDate" required>
+                    </div>
+
+                    <div class="course-form-group">
+                        <label>课程描述</label>
+                        <textarea id="courseDescription" placeholder="例如: 第三课：认识家庭成员"></textarea>
+                    </div>
+
+                    <div class="course-form-group">
+                        <label>单词列表 *</label>
+                        <div id="wordInputs">
+                            <!-- 动态生成单词输入行 -->
+                        </div>
+                        <button type="button" class="add-word-btn" onclick="addWordInput()">+ 添加单词</button>
+                        <p class="course-form-hint">每个单词填写英文和中文，点击单词可发音</p>
+                    </div>
+
+                    <div class="course-form-group">
+                        <label>短语句式（可选）</label>
+                        <textarea id="coursePhrases" placeholder="格式：英文句子|中文翻译&#10;例如：This is my father|这是我爸爸&#10;每行一句"></textarea>
+                        <p class="course-form-hint">每行一句，英文和中文用|分隔</p>
+                    </div>
+
+                    <div class="course-form-group">
+                        <label>视频链接（可选）</label>
+                        <input type="url" id="courseVideo" placeholder="https://...">
+                        <p class="course-form-hint">支持在线视频链接</p>
+                    </div>
+                </form>
+            </div>
+            <div class="course-modal-footer">
+                <button class="course-modal-btn cancel" onclick="closeCourseModal()">取消</button>
+                <button class="course-modal-btn save" onclick="saveCourse()">💾 保存课程</button>
+            </div>
+        </div>
+    </div>
+
     <script>
+        // ===== 全局变量 =====
+        let currentPracticeWords = [];
+        let practiceWordIndex = 0;
+        let correctPracticeCount = 0;
+        let wrongPracticeCount = 0;
+
         // ===== 游戏数据 =====
         // 字母游戏数据
         const alphabetData = {
@@ -2324,14 +2665,187 @@
                     <div class="course-actions">
                         <button class="course-action-btn study" onclick="startCourseStudy('${course.id}')">开始学习</button>
                         <button class="course-action-btn edit" onclick="editCourse('${course.id}')">编辑</button>
+                        <button class="course-action-btn delete" onclick="deleteCourse('${course.id}')" style="background: #ff6b6b; color: white;">删除</button>
                     </div>
                 </div>
             `).join('');
         }
 
         // 显示添加课程模态框
+        let currentEditingCourseId = null; // 当前编辑的课程ID
+
         function showAddCourseModal() {
-            alert('添加课程功能开发中...\n\n请先告诉我S1和S2课程的具体内容（单词、短语、视频信息），我会帮你录入！');
+            currentEditingCourseId = null;
+            document.getElementById('courseModalTitle').textContent = '📚 添加新课程';
+            document.getElementById('courseForm').reset();
+            document.getElementById('courseId').disabled = false;
+            document.getElementById('courseDate').value = new Date().toISOString().split('T')[0];
+            
+            // 初始化单词输入（默认3个空行）
+            initWordInputs();
+            
+            document.getElementById('courseModal').classList.add('show');
+        }
+
+        // 初始化单词输入
+        function initWordInputs(words = []) {
+            const container = document.getElementById('wordInputs');
+            container.innerHTML = '';
+            
+            // 如果有现有单词，显示它们
+            if (words.length > 0) {
+                words.forEach(word => addWordInput(word));
+            } else {
+                // 默认添加3个空行
+                for (let i = 0; i < 3; i++) {
+                    addWordInput();
+                }
+            }
+        }
+
+        // 添加单词输入行
+        function addWordInput(wordData = null) {
+            const container = document.getElementById('wordInputs');
+            const row = document.createElement('div');
+            row.className = 'word-input-row';
+            
+            const word = wordData ? wordData.word : '';
+            const chinese = wordData ? wordData.chinese : '';
+            
+            row.innerHTML = `
+                <input type="text" placeholder="英文单词" value="${word}" class="word-english">
+                <input type="text" placeholder="中文翻译" value="${chinese}" class="word-chinese">
+                <button type="button" class="remove-word-btn" onclick="removeWordInput(this)">删除</button>
+            `;
+            
+            container.appendChild(row);
+        }
+
+        // 删除单词输入行
+        function removeWordInput(btn) {
+            const rows = document.querySelectorAll('.word-input-row');
+            if (rows.length > 1) {
+                btn.parentElement.remove();
+            } else {
+                alert('至少需要保留一个单词！');
+            }
+        }
+
+        // 关闭课程模态框
+        function closeCourseModal() {
+            document.getElementById('courseModal').classList.remove('show');
+            currentEditingCourseId = null;
+        }
+
+        // 保存课程
+        function saveCourse() {
+            const courseId = document.getElementById('courseId').value.trim();
+            const title = document.getElementById('courseTitle').value.trim();
+            const date = document.getElementById('courseDate').value;
+            const description = document.getElementById('courseDescription').value.trim();
+            const phrasesText = document.getElementById('coursePhrases').value.trim();
+            const videoUrl = document.getElementById('courseVideo').value.trim();
+
+            // 验证必填字段
+            if (!courseId || !title || !date) {
+                alert('请填写课程编号、标题和日期！');
+                return;
+            }
+
+            // 收集单词
+            const wordRows = document.querySelectorAll('.word-input-row');
+            const words = [];
+            wordRows.forEach(row => {
+                const word = row.querySelector('.word-english').value.trim();
+                const chinese = row.querySelector('.word-chinese').value.trim();
+                if (word && chinese) {
+                    words.push({
+                        word: word,
+                        chinese: chinese,
+                        emoji: getEmojiForWord(word),
+                        phrases: [`This is my ${word}`]
+                    });
+                }
+            });
+
+            if (words.length === 0) {
+                alert('请至少添加一个单词！');
+                return;
+            }
+
+            // 解析短语
+            const phrases = [];
+            if (phrasesText) {
+                const lines = phrasesText.split('\n');
+                lines.forEach(line => {
+                    const parts = line.split('|');
+                    if (parts.length === 2) {
+                        phrases.push({
+                            english: parts[0].trim(),
+                            chinese: parts[1].trim()
+                        });
+                    }
+                });
+            }
+
+            // 构建课程数据
+            const courseData = {
+                id: courseId,
+                title: title,
+                date: date,
+                description: description,
+                words: words,
+                phrases: phrases.length > 0 ? phrases : words.map(w => ({
+                    english: `This is my ${w.word}`,
+                    chinese: `这是我的${w.chinese}`
+                })),
+                videos: videoUrl ? [{
+                    title: `${courseId}教学视频 - ${title}`,
+                    url: videoUrl,
+                    type: 'link'
+                }] : []
+            };
+
+            // 检查是编辑还是新增
+            if (currentEditingCourseId) {
+                // 编辑模式
+                delete readingCourses[currentEditingCourseId];
+                readingCourses[courseId] = courseData;
+                alert('✅ 课程更新成功！');
+            } else {
+                // 新增模式
+                if (readingCourses[courseId]) {
+                    alert('课程编号已存在，请使用其他编号！');
+                    return;
+                }
+                readingCourses[courseId] = courseData;
+                alert('✅ 课程添加成功！');
+            }
+
+            // 保存到localStorage
+            saveReadingCourses();
+            
+            // 关闭模态框
+            closeCourseModal();
+            
+            // 刷新课程列表
+            renderCourseList();
+        }
+
+        // 根据单词获取emoji
+        function getEmojiForWord(word) {
+            const emojiMap = {
+                'eye': '👁️', 'head': '🗣️', 'hand': '✋', 'mouth': '👄',
+                'ear': '👂', 'leg': '🦵', 'shoulder': '💪', 'nose': '👃',
+                'dog': '🐕', 'cat': '🐱', 'bird': '🐦', 'fish': '🐟',
+                'father': '👨', 'mother': '👩', 'brother': '👦', 'sister': '👧',
+                'family': '👨‍👩‍👧‍👦', 'friend': '👫', 'teacher': '👩‍🏫',
+                'book': '📚', 'pen': '🖊️', 'pencil': '✏️', 'ruler': '📏',
+                'apple': '🍎', 'banana': '🍌', 'orange': '🍊', 'cake': '🎂',
+                'car': '🚗', 'bus': '🚌', 'bike': '🚲', 'plane': '✈️'
+            };
+            const lowerWord = word.toLowerCase();
+            return emojiMap[lowerWord] || '📝';
         }
 
         // 开始课程学习
@@ -2433,8 +2947,158 @@
                 return;
             }
 
-            // TODO: 实现单词练习游戏
-            alert(`开始练习 ${course.title} 的单词！\n\n练习功能开发中...`);
+            // 隐藏课程详情
+            document.getElementById('courseDetail').classList.remove('active');
+            
+            // 显示练习页面（使用游戏页面结构）
+            const practicePage = document.getElementById('wordPracticePage');
+            if (practicePage) {
+                practicePage.classList.add('active');
+            }
+            
+            // 开始单词练习
+            currentPracticeWords = shuffleArray([...course.words]);
+            practiceWordIndex = 0;
+            correctPracticeCount = 0;
+            wrongPracticeCount = 0;
+            
+            // 显示第一个练习题
+            showPracticeQuestion();
+        }
+
+        // 显示练习题目
+        function showPracticeQuestion() {
+            if (practiceWordIndex >= currentPracticeWords.length) {
+                // 练习完成
+                showPracticeResult();
+                return;
+            }
+
+            const currentWord = currentPracticeWords[practiceWordIndex];
+            const container = document.getElementById('practiceQuestionArea');
+            
+            if (!container) {
+                console.error('找不到练习题容器');
+                return;
+            }
+
+            // 生成选项（正确答案 + 3个随机错误答案）
+            const allWords = Object.values(readingCourses)
+                .flatMap(c => c.words)
+                .filter(w => w.word !== currentWord.word);
+            
+            const wrongOptions = shuffleArray(allWords).slice(0, 3);
+            const options = shuffleArray([currentWord, ...wrongOptions]);
+
+            // 显示题目
+            container.innerHTML = `
+                <div class="practice-question">
+                    <div class="practice-word" onclick="speak('${currentWord.word}', 'en-US')">
+                        ${currentWord.word}
+                    </div>
+                    <p style="color: #888; font-size: 16px; margin-top: 10px;">
+                        💡 点击单词听发音，选择正确的中文翻译
+                    </p>
+                </div>
+                <div class="choices-grid">
+                    ${options.map((opt, index) => `
+                        <div class="choice-card" onclick="checkPracticeAnswer('${opt.word}', '${currentWord.word}', this)">
+                            <span class="choice-emoji">${opt.emoji}</span>
+                            <div class="choice-text">${opt.chinese}</div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+
+            // 自动朗读
+            setTimeout(() => speak(currentWord.word, 'en-US'), 500);
+        }
+
+        // 检查练习答案
+        function checkPracticeAnswer(selectedWord, correctWord, element) {
+            const container = document.getElementById('practiceQuestionArea');
+            const allCards = container.querySelectorAll('.choice-card');
+            
+            // 禁用所有卡片
+            allCards.forEach(card => card.style.pointerEvents = 'none');
+            
+            if (selectedWord === correctWord) {
+                // 正确
+                element.classList.add('correct');
+                correctPracticeCount++;
+                showStars();
+                showFeedback('✨ 太棒了！', 'correct');
+                speak('Excellent!', 'en-US');
+            } else {
+                // 错误
+                element.classList.add('wrong');
+                wrongPracticeCount++;
+                
+                // 显示正确答案
+                allCards.forEach(card => {
+                    const cardWord = card.getAttribute('onclick').match(/'([^']+)'/)[1];
+                    if (cardWord === correctWord) {
+                        card.classList.add('correct');
+                    }
+                });
+                
+                showFeedback('再试试看！正确答案是：' + correctWord, 'wrong');
+            }
+
+            // 2秒后下一题
+            setTimeout(() => {
+                practiceWordIndex++;
+                showPracticeQuestion();
+            }, 2000);
+        }
+
+        // 显示练习结果
+        function showPracticeResult() {
+            const container = document.getElementById('practiceQuestionArea');
+            const total = correctPracticeCount + wrongPracticeCount;
+            const percentage = Math.round((correctPracticeCount / total) * 100);
+
+            container.innerHTML = `
+                <div style="text-align: center; padding: 40px 20px;">
+                    <div style="font-size: 80px; margin-bottom: 20px;">
+                        ${percentage >= 80 ? '🎉' : percentage >= 60 ? '👍' : '💪'}
+                    </div>
+                    <h2 style="font-size: 32px; color: #333; margin-bottom: 20px;">
+                        练习完成！
+                    </h2>
+                    <div style="font-size: 24px; color: #666; margin-bottom: 30px;">
+                        正确：<span style="color: #4facfe; font-weight: bold;">${correctPracticeCount}</span> / ${total}
+                    </div>
+                    <div style="width: 200px; height: 200px; margin: 0 auto 30px; border-radius: 50%; 
+                                background: conic-gradient(#4facfe 0% ${percentage}%, #f0f0f0 ${percentage}% 100%);
+                                display: flex; align-items: center; justify-content: center;">
+                        <div style="font-size: 48px; font-weight: bold; color: #333;">
+                            ${percentage}%
+                        </div>
+                    </div>
+                    <button onclick="backToCourseDetail()" 
+                            style="padding: 15px 40px; font-size: 18px; background: linear-gradient(135deg, #56ab2f 0%, #a8e063 100%);
+                                   color: white; border: none; border-radius: 25px; cursor: pointer; font-weight: bold;">
+                        返回课程
+                    </button>
+                </div>
+            `;
+        }
+
+        // 返回课程详情
+        function backToCourseDetail() {
+            document.getElementById('wordPracticePage')?.classList.remove('active');
+            document.getElementById('courseDetail').classList.add('active');
+        }
+
+        // 洗牌算法
+        function shuffleArray(array) {
+            const newArray = [...array];
+            for (let i = newArray.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+            }
+            return newArray;
         }
 
         // 编辑课程
@@ -2442,7 +3106,42 @@
             const course = readingCourses[courseId];
             if (!course) return;
 
-            alert(`编辑课程 ${courseId}\n\n编辑功能开发中...`);
+            currentEditingCourseId = courseId;
+            
+            // 填充表单数据
+            document.getElementById('courseModalTitle').textContent = '✏️ 编辑课程';
+            document.getElementById('courseId').value = course.id;
+            document.getElementById('courseId').disabled = true; // 编辑时不能修改ID
+            document.getElementById('courseTitle').value = course.title;
+            document.getElementById('courseDate').value = course.date;
+            document.getElementById('courseDescription').value = course.description || '';
+            
+            // 填充单词
+            initWordInputs(course.words);
+            
+            // 填充短语
+            if (course.phrases && course.phrases.length > 0) {
+                const phrasesText = course.phrases.map(p => `${p.english}|${p.chinese}`).join('\n');
+                document.getElementById('coursePhrases').value = phrasesText;
+            }
+            
+            // 填充视频链接
+            if (course.videos && course.videos.length > 0) {
+                document.getElementById('courseVideo').value = course.videos[0].url;
+            }
+            
+            // 显示模态框
+            document.getElementById('courseModal').classList.add('show');
+        }
+
+        // 删除课程
+        function deleteCourse(courseId) {
+            if (confirm(`确定要删除课程 ${courseId} 吗？\n\n此操作不可撤销！`)) {
+                delete readingCourses[courseId];
+                saveReadingCourses();
+                renderCourseList();
+                alert('✅ 课程已删除！');
+            }
         }
 
         // 获取最佳语音
@@ -2533,8 +3232,8 @@
                 utterance.pitch = voiceSettings.pitch || 1.1;
                 utterance.volume = 1.0;
             } else {
-                // 中文保持原样
-                utterance.rate = 0.85;
+                // 中文使用用户设置的中文句子语速
+                utterance.rate = voiceSettings.chineseRate || 0.8;
                 utterance.pitch = 1.0;
                 utterance.volume = 1.0;
             }
@@ -2876,12 +3575,13 @@
             return new Promise((resolve) => {
                 const utterance = new SpeechSynthesisUtterance(char);
                 utterance.lang = 'zh-CN';
-                utterance.rate = 0.85;
+                // 使用用户设置的中文句子语速
+                utterance.rate = voiceSettings.chineseRate || 0.8;
                 utterance.pitch = 1.0;
                 utterance.volume = 1.0;
                 
-                // 使用最佳中文语音
-                const bestVoice = getBestVoice('zh-CN');
+                // 使用用户选择的中文语音或最佳中文语音
+                const bestVoice = getUserVoice('zh-CN');
                 if (bestVoice) {
                     utterance.voice = bestVoice;
                 }
@@ -3118,11 +3818,7 @@
 
         function playSentence() {
             const sentence = document.getElementById('sentenceText').textContent;
-            const utterance = new SpeechSynthesisUtterance(sentence);
-            utterance.lang = 'zh-CN';
-            // 使用用户设置的中文句子语速
-            utterance.rate = voiceSettings.chineseRate || 0.8;
-            synth.speak(utterance);
+            speak(sentence, 'zh-CN');
         }
 
         function nextSentence() {
@@ -3512,15 +4208,54 @@
         let voiceSettings = {
             rate: 0.9,
             pitch: 1.1,
-            selectedVoice: '',
-            chineseRate: 0.8  // 中文句子语速
+            englishVoice: '',      // 英文语音
+            chineseVoice: '',      // 中文语音
+            chineseRate: 0.8       // 中文句子语速
         };
+
+        // 判断是否为自然语音（更接近人声）
+        function isNaturalVoice(voice) {
+            const voiceName = voice.name.toLowerCase();
+            // 自然语音关键词
+            const naturalKeywords = [
+                'natural',      // Microsoft Natural 语音
+                'google',       // Google 语音
+                'online',       // 在线语音（通常质量更好）
+                'neural',       // 神经网络语音
+                'premium',      // 高级语音
+                'enhanced'      // 增强语音
+            ];
+            
+            // 机器语音关键词（要过滤掉的）
+            const roboticKeywords = [
+                'compact',      // 紧凑版（通常质量较低）
+                'basic',        // 基础版
+                'desktop'       // 桌面版（有些是低质量的）
+            ];
+            
+            // 检查是否包含自然语音关键词
+            const isNatural = naturalKeywords.some(keyword => voiceName.includes(keyword));
+            const isRobotic = roboticKeywords.some(keyword => voiceName.includes(keyword));
+            
+            // 如果是自然语音且不是机器语音，返回true
+            return isNatural && !isRobotic;
+        }
+
+        // 获取语音质量标签
+        function getVoiceQualityLabel(voice) {
+            if (isNaturalVoice(voice)) {
+                return ' ⭐ 推荐'; // 自然语音标记
+            }
+            return '';
+        }
 
         // 加载语音设置
         function loadVoiceSettings() {
             const saved = localStorage.getItem('voiceSettings');
             if (saved) {
-                voiceSettings = JSON.parse(saved);
+                const savedSettings = JSON.parse(saved);
+                voiceSettings = {...voiceSettings, ...savedSettings};
+                
                 document.getElementById('voiceRate').value = voiceSettings.rate;
                 document.getElementById('voicePitch').value = voiceSettings.pitch;
                 if (document.getElementById('chineseVoiceRate')) {
@@ -3543,6 +4278,17 @@
             voiceSettings.rate = parseFloat(rate);
             voiceSettings.pitch = parseFloat(pitch);
             voiceSettings.chineseRate = parseFloat(chineseRate);
+            
+            // 保存选择的语音
+            const englishVoiceSelect = document.getElementById('englishVoiceSelect');
+            const chineseVoiceSelect = document.getElementById('chineseVoiceSelect');
+            
+            if (englishVoiceSelect) {
+                voiceSettings.englishVoice = englishVoiceSelect.value;
+            }
+            if (chineseVoiceSelect) {
+                voiceSettings.chineseVoice = chineseVoiceSelect.value;
+            }
         }
 
         // 打开语音设置面板
@@ -3566,33 +4312,69 @@
         // 加载可用语音列表
         function loadAvailableVoices() {
             const voices = synth.getVoices();
-            const select = document.getElementById('voiceSelect');
             
-            select.innerHTML = '<option value="">自动选择最佳语音</option>';
+            // 英文语音选择
+            const englishSelect = document.getElementById('englishVoiceSelect');
+            englishSelect.innerHTML = '<option value="">自动选择最佳语音</option>';
             
-            // 只显示英文语音
+            // 中文语音选择
+            const chineseSelect = document.getElementById('chineseVoiceSelect');
+            chineseSelect.innerHTML = '<option value="">自动选择最佳语音</option>';
+            
+            // 分离并过滤英文和中文语音
             const englishVoices = voices.filter(v => v.lang.includes('en'));
-            englishVoices.forEach((voice, index) => {
+            const chineseVoices = voices.filter(v => v.lang.includes('zh'));
+            
+            // 按自然语音优先排序
+            const sortByNatural = (a, b) => {
+                const aNatural = isNaturalVoice(a);
+                const bNatural = isNaturalVoice(b);
+                if (aNatural && !bNatural) return -1;
+                if (!aNatural && bNatural) return 1;
+                return 0;
+            };
+            
+            englishVoices.sort(sortByNatural);
+            chineseVoices.sort(sortByNatural);
+            
+            // 填充英文语音选项
+            englishVoices.forEach(voice => {
                 const option = document.createElement('option');
                 option.value = voice.name;
-                option.textContent = `${voice.name} (${voice.lang})`;
-                if (voice.name === voiceSettings.selectedVoice) {
+                const qualityLabel = getVoiceQualityLabel(voice);
+                option.textContent = `${voice.name} (${voice.lang})${qualityLabel}`;
+                if (voice.name === voiceSettings.englishVoice) {
                     option.selected = true;
                 }
-                select.appendChild(option);
+                englishSelect.appendChild(option);
             });
             
+            // 填充中文语音选项
+            chineseVoices.forEach(voice => {
+                const option = document.createElement('option');
+                option.value = voice.name;
+                const qualityLabel = getVoiceQualityLabel(voice);
+                option.textContent = `${voice.name}${qualityLabel}`;
+                if (voice.name === voiceSettings.chineseVoice) {
+                    option.selected = true;
+                }
+                chineseSelect.appendChild(option);
+            });
+            
+            // 如果没有找到语音
             if (englishVoices.length === 0) {
                 const option = document.createElement('option');
                 option.textContent = '未找到英文语音';
                 option.disabled = true;
-                select.appendChild(option);
+                englishSelect.appendChild(option);
             }
-        }
-
-        // 保存选择的语音
-        function saveSelectedVoice() {
-            voiceSettings.selectedVoice = document.getElementById('voiceSelect').value;
+            
+            if (chineseVoices.length === 0) {
+                const option = document.createElement('option');
+                option.textContent = '未找到中文语音';
+                option.disabled = true;
+                chineseSelect.appendChild(option);
+            }
         }
 
         // 测试语音
@@ -3602,16 +4384,13 @@
                 'hello': 'Hello',
                 'excellent': 'Excellent!',
                 'great': 'Great job!',
+                'chinese_word': '汉字',
                 'sentence': '我有好爸爸和好妈妈。'
             };
             
-            if (word === 'sentence') {
-                // 中文句子测试
-                const sentence = testTexts.sentence;
-                const utterance = new SpeechSynthesisUtterance(sentence);
-                utterance.lang = 'zh-CN';
-                utterance.rate = voiceSettings.chineseRate || 0.8;
-                synth.speak(utterance);
+            if (word === 'sentence' || word === 'chinese_word') {
+                // 中文测试
+                speak(testTexts[word], 'zh-CN');
             } else {
                 // 英语单词测试
                 speak(testTexts[word], 'en-US');
@@ -3620,7 +4399,6 @@
 
         // 保存语音设置
         function saveVoiceSettings() {
-            saveSelectedVoice();
             updateVoiceParams();
             
             localStorage.setItem('voiceSettings', JSON.stringify(voiceSettings));
@@ -3634,14 +4412,16 @@
                 voiceSettings = {
                     rate: 0.9,
                     pitch: 1.1,
-                    selectedVoice: '',
+                    englishVoice: '',
+                    chineseVoice: '',
                     chineseRate: 0.8
                 };
                 
                 document.getElementById('voiceRate').value = 0.9;
                 document.getElementById('voicePitch').value = 1.1;
                 document.getElementById('chineseVoiceRate').value = 0.8;
-                document.getElementById('voiceSelect').value = '';
+                document.getElementById('englishVoiceSelect').value = '';
+                document.getElementById('chineseVoiceSelect').value = '';
                 
                 updateVoiceParams();
                 localStorage.removeItem('voiceSettings');
@@ -3653,9 +4433,13 @@
         function getUserVoice(lang) {
             const voices = synth.getVoices();
             
+            // 根据语言选择对应的设置
+            const voiceKey = lang.startsWith('zh') ? 'chineseVoice' : 'englishVoice';
+            const selectedVoice = voiceSettings[voiceKey];
+            
             // 如果用户选择了特定语音
-            if (voiceSettings.selectedVoice) {
-                const userVoice = voices.find(v => v.name === voiceSettings.selectedVoice);
+            if (selectedVoice) {
+                const userVoice = voices.find(v => v.name === selectedVoice);
                 if (userVoice) return userVoice;
             }
             
