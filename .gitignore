@@ -20,3 +20,6 @@ System_Sync_Issue.pptx
 
 # 部署目录（可选，如果想保留版本历史可以去掉这行）
 # deploy/
+
+# 临时备份文件
+*.backup_*
