@@ -265,6 +265,10 @@
             background: linear-gradient(90deg, #56ab2f 0%, #a8e063 100%);
         }
 
+        .game-card.data::before {
+            background: linear-gradient(90deg, #2193b0 0%, #6dd5ed 100%);
+        }
+
         .game-icon {
             font-size: 72px;
             margin-bottom: 20px;
@@ -322,6 +326,10 @@
             background: linear-gradient(90deg, #56ab2f 0%, #a8e063 100%);
         }
 
+        .game-card.data .game-progress-bar {
+            background: linear-gradient(90deg, #2193b0 0%, #6dd5ed 100%);
+        }
+
         .start-btn {
             width: 100%;
             padding: 15px;
@@ -353,6 +361,10 @@
 
         .game-card.reading .start-btn {
             background: linear-gradient(135deg, #56ab2f 0%, #a8e063 100%);
+        }
+
+        .game-card.data .start-btn {
+            background: linear-gradient(135deg, #2193b0 0%, #6dd5ed 100%);
         }
 
         .start-btn:hover {
@@ -2501,6 +2513,499 @@
             color: white;
         }
 
+        /* ===== 数据启蒙模块样式 ===== */
+        .data-menu {
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        .data-menu-title {
+            font-size: 32px;
+            color: #2193b0;
+            margin-bottom: 40px;
+            font-weight: bold;
+        }
+
+        .data-game-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .data-game-card {
+            background: white;
+            border-radius: 25px;
+            padding: 30px 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 3px solid transparent;
+        }
+
+        .data-game-card:hover {
+            transform: translateY(-8px) scale(1.03);
+            box-shadow: 0 20px 40px rgba(33, 147, 176, 0.25);
+            border-color: #6dd5ed;
+        }
+
+        .data-game-icon {
+            font-size: 80px;
+            display: block;
+            margin-bottom: 15px;
+        }
+
+        .data-game-card h4 {
+            font-size: 24px;
+            color: #2193b0;
+            margin-bottom: 10px;
+        }
+
+        .data-game-card p {
+            font-size: 16px;
+            color: #666;
+        }
+
+        /* 听音选数游戏 */
+        .listen-question {
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        .listen-prompt {
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 30px;
+            font-weight: bold;
+        }
+
+        .listen-speaker {
+            font-size: 100px;
+            cursor: pointer;
+            display: inline-block;
+            transition: transform 0.2s;
+            animation: pulse 1.5s infinite;
+        }
+
+        .listen-speaker:hover {
+            transform: scale(1.15);
+        }
+
+        .listen-target {
+            font-size: 96px;
+            color: #2193b0;
+            font-weight: bold;
+            margin: 20px 0;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .listen-target:hover {
+            transform: scale(1.1);
+        }
+
+        .listen-options {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+
+        .listen-option {
+            width: 110px;
+            height: 110px;
+            font-size: 64px;
+            font-weight: bold;
+            color: white;
+            background: linear-gradient(135deg, #2193b0 0%, #6dd5ed 100%);
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 20px rgba(33, 147, 176, 0.3);
+            transition: all 0.2s;
+        }
+
+        .listen-option:hover {
+            transform: scale(1.1) rotate(-3deg);
+            box-shadow: 0 12px 28px rgba(33, 147, 176, 0.5);
+        }
+
+        .listen-option.correct {
+            background: linear-gradient(135deg, #56ab2f 0%, #a8e063 100%) !important;
+            animation: bounce 0.6s ease;
+        }
+
+        .listen-option.wrong {
+            background: linear-gradient(135deg, #ff5858 0%, #f857a6 100%) !important;
+            animation: shake 0.4s ease;
+        }
+
+        /* 看图点数游戏 */
+        .count-question {
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        .count-prompt {
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 25px;
+            font-weight: bold;
+        }
+
+        .count-items {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin: 30px 0;
+            min-height: 120px;
+        }
+
+        .count-item {
+            font-size: 72px;
+            cursor: pointer;
+            transition: transform 0.2s;
+            user-select: none;
+            position: relative;
+        }
+
+        .count-item:hover {
+            transform: scale(1.2);
+        }
+
+        .count-item.counted {
+            opacity: 0.5;
+            transform: scale(0.9);
+        }
+
+        .count-item .count-number {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: #ff4757;
+            color: white;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .count-counter {
+            font-size: 32px;
+            color: #2193b0;
+            margin: 20px 0;
+            font-weight: bold;
+        }
+
+        .count-options {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .count-option {
+            width: 90px;
+            height: 90px;
+            font-size: 56px;
+            font-weight: bold;
+            color: white;
+            background: linear-gradient(135deg, #2193b0 0%, #6dd5ed 100%);
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            box-shadow: 0 6px 16px rgba(33, 147, 176, 0.3);
+            transition: all 0.2s;
+        }
+
+        .count-option:hover {
+            transform: scale(1.1);
+        }
+
+        .count-option.correct {
+            background: linear-gradient(135deg, #56ab2f 0%, #a8e063 100%) !important;
+            animation: bounce 0.6s ease;
+        }
+
+        .count-option.wrong {
+            background: linear-gradient(135deg, #ff5858 0%, #f857a6 100%) !important;
+            animation: shake 0.4s ease;
+        }
+
+        /* 拖拽天平 */
+        .balance-question {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .balance-prompt {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .balance-container {
+            position: relative;
+            width: 100%;
+            max-width: 700px;
+            margin: 20px auto;
+            height: 350px;
+        }
+
+        .balance-targets {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
+
+        .balance-target {
+            font-size: 80px;
+            color: #2193b0;
+            font-weight: bold;
+        }
+
+        .balance-beam {
+            position: absolute;
+            top: 80px;
+            left: 50%;
+            transform-origin: 50% 50%;
+            transform: translateX(-50%) rotate(0deg);
+            transition: transform 0.5s ease;
+            width: 90%;
+            height: 12px;
+            background: #654321;
+            border-radius: 6px;
+        }
+
+        .balance-pan {
+            position: absolute;
+            top: 90px;
+            width: 140px;
+            height: 30px;
+            background: #8B4513;
+            border-radius: 0 0 70px 70px;
+            border: 3px solid #5a2d0c;
+        }
+
+        .balance-pan.left { left: 10%; }
+        .balance-pan.right { right: 10%; }
+
+        .balance-pan-items {
+            position: absolute;
+            top: -55px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 4px;
+            max-width: 130px;
+        }
+
+        .balance-pan-items .balance-item {
+            font-size: 32px;
+        }
+
+        .balance-pool {
+            margin-top: 220px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            padding: 20px;
+            background: #f0f8ff;
+            border-radius: 20px;
+            min-height: 100px;
+        }
+
+        .balance-item {
+            font-size: 48px;
+            cursor: grab;
+            user-select: none;
+            transition: transform 0.2s;
+        }
+
+        .balance-item:hover {
+            transform: scale(1.2);
+        }
+
+        .balance-item:active {
+            cursor: grabbing;
+        }
+
+        .balance-pan.drag-over {
+            background: #a8e063;
+        }
+
+        .balance-check-btn {
+            margin-top: 20px;
+            padding: 15px 50px;
+            font-size: 22px;
+            font-weight: bold;
+            color: white;
+            background: linear-gradient(135deg, #56ab2f 0%, #a8e063 100%);
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(86, 171, 47, 0.3);
+            transition: all 0.2s;
+        }
+
+        .balance-check-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .balance-check-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* 摘苹果游戏 */
+        .pick-question {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .pick-prompt {
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .pick-target {
+            font-size: 64px;
+            color: #ff6b6b;
+            font-weight: bold;
+            cursor: pointer;
+            display: inline-block;
+            margin: 0 10px;
+        }
+
+        .pick-target:hover {
+            transform: scale(1.1);
+        }
+
+        .pick-tree {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            height: 400px;
+            margin: 30px auto;
+            background: linear-gradient(180deg, #87ceeb 0%, #e0f6ff 100%);
+            border-radius: 20px;
+        }
+
+        .pick-trunk {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 100px;
+            background: #654321;
+            border-radius: 0 0 10px 10px;
+        }
+
+        .pick-leaves {
+            position: absolute;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 400px;
+            height: 280px;
+            background: radial-gradient(ellipse, #4caf50 0%, #2e7d32 100%);
+            border-radius: 50%;
+        }
+
+        .pick-apple {
+            position: absolute;
+            font-size: 60px;
+            cursor: pointer;
+            user-select: none;
+            transition: all 0.5s ease;
+            z-index: 5;
+        }
+
+        .pick-apple:hover {
+            transform: scale(1.2);
+        }
+
+        .pick-apple.falling {
+            opacity: 0;
+            transform: translateY(400px) rotate(360deg) scale(0.5);
+        }
+
+        .pick-basket {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 80px;
+            z-index: 4;
+        }
+
+        .pick-basket-count {
+            position: absolute;
+            bottom: 95px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 36px;
+            color: #ff6b6b;
+            font-weight: bold;
+            z-index: 6;
+        }
+
+        /* 通用动画 */
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: scale(1); }
+            25% { transform: scale(1.2) translateY(-10px); }
+            50% { transform: scale(0.95) translateY(0); }
+            75% { transform: scale(1.1) translateY(-5px); }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20% { transform: translateX(-8px); }
+            40% { transform: translateX(8px); }
+            60% { transform: translateX(-4px); }
+            80% { transform: translateX(4px); }
+        }
+
+        .data-back-btn {
+            margin-top: 30px;
+            padding: 12px 35px;
+            font-size: 18px;
+            background: white;
+            color: #2193b0;
+            border: 2px solid #2193b0;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .data-back-btn:hover {
+            background: #2193b0;
+            color: white;
+        }
+
         @keyframes slideUp {
             from {
                 opacity: 0;
@@ -2577,6 +3082,16 @@
                     <p class="game-description">英语课程学习与复习,单词短语练习</p>
                     <div class="game-progress">
                         <div class="game-progress-bar" id="readingProgressBar" style="width: 0%"></div>
+                    </div>
+                    <button class="start-btn">开始学习</button>
+                </div>
+
+                <div class="game-card data" onclick="startGame('data')">
+                    <span class="game-icon">🔢</span>
+                    <h3 class="game-title">数据启蒙</h3>
+                    <p class="game-description">数字认知·数数·比较·加减法,趣味互动学数学</p>
+                    <div class="game-progress">
+                        <div class="game-progress-bar" id="dataProgressBar" style="width: 0%"></div>
                     </div>
                     <button class="start-btn">开始学习</button>
                 </div>
@@ -2994,6 +3509,68 @@
 
             <div class="game-area" id="phraseQuestionArea">
                 <!-- 动态生成短语练习题 -->
+            </div>
+        </div>
+
+        <!-- ===== 数据启蒙模块 ===== -->
+        <div id="dataGame" class="game-page">
+            <div class="game-header">
+                <button class="back-btn" onclick="goHome()">← 返回</button>
+                <h2>🔢 数据启蒙</h2>
+                <button class="config-btn" onclick="toggleMathLanguage()">🔊 <span id="mathLangLabel">中文</span></button>
+                <div class="score-board">
+                    <div class="score-item correct-count">
+                        <span class="number" id="dataCorrect">0</span>
+                        <span class="label">正确</span>
+                    </div>
+                    <div class="score-item wrong-count">
+                        <span class="number" id="dataWrong">0</span>
+                        <span class="label">错误</span>
+                    </div>
+                    <div class="score-item total-score">
+                        <span class="number" id="dataScore">0</span>
+                        <span class="label">总分</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 子模块选择器（默认显示） -->
+            <div id="dataGameMenu" class="data-menu">
+                <h3 class="data-menu-title">选择一个游戏开始玩吧！</h3>
+                <div class="data-game-cards">
+                    <div class="data-game-card" onclick="startDataGame('listen')">
+                        <span class="data-game-icon">🔊</span>
+                        <h4>听音找数字</h4>
+                        <p>听到数字,选对数字</p>
+                    </div>
+                    <div class="data-game-card" onclick="startDataGame('count')">
+                        <span class="data-game-icon">🐱</span>
+                        <h4>小动物排队</h4>
+                        <p>点一排小动物,数清楚</p>
+                    </div>
+                    <div class="data-game-card" onclick="startDataGame('balance')">
+                        <span class="data-game-icon">⚖️</span>
+                        <h4>拖拽天平</h4>
+                        <p>拖动物品,让天平平衡</p>
+                    </div>
+                    <div class="data-game-card" onclick="startDataGame('pick')">
+                        <span class="data-game-icon">🍎</span>
+                        <h4>摘苹果</h4>
+                        <p>点苹果,摘到指定数量</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 题目进度条 -->
+            <div id="dataQuestionProgress" class="question-progress-container" style="display: none;"></div>
+
+            // 动态游戏区
+            <div class="game-area" id="dataQuestionArea" style="display: none;">
+                <!-- 动态生成题目 -->
+            </div>
+
+            <div style="text-align:center;padding:20px;">
+                <button class="data-back-btn" onclick="backToDataMenu()">↩ 换个游戏</button>
             </div>
         </div>
     </div>
@@ -3690,7 +4267,8 @@
             alphabet: { correct: 0, wrong: 0, score: 0, hasAnswered: false },
             word: { correct: 0, wrong: 0, score: 0, hasAnswered: false },
             chinese: { correct: 0, wrong: 0, score: 0, hasAnswered: false },
-            sentence: { current: 0, lesson: 1 }
+            sentence: { current: 0, lesson: 1 },
+            data: { correct: 0, wrong: 0, score: 0, hasAnswered: false, currentGame: null, currentQuestion: 0, totalQuestions: 10 }
         };
 
         // ===== 进度管理 =====
@@ -3705,7 +4283,8 @@
                 alphabet: { correct: 0, wrong: 0 },
                 word: { correct: 0, wrong: 0 },
                 chinese: { correct: 0, wrong: 0 },
-                sentence: { completed: 0 }
+                sentence: { completed: 0 },
+                data: { correct: 0, wrong: 0 }
             };
         }
 
@@ -3726,6 +4305,10 @@
                 },
                 sentence: { 
                     completed: gameState.sentence.current 
+                },
+                data: {
+                    correct: gameState.data.correct,
+                    wrong: gameState.data.wrong
                 }
             };
             localStorage.setItem('learningProgress', JSON.stringify(progress));
@@ -3753,6 +4336,12 @@
             // 更新句子跟读进度
             const sentenceRate = (progress.sentence.completed / 50) * 100;
             document.getElementById('sentenceProgressBar').style.width = Math.min(sentenceRate, 100) + '%';
+
+            // 更新数据启蒙进度
+            const dataTotal = (progress.data?.correct || 0) + (progress.data?.wrong || 0);
+            const dataRate = dataTotal > 0 ? ((progress.data?.correct || 0) / dataTotal * 100) : 0;
+            const dataBar = document.getElementById('dataProgressBar');
+            if (dataBar) dataBar.style.width = dataRate + '%';
         }
 
         // ===== 音频管理 =====
@@ -4868,16 +5457,646 @@
         function goHome() {
             // 关闭配置面板
             closeConfigPanel();
-            
+
             document.querySelectorAll('.game-page').forEach(page => {
                 page.classList.remove('active');
             });
             document.getElementById('homePage').style.display = 'block';
             currentGame = null;
-            
+
             // 更新首页进度条
             updateHomeProgress();
         }
+
+        // ===== 数据启蒙模块 =====
+        // 数据启蒙语言设置: 'zh' | 'en' | 'mix'
+        let mathLanguage = localStorage.getItem('mathLanguage') || 'zh';
+
+        // 数字中英文读法
+        const NUMBER_WORDS = {
+            0: { zh: '零', en: 'zero' },
+            1: { zh: '一', en: 'one' },
+            2: { zh: '二', en: 'two' },
+            3: { zh: '三', en: 'three' },
+            4: { zh: '四', en: 'four' },
+            5: { zh: '五', en: 'five' },
+            6: { zh: '六', en: 'six' },
+            7: { zh: '七', en: 'seven' },
+            8: { zh: '八', en: 'eight' },
+            9: { zh: '九', en: 'nine' },
+            10: { zh: '十', en: 'ten' }
+        };
+
+        // emoji 主题池
+        const EMOJI_THEMES = {
+            apple:    { emoji: '🍎', label: '苹果', eater: '🐰' },
+            carrot:   { emoji: '🥕', label: '胡萝卜', eater: '🐰' },
+            fish:     { emoji: '🐟', label: '小鱼', eater: '🐱' },
+            flower:   { emoji: '🌸', label: '小花', eater: '🐝' },
+            star:     { emoji: '⭐', label: '星星', eater: '🌙' },
+            cookie:   { emoji: '🍪', label: '饼干', eater: '🐭' },
+            balloon:  { emoji: '🎈', label: '气球', eater: '🎉' },
+            cat:      { emoji: '🐱', label: '小猫', eater: '🦴' },
+            chick:    { emoji: '🐥', label: '小鸡', eater: '🌾' },
+            duck:     { emoji: '🦆', label: '鸭子', eater: '💧' }
+        };
+
+        // 表扬语池
+        const PRAISES = {
+            listen: ['真厉害!你听到了{target}!', '太棒了!是{target}!', '答对啦!你真聪明!', '好棒啊!就是{target}!'],
+            count:  ['{target}只{targetLabel},数对啦!', '太厉害了!一共有{target}个!', '完美!就是{target}!', '数得真准!{target}个{targetLabel}!'],
+            balance:['平衡啦!两边都是{target}个!', '天平平啦!都是{target}!', '你做到了!两边都是{target}个!', '完美平衡!{target}等于{target}!'],
+            pick:   ['摘够啦!{target}个苹果!', '太棒了!刚好{target}个!', '摘完啦!{target}个苹果,你真厉害!', '完美!一共有{target}个苹果!']
+        };
+
+        // 当前题目状态
+        let mathCurrentQuestion = null;
+        let mathCountedItems = 0;
+
+        function initMathLanguage() {
+            updateMathLangLabel();
+        }
+
+        function updateMathLangLabel() {
+            const labels = { zh: '中文', en: '英文', mix: '中英' };
+            const el = document.getElementById('mathLangLabel');
+            if (el) el.textContent = labels[mathLanguage] || '中文';
+        }
+
+        function toggleMathLanguage() {
+            const order = ['zh', 'en', 'mix'];
+            const idx = order.indexOf(mathLanguage);
+            mathLanguage = order[(idx + 1) % order.length];
+            localStorage.setItem('mathLanguage', mathLanguage);
+            updateMathLangLabel();
+            const announcements = { zh: '切换到中文', en: 'Switched to English', mix: '中英混合' };
+            speak(announcements[mathLanguage], mathLanguage === 'en' ? 'en-US' : 'zh-CN');
+        }
+
+        // 数字读音(根据当前语言设置)
+        function speakNumber(n) {
+            if (!NUMBER_WORDS[n]) return;
+            const word = NUMBER_WORDS[n];
+            if (mathLanguage === 'en') {
+                speak(word.en, 'en-US');
+            } else if (mathLanguage === 'mix') {
+                speak(word.zh + ' ' + word.en, 'zh-CN');
+            } else {
+                speak(word.zh, 'zh-CN');
+            }
+        }
+
+        // emoji + 数量 读音
+        function speakCount(n, themeKey) {
+            const theme = EMOJI_THEMES[themeKey];
+            if (!theme) return;
+            if (mathLanguage === 'en') {
+                speak(n + ' ' + (n === 1 ? theme.label : theme.label + 's'), 'en-US');
+            } else if (mathLanguage === 'mix') {
+                speak(n + '个' + theme.label, 'zh-CN');
+                setTimeout(() => speak(n, 'en-US'), 1200);
+            } else {
+                speak(n + '个' + theme.label, 'zh-CN');
+            }
+        }
+
+        function getRandomTheme() {
+            const keys = Object.keys(EMOJI_THEMES);
+            return keys[Math.floor(Math.random() * keys.length)];
+        }
+
+        function getRandomInt(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        function shuffle(arr) {
+            const a = arr.slice();
+            for (let i = a.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [a[i], a[j]] = [a[j], a[i]];
+            }
+            return a;
+        }
+
+        // ===== 数据模块入口 =====
+        function startDataGameMenu() {
+            document.getElementById('dataGameMenu').style.display = 'block';
+            document.getElementById('dataQuestionProgress').style.display = 'none';
+            document.getElementById('dataQuestionArea').style.display = 'none';
+            updateDataScoreBoard();
+            initMathLanguage();
+        }
+
+        function updateDataScoreBoard() {
+            const s = gameState.data;
+            document.getElementById('dataCorrect').textContent = s.correct;
+            document.getElementById('dataWrong').textContent = s.wrong;
+            document.getElementById('dataScore').textContent = s.score;
+        }
+
+        // 启动具体的子游戏
+        function startDataGame(gameType) {
+            gameState.data.currentGame = gameType;
+            gameState.data.currentQuestion = 0;
+            gameState.data.hasAnswered = false;
+            mathCountedItems = 0;
+            document.getElementById('dataGameMenu').style.display = 'none';
+            document.getElementById('dataQuestionProgress').style.display = 'flex';
+            document.getElementById('dataQuestionArea').style.display = 'block';
+
+            // 初始化进度条(数据模块10题一轮)
+            if (!window.questionProgress) window.questionProgress = {};
+            if (!window.questionProgress.data) {
+                window.questionProgress.data = new QuestionProgressTracker('data', 'dataQuestionProgress', 10);
+                window.questionProgress.data.triggerGoToQuestion = (index) => {
+                    gameState.data.currentQuestion = index;
+                    gameState.data.hasAnswered = false;
+                    if (gameType === 'listen') showListenQuestion();
+                    else if (gameType === 'count') showCountQuestion();
+                    else if (gameType === 'balance') showBalanceQuestion();
+                    else if (gameType === 'pick') showPickQuestion();
+                };
+            } else {
+                window.questionProgress.data.reset();
+                window.questionProgress.data.triggerGoToQuestion = (index) => {
+                    gameState.data.currentQuestion = index;
+                    gameState.data.hasAnswered = false;
+                    if (gameType === 'listen') showListenQuestion();
+                    else if (gameType === 'count') showCountQuestion();
+                    else if (gameType === 'balance') showBalanceQuestion();
+                    else if (gameType === 'pick') showPickQuestion();
+                };
+            }
+
+            if (gameType === 'listen') showListenQuestion();
+            else if (gameType === 'count') showCountQuestion();
+            else if (gameType === 'balance') showBalanceQuestion();
+            else if (gameType === 'pick') showPickQuestion();
+        }
+
+        // 通用: 答对反馈
+        function dataCorrectFeedback(praiseText) {
+            gameState.data.correct++;
+            gameState.data.score += 10;
+            updateDataScoreBoard();
+            saveProgress();
+            showStars();
+            if (praiseText) {
+                setTimeout(() => speak(praiseText, 'zh-CN'), 300);
+            }
+        }
+
+        // 通用: 答错反馈
+        function dataWrongFeedback(message) {
+            gameState.data.wrong++;
+            updateDataScoreBoard();
+            saveProgress();
+            if (message) speak(message, 'zh-CN');
+        }
+
+        // 切到下一题
+        function dataNextQuestion() {
+            gameState.data.currentQuestion++;
+            if (gameState.data.currentQuestion >= gameState.data.totalQuestions) {
+                // 玩完一轮
+                const total = gameState.data.correct + gameState.data.wrong;
+                const rate = total > 0 ? Math.round(gameState.data.correct / total * 100) : 0;
+                const area = document.getElementById('dataQuestionArea');
+                area.innerHTML = `
+                    <div class="data-menu" style="text-align:center;">
+                        <h2 style="color:#56ab2f;font-size:48px;">🎉 太棒啦!玩完一轮!</h2>
+                        <p style="font-size:32px;color:#333;margin:30px 0;">答对 <b style="color:#56ab2f;">${gameState.data.correct}</b> 题,答错 <b style="color:#ff6b6b;">${gameState.data.wrong}</b> 题</p>
+                        <p style="font-size:24px;color:#666;">正确率: <b style="color:#2193b0;">${rate}%</b></p>
+                        <button class="data-back-btn" onclick="startDataGameMenu()" style="margin-top:30px;">🏠 回到菜单</button>
+                    </div>
+                `;
+                speak('太棒啦!你玩完了一轮!答对' + gameState.data.correct + '题!', 'zh-CN');
+                return;
+            }
+            const gt = gameState.data.currentGame;
+            if (gt === 'listen') showListenQuestion();
+            else if (gt === 'count') showCountQuestion();
+            else if (gt === 'balance') showBalanceQuestion();
+            else if (gt === 'pick') showPickQuestion();
+        }
+
+        // 返回到子游戏选择
+        function backToDataMenu() {
+            gameState.data.currentGame = null;
+            startDataGameMenu();
+        }
+
+        // ===== 游戏1: 听音选数 =====
+        function showListenQuestion() {
+            const target = getRandomInt(1, 10);
+            mathCurrentQuestion = { type: 'listen', target, theme: getRandomTheme() };
+
+            // 4-6个选项
+            const optCount = getRandomInt(4, 5);
+            const options = [target];
+            while (options.length < optCount) {
+                const wrong = getRandomInt(1, 10);
+                if (!options.includes(wrong)) options.push(wrong);
+            }
+            options.sort(() => Math.random() - 0.5);
+            mathCurrentQuestion.options = options;
+
+            const area = document.getElementById('dataQuestionArea');
+            area.innerHTML = `
+                <div class="listen-question">
+                    <div class="listen-prompt">仔细听,选出听到的数字!</div>
+                    <div class="listen-speaker" onclick="speakNumber(mathCurrentQuestion.target)">🔊</div>
+                    <div class="listen-target" onclick="speakNumber(mathCurrentQuestion.target)">?</div>
+                    <div class="listen-options">
+                        ${options.map(n => `<button class="listen-option" onclick="checkListenAnswer(${n}, this)">${n}</button>`).join('')}
+                    </div>
+                </div>
+            `;
+
+            // 自动播放一次
+            setTimeout(() => speakNumber(target), 500);
+
+            // 更新进度条
+            if (window.questionProgress?.data) {
+                window.questionProgress.data.currentQuestion = gameState.data.currentQuestion;
+            }
+        }
+
+        function checkListenAnswer(selected, element) {
+            if (gameState.data.hasAnswered) return;
+            const correct = mathCurrentQuestion.target;
+
+            // 禁用所有选项
+            document.querySelectorAll('.listen-option').forEach(btn => btn.style.pointerEvents = 'none');
+
+            if (selected === correct) {
+                gameState.data.hasAnswered = true;
+                element.classList.add('correct');
+                const praises = PRAISES.listen;
+                const text = praises[getRandomInt(0, praises.length - 1)].replace('{target}', correct);
+                dataCorrectFeedback(text);
+                setTimeout(dataNextQuestion, 2000);
+            } else {
+                element.classList.add('wrong');
+                dataWrongFeedback(null);
+                setTimeout(() => {
+                    element.classList.remove('wrong');
+                    element.style.pointerEvents = 'auto';
+                    speakNumber(correct);
+                }, 800);
+            }
+        }
+
+        // ===== 游戏2: 看图点数 =====
+        function showCountQuestion() {
+            const target = getRandomInt(2, 10);
+            const themeKey = getRandomTheme();
+            mathCurrentQuestion = { type: 'count', target, theme: themeKey };
+            mathCountedItems = 0;
+
+            // 4个数字选项
+            const opts = [target];
+            while (opts.length < 4) {
+                const wrong = getRandomInt(1, 10);
+                if (!opts.includes(wrong) && Math.abs(wrong - target) <= 2) opts.push(wrong);
+            }
+            const options = shuffle(opts);
+            mathCurrentQuestion.options = options;
+
+            const theme = EMOJI_THEMES[themeKey];
+            const items = Array(target).fill(theme.emoji);
+
+            const area = document.getElementById('dataQuestionArea');
+            area.innerHTML = `
+                <div class="count-question">
+                    <div class="count-prompt">🐱 小动物排队!数一数有几个${theme.label}?</div>
+                    <div class="count-counter">已数: <span id="countCurrent">0</span></div>
+                    <div class="count-items" id="countItems">
+                        ${items.map((e, i) => `<span class="count-item" data-idx="${i}" onclick="clickCountItem(this)">${e}</span>`).join('')}
+                    </div>
+                    <div class="count-prompt" style="font-size:22px;color:#666;">选一个数字:</div>
+                    <div class="count-options">
+                        ${options.map(n => `<button class="count-option" onclick="checkCountAnswer(${n}, this)">${n}</button>`).join('')}
+                    </div>
+                </div>
+            `;
+
+            setTimeout(() => {
+                const ttsText = mathLanguage === 'en'
+                    ? 'How many ' + theme.label + 's are there?'
+                    : '数一数有几个' + theme.label + '?';
+                speak(ttsText, mathLanguage === 'en' ? 'en-US' : 'zh-CN');
+            }, 500);
+        }
+
+        function clickCountItem(element) {
+            if (element.classList.contains('counted')) return;
+            if (gameState.data.hasAnswered) return;
+
+            element.classList.add('counted');
+            const idx = parseInt(element.dataset.idx);
+            mathCountedItems++;
+            document.getElementById('countCurrent').textContent = mathCountedItems;
+
+            // 弹出数字编号
+            const num = document.createElement('span');
+            num.className = 'count-number';
+            num.textContent = mathCountedItems;
+            element.appendChild(num);
+            element.style.transform = 'scale(1.2)';
+            setTimeout(() => element.style.transform = 'scale(0.9)', 200);
+
+            // TTS 报数
+            speakNumber(mathCountedItems);
+        }
+
+        function checkCountAnswer(selected, element) {
+            if (gameState.data.hasAnswered) return;
+            const correct = mathCurrentQuestion.target;
+
+            document.querySelectorAll('.count-option').forEach(btn => btn.style.pointerEvents = 'none');
+
+            if (selected === correct) {
+                gameState.data.hasAnswered = true;
+                element.classList.add('correct');
+                const theme = EMOJI_THEMES[mathCurrentQuestion.theme];
+                const praises = PRAISES.count;
+                const text = praises[getRandomInt(0, praises.length - 1)]
+                    .replace('{target}', correct).replace('{targetLabel}', theme.label);
+                dataCorrectFeedback(text);
+                setTimeout(dataNextQuestion, 2500);
+            } else {
+                element.classList.add('wrong');
+                dataWrongFeedback(null);
+                setTimeout(() => {
+                    element.classList.remove('wrong');
+                    element.style.pointerEvents = 'auto';
+                }, 800);
+            }
+        }
+
+        // ===== 游戏3: 拖拽天平 =====
+        let balanceState = null;
+
+        function showBalanceQuestion() {
+            const leftTarget = getRandomInt(1, 5);
+            const rightTarget = getRandomInt(1, 5);
+            const themeKey = getRandomTheme();
+            const theme = EMOJI_THEMES[themeKey];
+
+            balanceState = {
+                type: 'balance',
+                leftTarget,
+                rightTarget,
+                theme: themeKey,
+                leftItems: [],
+                rightItems: [],
+                totalItems: leftTarget + rightTarget
+            };
+
+            const area = document.getElementById('dataQuestionArea');
+            area.innerHTML = `
+                <div class="balance-question">
+                    <div class="balance-prompt">⚖️ 拖动${theme.label}到天平两边,让天平平衡!</div>
+                    <div class="balance-targets">
+                        <div class="balance-target" onclick="speakNumber(${leftTarget})">${leftTarget}</div>
+                        <div style="font-size:50px;align-self:center;">⚖️</div>
+                        <div class="balance-target" onclick="speakNumber(${rightTarget})">${rightTarget}</div>
+                    </div>
+                    <div class="balance-container" id="balanceContainer">
+                        <div class="balance-beam" id="balanceBeam"></div>
+                        <div class="balance-pan left" id="panLeft" ondragover="allowBalanceDrop(event)" ondrop="dropToPan(event, 'left')">
+                            <div class="balance-pan-items" id="panLeftItems"></div>
+                        </div>
+                        <div class="balance-pan right" id="panRight" ondragover="allowBalanceDrop(event)" ondrop="dropToPan(event, 'right')">
+                            <div class="balance-pan-items" id="panRightItems"></div>
+                        </div>
+                    </div>
+                    <div class="balance-pool" id="balancePool">
+                        ${Array(leftTarget + rightTarget).fill(0).map((_, i) =>
+                            `<span class="balance-item" draggable="true" data-id="${i}"
+                                   ondragstart="dragBalanceItem(event)"
+                                   onclick="clickToPlaceItem(${i})">${theme.emoji}</span>`
+                        ).join('')}
+                    </div>
+                    <button class="balance-check-btn" id="balanceCheckBtn" onclick="checkBalance()">✔️ 检查</button>
+                    <p style="margin-top:15px;font-size:16px;color:#666;">或点击物品 → 点击目标盘子</p>
+                </div>
+            `;
+
+            // 移动端click-to-place
+            balanceState.clickMode = null;
+            setTimeout(() => {
+                const ttsText = mathLanguage === 'en'
+                    ? 'Drag the ' + theme.label + 's to make the scale balance!'
+                    : '拖动' + theme.label + '到天平两边!';
+                speak(ttsText, mathLanguage === 'en' ? 'en-US' : 'zh-CN');
+            }, 500);
+        }
+
+        function dragBalanceItem(event) {
+            event.dataTransfer.setData('text/plain', event.target.dataset.id);
+            event.target.style.opacity = '0.4';
+        }
+
+        function allowBalanceDrop(event) {
+            event.preventDefault();
+            event.currentTarget.classList.add('drag-over');
+        }
+
+        function dropToPan(event, side) {
+            event.preventDefault();
+            event.currentTarget.classList.remove('drag-over');
+            const id = event.dataTransfer.getData('text/plain');
+            placeItemToPan(parseInt(id), side);
+        }
+
+        function clickToPlaceItem(id) {
+            if (gameState.data.hasAnswered) return;
+            if (balanceState.clickMode === null) {
+                balanceState.clickMode = id;
+                document.querySelectorAll('.balance-item').forEach(el => {
+                    if (parseInt(el.dataset.id) === id) el.style.transform = 'scale(1.4)';
+                });
+            } else if (balanceState.clickMode === id) {
+                // 取消选择
+                balanceState.clickMode = null;
+                document.querySelectorAll('.balance-item').forEach(el => el.style.transform = '');
+            } else {
+                // 已经选了一个,这次点的是同一个
+            }
+        }
+
+        function placeItemToPan(id, side) {
+            const item = document.querySelector(`.balance-item[data-id="${id}"]`);
+            if (!item) return;
+
+            // 从池子移到盘子
+            if (side === 'left') {
+                balanceState.leftItems.push(id);
+                document.getElementById('panLeftItems').appendChild(item);
+            } else {
+                balanceState.rightItems.push(id);
+                document.getElementById('panRightItems').appendChild(item);
+            }
+            item.style.opacity = '1';
+            item.style.transform = 'scale(1)';
+            item.setAttribute('draggable', 'false');
+            item.onclick = null;
+
+            // 移动端: 第一个item被click,等待选择盘子
+            if (window.matchMedia('(pointer: coarse)').matches) {
+                // 触屏设备: 弹一个选择
+                if (balanceState.clickMode === id) {
+                    // 已经在click模式, 让用户选盘子
+                }
+            }
+
+            // 实时倾斜天平
+            updateBalanceTilt();
+
+            // 报数
+            const count = side === 'left' ? balanceState.leftItems.length : balanceState.rightItems.length;
+            const theme = EMOJI_THEMES[balanceState.theme];
+            const text = mathLanguage === 'en'
+                ? count + ' ' + (count === 1 ? theme.label : theme.label + 's')
+                : count + '个';
+            speak(text, mathLanguage === 'en' ? 'en-US' : 'zh-CN');
+        }
+
+        function updateBalanceTilt() {
+            const beam = document.getElementById('balanceBeam');
+            const left = balanceState.leftItems.length;
+            const right = balanceState.rightItems.length;
+            const diff = left - right;
+            // diff: 正数=左边重(逆时针倾斜), 负数=右边重(顺时针倾斜)
+            // 限制最大倾斜角度
+            const maxTilt = 20;
+            const tilt = Math.max(-maxTilt, Math.min(maxTilt, diff * 6));
+            beam.style.transform = `translateX(-50%) rotate(${tilt}deg)`;
+
+            if (diff === 0 && left > 0) {
+                beam.style.background = '#56ab2f';
+            } else {
+                beam.style.background = '#654321';
+            }
+        }
+
+        function checkBalance() {
+            if (gameState.data.hasAnswered) return;
+            const left = balanceState.leftItems.length;
+            const right = balanceState.rightItems.length;
+            const targetLeft = balanceState.leftTarget;
+            const targetRight = balanceState.rightTarget;
+            const isCorrect = (left === targetLeft && right === targetRight);
+
+            document.getElementById('balanceCheckBtn').disabled = true;
+
+            if (isCorrect) {
+                gameState.data.hasAnswered = true;
+                const praises = PRAISES.balance;
+                const text = praises[getRandomInt(0, praises.length - 1)]
+                    .replaceAll('{target}', targetLeft);
+                dataCorrectFeedback(text);
+                setTimeout(dataNextQuestion, 2500);
+            } else {
+                const ttsText = mathLanguage === 'en'
+                    ? 'Try again! ' + left + ' on the left, ' + right + ' on the right.'
+                    : '再试试!左边' + left + '个,右边' + right + '个,目标是左边' + targetLeft + '个,右边' + targetRight + '个。';
+                dataWrongFeedback(ttsText);
+                setTimeout(() => {
+                    document.getElementById('balanceCheckBtn').disabled = false;
+                }, 2500);
+            }
+        }
+
+        // ===== 游戏4: 摘苹果 =====
+        let pickState = null;
+
+        function showPickQuestion() {
+            const target = getRandomInt(2, 9);
+            const totalApples = getRandomInt(7, 9);
+            pickState = {
+                type: 'pick',
+                target,
+                totalApples,
+                picked: 0,
+                positions: generateApplePositions(totalApples)
+            };
+
+            const area = document.getElementById('dataQuestionArea');
+            area.innerHTML = `
+                <div class="pick-question">
+                    <div class="pick-prompt">🍎 帮小猴子摘苹果!</div>
+                    <p style="font-size:24px;color:#333;">要摘 <span class="pick-target" onclick="speakNumber(${target})">${target}</span> 个苹果</p>
+                    <div class="pick-tree" id="pickTree">
+                        <div class="pick-leaves"></div>
+                        <div class="pick-trunk"></div>
+                        <div class="pick-basket" id="pickBasket">🧺</div>
+                        <div class="pick-basket-count" id="pickBasketCount">0</div>
+                        ${pickState.positions.map((pos, i) =>
+                            `<span class="pick-apple" data-id="${i}"
+                                  style="left:${pos.x}%;top:${pos.y}%;"
+                                  onclick="pickApple(${i})">🍎</span>`
+                        ).join('')}
+                    </div>
+                </div>
+            `;
+
+            setTimeout(() => {
+                const ttsText = mathLanguage === 'en'
+                    ? 'Pick ' + target + ' apples!'
+                    : '摘' + target + '个苹果!';
+                speak(ttsText, mathLanguage === 'en' ? 'en-US' : 'zh-CN');
+            }, 500);
+        }
+
+        function generateApplePositions(count) {
+            // 在树的上半部分随机分布
+            const positions = [];
+            for (let i = 0; i < count; i++) {
+                let x, y, overlapping;
+                let attempts = 0;
+                do {
+                    x = 15 + Math.random() * 70; // 15-85%
+                    y = 5 + Math.random() * 60;  // 5-65%
+                    overlapping = positions.some(p => Math.abs(p.x - x) < 12 && Math.abs(p.y - y) < 12);
+                    attempts++;
+                } while (overlapping && attempts < 30);
+                positions.push({ x, y });
+            }
+            return positions;
+        }
+
+        function pickApple(id) {
+            if (gameState.data.hasAnswered) return;
+            if (pickState.picked >= pickState.target) {
+                speak('已经摘够啦!', 'zh-CN');
+                return;
+            }
+
+            const apple = document.querySelector(`.pick-apple[data-id="${id}"]`);
+            if (!apple || apple.classList.contains('falling')) return;
+
+            apple.classList.add('falling');
+            pickState.picked++;
+            document.getElementById('pickBasketCount').textContent = pickState.picked;
+            speakNumber(pickState.picked);
+
+            // 摘够了
+            if (pickState.picked === pickState.target) {
+                gameState.data.hasAnswered = true;
+                setTimeout(() => {
+                    const praises = PRAISES.pick;
+                    const text = praises[getRandomInt(0, praises.length - 1)]
+                        .replace('{target}', pickState.target);
+                    dataCorrectFeedback(text);
+                    setTimeout(dataNextQuestion, 2500);
+                }, 600);
+            }
+        }
+
+
 
         function startGame(gameType) {
             // 关闭配置面板
@@ -4906,6 +6125,10 @@
                 case 'reading':
                     document.getElementById('readingGame').classList.add('active');
                     startReadingModule();
+                    break;
+                case 'data':
+                    document.getElementById('dataGame').classList.add('active');
+                    startDataGameMenu();
                     break;
             }
         }
@@ -6495,6 +7718,12 @@
             
             recordAnswer(isCorrect) {
                 this.answers[this.currentQuestion] = isCorrect;
+                this.render();
+            }
+
+            reset() {
+                this.currentQuestion = 0;
+                this.answers = new Array(this.totalQuestions).fill(null);
                 this.render();
             }
             
