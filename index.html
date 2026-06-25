@@ -2772,25 +2772,26 @@
             position: relative;
             width: 100%;
             max-width: 700px;
-            margin: 20px auto;
-            height: 350px;
+            margin: 10px auto;
+            height: 220px;
         }
 
         .balance-targets {
             display: flex;
             justify-content: space-around;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
         }
 
         .balance-target {
             font-size: 80px;
             color: #2193b0;
             font-weight: bold;
+            cursor: pointer;
         }
 
         .balance-beam {
             position: absolute;
-            top: 80px;
+            top: 50px;
             left: 50%;
             transform-origin: 50% 50%;
             transform: translateX(-50%) rotate(0deg);
@@ -2803,54 +2804,59 @@
 
         .balance-pan {
             position: absolute;
-            top: 90px;
-            width: 140px;
-            height: 30px;
-            background: #8B4513;
-            border-radius: 0 0 70px 70px;
-            border: 3px solid #5a2d0c;
+            top: 60px;
+            width: 45%;
+            height: 130px;
+            background: rgba(139, 69, 19, 0.15);
+            border-radius: 0 0 40px 40px;
+            border: 3px dashed rgba(139, 69, 19, 0.5);
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            padding-bottom: 8px;
+            transition: background 0.2s, border-color 0.2s;
+            cursor: pointer;
         }
 
-        .balance-pan.left { left: 10%; }
-        .balance-pan.right { right: 10%; }
+        .balance-pan.left { left: 1%; }
+        .balance-pan.right { right: 1%; }
 
         .balance-pan-items {
-            position: absolute;
-            top: -55px;
-            left: 50%;
-            transform: translateX(-50%);
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             gap: 4px;
-            max-width: 130px;
+            max-width: 100%;
+            padding: 0 4px;
+            padding-bottom: 30px;
+            pointer-events: none;
         }
 
         .balance-pan-items .balance-item {
-            font-size: 32px;
+            font-size: 42px;
         }
 
         .balance-pool {
-            margin-top: 220px;
+            margin-top: 15px;
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 10px;
-            padding: 20px;
+            gap: 12px;
+            padding: 15px;
             background: #f0f8ff;
             border-radius: 20px;
-            min-height: 100px;
+            min-height: 80px;
         }
 
         .balance-item {
-            font-size: 48px;
+            font-size: 64px;
             cursor: grab;
             user-select: none;
             transition: transform 0.2s;
         }
 
         .balance-item:hover {
-            transform: scale(1.2);
+            transform: scale(1.3);
         }
 
         .balance-item:active {
@@ -2858,7 +2864,8 @@
         }
 
         .balance-pan.drag-over {
-            background: #a8e063;
+            background: rgba(168, 224, 99, 0.5);
+            border-color: #56ab2f;
         }
 
         .balance-check-btn {
@@ -3018,6 +3025,24 @@
             color: white;
         }
 
+        .data-next-btn {
+            margin-top: 10px;
+            padding: 14px 44px;
+            font-size: 22px;
+            background: linear-gradient(135deg, #56ab2f, #a8e063);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(86,171,47,0.4);
+            transition: all 0.3s;
+        }
+        .data-next-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(86,171,47,0.6);
+        }
+
         @keyframes slideUp {
             from {
                 opacity: 0;
@@ -3028,6 +3053,12 @@
                 transform: translateY(0);
             }
         }
+        .correct-hint {
+            box-shadow: 0 0 0 4px #56ab2f, 0 0 12px rgba(86,171,47,0.5);
+            transform: scale(1.08);
+            transition: all 0.3s;
+        }
+
     </style>
 </head>
 <body>
@@ -3579,6 +3610,10 @@
             // 动态游戏区
             <div class="game-area" id="dataQuestionArea" style="display: none;">
                 <!-- 动态生成题目 -->
+            </div>
+            <!-- 下一题按钮 -->
+            <div id="dataNextBtnWrap" style="display:none;text-align:center;margin-top:18px;">
+                <button class="data-next-btn" onclick="dataNextQuestion()">下一题 ▶</button>
             </div>
 
             <div style="text-align:center;padding:20px;">
@@ -5517,7 +5552,7 @@
         const PRAISES = {
             listen: ['真厉害!你听到了{target}!', '太棒了!是{target}!', '答对啦!你真聪明!', '好棒啊!就是{target}!'],
             count:  ['{target}只{targetLabel},数对啦!', '太厉害了!一共有{target}个!', '完美!就是{target}!', '数得真准!{target}个{targetLabel}!'],
-            balance:['平衡啦!两边都是{target}个!', '天平平啦!都是{target}!', '你做到了!两边都是{target}个!', '完美平衡!{target}等于{target}!'],
+            balance:['正确!左边{left}个,右边{right}个!', '太棒啦!左边{left}个,右边{right}个,放对啦!', '你做到了!左右两边都对!', '完美!左边{left},右边{right}!'],
             pick:   ['摘够啦!{target}个苹果!', '太棒了!刚好{target}个!', '摘完啦!{target}个苹果,你真厉害!', '完美!一共有{target}个苹果!']
         };
 
@@ -5592,6 +5627,7 @@
 
         // ===== 数据模块入口 =====
         function startDataGameMenu() {
+            hideDataNextBtn();
             document.getElementById('dataGameMenu').style.display = 'block';
             document.getElementById('dataQuestionProgress').style.display = 'none';
             document.getElementById('dataQuestionArea').style.display = 'none';
@@ -5608,6 +5644,7 @@
 
         // 启动具体的子游戏
         function startDataGame(gameType) {
+            hideDataNextBtn();
             gameState.data.currentGame = gameType;
             gameState.data.currentQuestion = 0;
             gameState.data.hasAnswered = false;
@@ -5656,6 +5693,10 @@
             if (praiseText) {
                 setTimeout(() => speak(praiseText, 'zh-CN'), 300);
             }
+            // 显示下一题按钮，3秒后自动跳转
+            showDataNextBtn();
+            clearTimeout(gameState.data._autoNext);
+            gameState.data._autoNext = setTimeout(dataNextQuestion, 3000);
         }
 
         // 通用: 答错反馈
@@ -5666,8 +5707,20 @@
             if (message) speak(message, 'zh-CN');
         }
 
+        // 显示/隐藏下一题按钮
+        function showDataNextBtn() {
+            document.getElementById('dataNextBtnWrap').style.display = 'block';
+        }
+        function hideDataNextBtn() {
+            document.getElementById('dataNextBtnWrap').style.display = 'none';
+        }
+
         // 切到下一题
         function dataNextQuestion() {
+            clearTimeout(gameState.data._autoNext);
+            hideDataNextBtn();
+            gameState.data.hasAnswered = false;
+            mathCountedItems = 0;
             gameState.data.currentQuestion++;
             if (gameState.data.currentQuestion >= gameState.data.totalQuestions) {
                 // 玩完一轮
@@ -5738,24 +5791,28 @@
             if (gameState.data.hasAnswered) return;
             const correct = mathCurrentQuestion.target;
 
-            // 禁用所有选项
-            document.querySelectorAll('.listen-option').forEach(btn => btn.style.pointerEvents = 'none');
-
             if (selected === correct) {
                 gameState.data.hasAnswered = true;
                 element.classList.add('correct');
                 const praises = PRAISES.listen;
                 const text = praises[getRandomInt(0, praises.length - 1)].replace('{target}', correct);
                 dataCorrectFeedback(text);
-                setTimeout(dataNextQuestion, 2000);
             } else {
+                // 选错：红闪 + 提示正确答案 + 可立即重新选择
                 element.classList.add('wrong');
-                dataWrongFeedback(null);
+                dataWrongFeedback('再试试！正确答案是 ' + correct);
+                // 高亮正确答案按钮
+                document.querySelectorAll('.listen-option').forEach(btn => {
+                    if (parseInt(btn.textContent) === correct) {
+                        btn.classList.add('correct-hint');
+                    }
+                });
                 setTimeout(() => {
                     element.classList.remove('wrong');
-                    element.style.pointerEvents = 'auto';
-                    speakNumber(correct);
-                }, 800);
+                    document.querySelectorAll('.listen-option').forEach(btn => {
+                        btn.classList.remove('correct-hint');
+                    });
+                }, 1500);
             }
         }
 
@@ -5826,8 +5883,6 @@
             if (gameState.data.hasAnswered) return;
             const correct = mathCurrentQuestion.target;
 
-            document.querySelectorAll('.count-option').forEach(btn => btn.style.pointerEvents = 'none');
-
             if (selected === correct) {
                 gameState.data.hasAnswered = true;
                 element.classList.add('correct');
@@ -5836,14 +5891,23 @@
                 const text = praises[getRandomInt(0, praises.length - 1)]
                     .replace('{target}', correct).replace('{targetLabel}', theme.label);
                 dataCorrectFeedback(text);
-                setTimeout(dataNextQuestion, 2500);
+
             } else {
+                // 选错：红闪 + 提示正确答案 + 可立即重新选择
                 element.classList.add('wrong');
-                dataWrongFeedback(null);
+                dataWrongFeedback('再试试！正确答案是 ' + correct);
+                // 高亮正确答案按钮
+                document.querySelectorAll('.count-option').forEach(btn => {
+                    if (parseInt(btn.textContent) === correct) {
+                        btn.classList.add('correct-hint');
+                    }
+                });
                 setTimeout(() => {
                     element.classList.remove('wrong');
-                    element.style.pointerEvents = 'auto';
-                }, 800);
+                    document.querySelectorAll('.count-option').forEach(btn => {
+                        btn.classList.remove('correct-hint');
+                    });
+                }, 1500);
             }
         }
 
@@ -5877,10 +5941,16 @@
                     </div>
                     <div class="balance-container" id="balanceContainer">
                         <div class="balance-beam" id="balanceBeam"></div>
-                        <div class="balance-pan left" id="panLeft" ondragover="allowBalanceDrop(event)" ondrop="dropToPan(event, 'left')">
+                        <div class="balance-pan left" id="panLeft"
+                             ondragover="allowBalanceDrop(event)" ondragleave="endBalanceDrag(event)"
+                             ondrop="dropToPan(event, 'left')"
+                             onclick="clickPanToPlace('left')">
                             <div class="balance-pan-items" id="panLeftItems"></div>
                         </div>
-                        <div class="balance-pan right" id="panRight" ondragover="allowBalanceDrop(event)" ondrop="dropToPan(event, 'right')">
+                        <div class="balance-pan right" id="panRight"
+                             ondragover="allowBalanceDrop(event)" ondragleave="endBalanceDrag(event)"
+                             ondrop="dropToPan(event, 'right')"
+                             onclick="clickPanToPlace('right')">
                             <div class="balance-pan-items" id="panRightItems"></div>
                         </div>
                     </div>
@@ -5907,13 +5977,24 @@
         }
 
         function dragBalanceItem(event) {
-            event.dataTransfer.setData('text/plain', event.target.dataset.id);
+            const id = parseInt(event.target.dataset.id);
+            event.dataTransfer.setData('text/plain', id);
+            // 如果物品在左边盘子，先从左边移除
+            const li = balanceState.leftItems.indexOf(id);
+            if (li !== -1) { balanceState.leftItems.splice(li, 1); updateBalanceTilt(); }
+            // 如果物品在右边盘子，先从右边移除
+            const ri = balanceState.rightItems.indexOf(id);
+            if (ri !== -1) { balanceState.rightItems.splice(ri, 1); updateBalanceTilt(); }
             event.target.style.opacity = '0.4';
         }
 
         function allowBalanceDrop(event) {
             event.preventDefault();
             event.currentTarget.classList.add('drag-over');
+        }
+
+        function endBalanceDrag(event) {
+            event.currentTarget.classList.remove('drag-over');
         }
 
         function dropToPan(event, side) {
@@ -5939,30 +6020,41 @@
             }
         }
 
+        function clickPanToPlace(side) {
+            if (gameState.data.hasAnswered) return;
+            if (balanceState.clickMode === null) return;
+            const id = balanceState.clickMode;
+            balanceState.clickMode = null;
+            document.querySelectorAll('.balance-item').forEach(el => el.style.transform = '');
+            placeItemToPan(id, side);
+        }
+
         function placeItemToPan(id, side) {
             const item = document.querySelector(`.balance-item[data-id="${id}"]`);
             if (!item) return;
 
-            // 从池子移到盘子
-            if (side === 'left') {
-                balanceState.leftItems.push(id);
-                document.getElementById('panLeftItems').appendChild(item);
-            } else {
-                balanceState.rightItems.push(id);
-                document.getElementById('panRightItems').appendChild(item);
-            }
+            // 防止重复添加到同一侧
+            const targetItems = side === 'left' ? balanceState.leftItems : balanceState.rightItems;
+            if (targetItems.includes(id)) return;
+
+            // 从另一侧移除（如果之前在别处）
+            const otherSide = side === 'left' ? 'right' : 'left';
+            const otherItems = otherSide === 'left' ? balanceState.leftItems : balanceState.rightItems;
+            const oi = otherItems.indexOf(id);
+            if (oi !== -1) otherItems.splice(oi, 1);
+
+            // 移到目标盘子
+            targetItems.push(id);
+            const panEl = side === 'left'
+                ? document.getElementById('panLeftItems')
+                : document.getElementById('panRightItems');
+            panEl.appendChild(item);
             item.style.opacity = '1';
             item.style.transform = 'scale(1)';
-            item.setAttribute('draggable', 'false');
-            item.onclick = null;
-
-            // 移动端: 第一个item被click,等待选择盘子
-            if (window.matchMedia('(pointer: coarse)').matches) {
-                // 触屏设备: 弹一个选择
-                if (balanceState.clickMode === id) {
-                    // 已经在click模式, 让用户选盘子
-                }
-            }
+            // 保持可拖拽（允许再次调整）
+            item.setAttribute('draggable', 'true');
+            item.ondragstart = dragBalanceItem;
+            item.onclick = function() { clickToPlaceItem(id); };
 
             // 实时倾斜天平
             updateBalanceTilt();
@@ -5980,18 +6072,13 @@
             const beam = document.getElementById('balanceBeam');
             const left = balanceState.leftItems.length;
             const right = balanceState.rightItems.length;
-            const diff = left - right;
-            // diff: 正数=左边重(逆时针倾斜), 负数=右边重(顺时针倾斜)
-            // 限制最大倾斜角度
+            const diff = right - left;
+            // diff > 0: 右边重 → 顺时针(右边低) → positive rotate
+            // diff < 0: 左边重 → 逆时针(左边低) → negative rotate
             const maxTilt = 20;
             const tilt = Math.max(-maxTilt, Math.min(maxTilt, diff * 6));
             beam.style.transform = `translateX(-50%) rotate(${tilt}deg)`;
-
-            if (diff === 0 && left > 0) {
-                beam.style.background = '#56ab2f';
-            } else {
-                beam.style.background = '#654321';
-            }
+            // 横梁颜色由 checkBalance 控制，这里不动
         }
 
         function checkBalance() {
@@ -6002,23 +6089,28 @@
             const targetRight = balanceState.rightTarget;
             const isCorrect = (left === targetLeft && right === targetRight);
 
-            document.getElementById('balanceCheckBtn').disabled = true;
-
             if (isCorrect) {
                 gameState.data.hasAnswered = true;
+                document.getElementById('balanceBeam').style.background = '#56ab2f';
+                const theme = EMOJI_THEMES[balanceState.theme];
                 const praises = PRAISES.balance;
                 const text = praises[getRandomInt(0, praises.length - 1)]
-                    .replaceAll('{target}', targetLeft);
+                    .replace('{left}', targetLeft).replace('{right}', targetRight);
                 dataCorrectFeedback(text);
-                setTimeout(dataNextQuestion, 2500);
+
             } else {
+                // 重置天平横梁颜色
+                document.getElementById('balanceBeam').style.background = '#654321';
                 const ttsText = mathLanguage === 'en'
-                    ? 'Try again! ' + left + ' on the left, ' + right + ' on the right.'
-                    : '再试试!左边' + left + '个,右边' + right + '个,目标是左边' + targetLeft + '个,右边' + targetRight + '个。';
+                    ? 'Try again! Left needs ' + targetLeft + ', right needs ' + targetRight + '. You have ' + left + ' on the left, ' + right + ' on the right.'
+                    : '再试试!目标:左边' + targetLeft + '个,右边' + targetRight + '个。你现在:左边' + left + '个,右边' + right + '个。可以拖动调整!';
                 dataWrongFeedback(ttsText);
-                setTimeout(() => {
-                    document.getElementById('balanceCheckBtn').disabled = false;
-                }, 2500);
+                // 允许重新调整：恢复 pan 中物品的可拖动性
+                document.querySelectorAll('.balance-pan-items .balance-item').forEach(el => {
+                    el.setAttribute('draggable', 'true');
+                    el.ondragstart = dragBalanceItem;
+                    el.onclick = function() { clickToPlaceItem(parseInt(el.dataset.id)); };
+                });
             }
         }
 
@@ -6026,8 +6118,8 @@
         let pickState = null;
 
         function showPickQuestion() {
-            const target = getRandomInt(2, 9);
-            const totalApples = getRandomInt(7, 9);
+            const target = getRandomInt(2, 6);
+            const totalApples = target + getRandomInt(2, 4);
             pickState = {
                 type: 'pick',
                 target,
@@ -6103,7 +6195,6 @@
                     const text = praises[getRandomInt(0, praises.length - 1)]
                         .replace('{target}', pickState.target);
                     dataCorrectFeedback(text);
-                    setTimeout(dataNextQuestion, 2500);
                 }, 600);
             }
         }
