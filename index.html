@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <!--
-  儿童学习平台 v4.1 - 数据启蒙
+  儿童学习平台 v4.1 - 数字启蒙
   ===========================
   - 字母小屋（大小写字母、空格间隔、英文发音）
   - 单词游戏（看图选词、错题本、emoji 配置）
   - 汉字游戏（四五快读第一册 50 字、汉字配置）
   - 汉字 Plus（句子跟读、随机化）
   - 睿丁欣研英语课程（S1-S5、视频、单词/短语练习）
-  - 数据启蒙（v4.1 新增:听音选数 / 小动物排队 / 拖拽天平 / 摘苹果）
+  - 数字启蒙（v4.1 新增:听音选数 / 小动物排队 / 拖拽天平 / 摘苹果）
   ===========================
   部署地址: https://emmayan-666.github.io/learning-platform/
 -->
@@ -2525,7 +2525,7 @@
             color: white;
         }
 
-        /* ===== 数据启蒙模块样式 ===== */
+        /* ===== 数字启蒙模块样式 ===== */
         .data-menu {
             padding: 30px 20px;
             text-align: center;
@@ -3131,7 +3131,7 @@
 
                 <div class="game-card data" onclick="startGame('data')">
                     <span class="game-icon">🔢</span>
-                    <h3 class="game-title">数据启蒙</h3>
+                    <h3 class="game-title">数字启蒙</h3>
                     <p class="game-description">数字认知·数数·比较·加减法,趣味互动学数学</p>
                     <div class="game-progress">
                         <div class="game-progress-bar" id="dataProgressBar" style="width: 0%"></div>
@@ -3555,11 +3555,11 @@
             </div>
         </div>
 
-        <!-- ===== 数据启蒙模块 ===== -->
+        <!-- ===== 数字启蒙模块 ===== -->
         <div id="dataGame" class="game-page">
             <div class="game-header">
                 <button class="back-btn" onclick="goHome()">← 返回</button>
-                <h2>🔢 数据启蒙</h2>
+                <h2>🔢 数字启蒙</h2>
                 <button class="config-btn" onclick="toggleMathLanguage()">🔊 <span id="mathLangLabel">中文</span></button>
                 <div class="score-board">
                     <div class="score-item correct-count">
@@ -4384,7 +4384,7 @@
             const sentenceRate = (progress.sentence.completed / 50) * 100;
             document.getElementById('sentenceProgressBar').style.width = Math.min(sentenceRate, 100) + '%';
 
-            // 更新数据启蒙进度
+            // 更新数字启蒙进度
             const dataTotal = (progress.data?.correct || 0) + (progress.data?.wrong || 0);
             const dataRate = dataTotal > 0 ? ((progress.data?.correct || 0) / dataTotal * 100) : 0;
             const dataBar = document.getElementById('dataProgressBar');
@@ -5515,8 +5515,8 @@
             updateHomeProgress();
         }
 
-        // ===== 数据启蒙模块 =====
-        // 数据启蒙语言设置: 'zh' | 'en' | 'mix'
+        // ===== 数字启蒙模块 =====
+        // 数字启蒙语言设置: 'zh' | 'en' | 'mix'
         let mathLanguage = localStorage.getItem('mathLanguage') || 'zh';
 
         // 数字中英文读法
