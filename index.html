@@ -3059,6 +3059,439 @@
             transition: all 0.3s;
         }
 
+        .chinese-home-content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .chinese-home-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .chinese-home-card {
+            background: white;
+            border-radius: 20px;
+            padding: 25px 15px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .chinese-home-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            border-color: #f093fb;
+        }
+
+        .chinese-home-icon {
+            font-size: 48px;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .chinese-home-card h4 {
+            color: #333;
+            margin: 0 0 8px 0;
+            font-size: 18px;
+        }
+
+        .chinese-home-card p {
+            color: #888;
+            font-size: 14px;
+            margin: 0;
+        }
+
+        .chinese-lesson-select {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .chinese-lesson-select h3 {
+            margin: 0 0 15px 0;
+            color: #333;
+            text-align: center;
+        }
+
+        .chinese-lesson-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .chinese-lesson-btn {
+            padding: 10px 20px;
+            border: 2px solid #f093fb;
+            background: white;
+            color: #f093fb;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+
+        .chinese-lesson-btn:hover,
+        .chinese-lesson-btn.active {
+            background: #f093fb;
+            color: white;
+        }
+
+        .chinese-lesson-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 15px;
+            padding: 20px;
+        }
+
+        .chinese-char-card {
+            background: white;
+            border-radius: 15px;
+            padding: 15px 10px;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .chinese-char-card:hover {
+            transform: scale(1.05);
+            border-color: #667eea;
+        }
+
+        .chinese-char-card .char {
+            font-size: 48px;
+            font-weight: bold;
+            color: #333;
+            display: block;
+            line-height: 1.2;
+        }
+
+        .chinese-char-card .pinyin {
+            font-size: 14px;
+            color: #888;
+            margin-top: 5px;
+        }
+
+        .chinese-char-card .meaning {
+            font-size: 12px;
+            color: #aaa;
+            margin-top: 3px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .chinese-detail-panel {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            max-width: 800px;
+            margin: 0 auto;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .chinese-detail-main {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .chinese-detail-char {
+            font-size: 120px;
+            cursor: pointer;
+            color: #333;
+            line-height: 1;
+            text-align: center;
+        }
+
+        .chinese-detail-info {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .chinese-detail-info p {
+            margin: 8px 0;
+            font-size: 16px;
+            color: #555;
+        }
+
+        .chinese-detail-info .label {
+            color: #888;
+            font-weight: 500;
+            margin-right: 8px;
+        }
+
+        .chinese-words-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 10px 0;
+        }
+
+        .chinese-word-tag {
+            background: #f0f4ff;
+            color: #667eea;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 14px;
+        }
+
+        .chinese-sentences-list {
+            text-align: left;
+            margin: 10px 0;
+        }
+
+        .chinese-sentences-list li {
+            margin: 8px 0;
+            color: #555;
+            font-size: 16px;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 8px;
+            transition: background 0.2s;
+        }
+
+        .chinese-sentences-list li:hover {
+            background: #f0f4ff;
+        }
+
+        .chinese-tracing-area {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .chinese-tracing-char {
+            font-size: 80px;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .chinese-tracing-board {
+            width: 300px;
+            height: 300px;
+            border: 3px solid #f093fb;
+            border-radius: 15px;
+            margin: 0 auto 15px;
+            background: #fff9fb;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .chinese-tracing-hint {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 200px;
+            color: rgba(240, 147, 251, 0.15);
+            pointer-events: none;
+            user-select: none;
+            line-height: 1;
+        }
+
+        .chinese-tracing-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            cursor: crosshair;
+            z-index: 10;
+        }
+
+        .chinese-tracing-controls {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .chinese-tracing-controls button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .chinese-tracing-controls .trace-btn {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+
+        .chinese-tracing-controls .clear-btn {
+            background: #f0f0f0;
+            color: #666;
+        }
+
+        .sentence-practice-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .sentence-practice-text {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 20px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            min-height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 5px;
+            font-size: 36px;
+            line-height: 1.6;
+        }
+
+        .sentence-practice-char {
+            display: inline-block;
+            padding: 5px 8px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+        }
+
+        .sentence-practice-char:hover {
+            background: #f0f4ff;
+        }
+
+        .sentence-practice-char.active {
+            background: #667eea;
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .sentence-practice-char.blank {
+            background: #fff3e0;
+            border: 2px dashed #ff9800;
+            min-width: 50px;
+            min-height: 50px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .sentence-practice-char.blank.filled {
+            background: #e8f5e9;
+            border-color: #4caf50;
+            color: #333;
+        }
+
+        .sentence-practice-char.blank.wrong {
+            background: #ffebee;
+            border-color: #f44336;
+            animation: shake 0.4s;
+        }
+
+        .sentence-pinyin-text {
+            text-align: center;
+            font-size: 20px;
+            color: #888;
+            margin-bottom: 20px;
+            letter-spacing: 3px;
+        }
+
+        .sentence-blank-choices {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .sentence-blank-choice {
+            padding: 12px 24px;
+            font-size: 28px;
+            background: white;
+            border: 2px solid #667eea;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .sentence-blank-choice:hover {
+            background: #667eea;
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .sentence-blank-choice.used {
+            opacity: 0.4;
+            pointer-events: none;
+        }
+
+        .sentence-practice-controls {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .sentence-practice-controls button {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .sentence-play-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .sentence-next-btn {
+            background: linear-gradient(135deg, #56ab2f 0%, #a8e063 100%);
+            color: white;
+        }
+
+        .sentence-mode-toggle {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .sentence-mode-btn {
+            padding: 8px 20px;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .sentence-mode-btn.active {
+            background: #667eea;
+            color: white;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
     </style>
 </head>
 <body>
@@ -3096,24 +3529,13 @@
                     <button class="start-btn">开始学习</button>
                 </div>
 
-                <!-- 汉字游戏 -->
+                <!-- 汉字识字 -->
                 <div class="game-card chinese" onclick="startGame('chinese')">
-                    <span class="game-icon">汉字</span>
-                    <h3 class="game-title">汉字游戏</h3>
-                    <p class="game-description">学习基础汉字(四五快读第一册)</p>
+                    <span class="game-icon">📖</span>
+                    <h3 class="game-title">汉字识字</h3>
+                    <p class="game-description">汉字学习、笔画描红、读句子练识字</p>
                     <div class="game-progress">
                         <div class="game-progress-bar" id="chineseProgressBar" style="width: 0%"></div>
-                    </div>
-                    <button class="start-btn">开始学习</button>
-                </div>
-
-                <!-- 句子跟读 -->
-                <div class="game-card sentence" onclick="startGame('sentence')">
-                    <span class="game-icon">📖</span>
-                    <h3 class="game-title">汉字Plus</h3>
-                    <p class="game-description">句子跟读练习,巩固汉字学习</p>
-                    <div class="game-progress">
-                        <div class="game-progress-bar" id="sentenceProgressBar" style="width: 0%"></div>
                     </div>
                     <button class="start-btn">开始学习</button>
                 </div>
@@ -3356,11 +3778,61 @@
             </div>
         </div>
 
+        <!-- ===== 汉字识字主页 ===== -->
+        <div id="chineseHomePage" class="game-page">
+            <div class="game-header">
+                <button class="back-btn" onclick="goHome()">← 返回首页</button>
+                <h2>📖 汉字识字</h2>
+                <div class="score-board">
+                    <div class="score-item correct-count">
+                        <span class="number" id="chineseHomeTotalChars">80</span>
+                        <span class="label">总汉字</span>
+                    </div>
+                    <div class="score-item total-score">
+                        <span class="number" id="chineseHomeScore">0</span>
+                        <span class="label">总分</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chinese-home-content">
+                <div class="chinese-home-cards">
+                    <div class="chinese-home-card" onclick="showChineseLessonPage()">
+                        <span class="chinese-home-icon">📚</span>
+                        <h4>课文学习</h4>
+                        <p>按课浏览 80 个汉字</p>
+                    </div>
+                    <div class="chinese-home-card" onclick="showChineseGame()">
+                        <span class="chinese-home-icon">🎯</span>
+                        <h4>汉字游戏</h4>
+                        <p>四选一挑战</p>
+                    </div>
+                    <div class="chinese-home-card" onclick="showChineseSentencePractice()">
+                        <span class="chinese-home-icon">🗣️</span>
+                        <h4>读句子练识字</h4>
+                        <p>逐字高亮 + 挖空练习</p>
+                    </div>
+                    <div class="chinese-home-card" onclick="showChineseTracing()">
+                        <span class="chinese-home-icon">✍️</span>
+                        <h4>描红写字</h4>
+                        <p>跟随笔画书写</p>
+                    </div>
+                </div>
+
+                <div class="chinese-lesson-select">
+                    <h3>🎯 快速选择课程</h3>
+                    <div id="chineseHomeLessonButtons" class="chinese-lesson-buttons">
+                        <!-- 动态生成 -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- ===== 汉字游戏页面 ===== -->
         <div id="chineseGame" class="game-page">
             <div class="game-header">
                 <button class="back-btn" onclick="goHome()">← 返回</button>
-                <h2>汉字 汉字游戏</h2>
+                <h2>汉字游戏</h2>
                 <button class="config-btn" onclick="openChineseConfig()">🎨 配置图片</button>
                 <div class="score-board">
                     <div class="score-item correct-count">
@@ -3421,6 +3893,81 @@
             </div>
         </div>
 
+        <!-- ===== 课文学习页面 ===== -->
+        <div id="chineseLessonPage" class="game-page">
+            <div class="game-header">
+                <button class="back-btn" onclick="showChineseHomePage()">← 返回</button>
+                <h2 id="chineseLessonTitle">📚 课文学习</h2>
+                <button class="back-btn" onclick="showChineseSentencePractice()">🗣️ 读句子</button>
+            </div>
+            <div class="game-area">
+                <div id="chineseLessonGrid" class="chinese-lesson-grid"></div>
+            </div>
+        </div>
+
+        <!-- ===== 汉字详情页面 ===== -->
+        <div id="chineseDetailPage" class="game-page">
+            <div class="game-header">
+                <button class="back-btn" onclick="showChineseLessonPage()">← 返回课文</button>
+                <h2>📖 汉字详情</h2>
+                <button class="back-btn" onclick="openTracingFromDetail()">✍️ 描红</button>
+            </div>
+            <div class="chinese-detail-panel" id="chineseDetailPanel">
+                <!-- 动态生成 -->
+            </div>
+        </div>
+
+        <!-- ===== 描红写字页面 ===== -->
+        <div id="chineseTracingPage" class="game-page">
+            <div class="game-header">
+                <button class="back-btn" onclick="backFromTracing()">← 返回</button>
+                <h2>✍️ 描红写字</h2>
+                <button class="back-btn" onclick="nextTracingChar()">下一个 →</button>
+            </div>
+            <div class="chinese-tracing-area">
+                <div class="chinese-tracing-char" id="tracingCharDisplay">人</div>
+                <div class="chinese-tracing-board" id="tracingBoard">
+                    <span class="chinese-tracing-hint" id="tracingHint">人</span>
+                    <canvas class="chinese-tracing-canvas" id="tracingCanvas" width="300" height="300"></canvas>
+                </div>
+                <div class="chinese-tracing-controls">
+                    <button class="trace-btn" onclick="playTracingChar()">🔊 听发音</button>
+                    <button class="trace-btn" onclick="showTracingStroke()">🎬 看笔顺</button>
+                    <button class="clear-btn" onclick="clearTracingCanvas()">🗑️ 清空</button>
+                    <button class="trace-btn" onclick="checkTracing()">✅ 检查</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== 读句子练识字页面 ===== -->
+        <div id="chineseSentencePracticePage" class="game-page">
+            <div class="game-header">
+                <button class="back-btn" onclick="showChineseHomePage()">← 返回</button>
+                <h2>🗣️ 读句子练识字</h2>
+                <div class="score-board">
+                    <span id="sentencePracticeProgress" style="font-size: 18px; color: #666;">1/5</span>
+                </div>
+            </div>
+
+            <div class="sentence-practice-container">
+                <div class="sentence-mode-toggle">
+                    <button class="sentence-mode-btn active" onclick="switchSentencePracticeMode('read')" data-mode="read">🔊 朗读</button>
+                    <button class="sentence-mode-btn" onclick="switchSentencePracticeMode('blank')" data-mode="blank">✏️ 填空</button>
+                </div>
+
+                <div class="sentence-practice-text" id="sentencePracticeText"></div>
+                <div class="sentence-pinyin-text" id="sentencePracticePinyin"></div>
+                <div id="sentenceBlankChoices" class="sentence-blank-choices"></div>
+
+                <div class="sentence-practice-controls">
+                    <button class="sentence-play-btn" onclick="playSentencePractice()">🔊 朗读句子</button>
+                    <button class="sentence-next-btn" onclick="nextSentencePractice()">下一句 →</button>
+                </div>
+
+                <div class="progress-dots" id="sentencePracticeDots"></div>
+            </div>
+        </div>
+
         <!-- ===== 句子跟读页面 ===== -->
         <div id="sentenceGame" class="game-page">
             <div class="game-header">
@@ -3437,6 +3984,10 @@
                 <button class="lesson-btn" onclick="switchSentenceLesson('lesson4')" data-lesson="lesson4">第4课</button>
                 <button class="lesson-btn" onclick="switchSentenceLesson('lesson5')" data-lesson="lesson5">第5课</button>
                 <button class="lesson-btn" onclick="switchSentenceLesson('lesson6')" data-lesson="lesson6">第6课</button>
+                <button class="lesson-btn" onclick="switchSentenceLesson('lesson7')" data-lesson="lesson7">第7课</button>
+                <button class="lesson-btn" onclick="switchSentenceLesson('lesson8')" data-lesson="lesson8">第8课</button>
+                <button class="lesson-btn" onclick="switchSentenceLesson('lesson9')" data-lesson="lesson9">第9课</button>
+                <button class="lesson-btn" onclick="switchSentenceLesson('lesson10')" data-lesson="lesson10">第10课</button>
             </div>
 
             <div class="sentence-reader">
@@ -3811,6 +4362,7 @@
         </div>
     </div>
 
+    <script src="chinese_database.js"></script>
     <script>
         // ===== 全局变量 =====
         let currentPracticeWords = [];
@@ -4113,200 +4665,33 @@
         };
 
         // 汉字游戏数据 - 基于四五快读第一册（增强版：添加象形字信息和演变图片）
-        const chineseData = {
-            lesson1: [
-                { 
-                    char: "人", 
-                    pinyin: "rén", 
-                    emoji: "👤", 
-                    image: "https://source.unsplash.com/featured/?person,people",
-                    isPictograph: true,
-                    pictograph: {
-                        origin: "甲骨文",
-                        description: "像人的侧面站立形状",
-                        stages: [
-                            { url: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/U30007_u4eba.svg/120px-U30007_u4eba.svg.png", label: "甲骨文" },
-                            { url: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/%E4%BA%BA-seal.svg/120px-%E4%BA%BA-seal.svg.png", label: "小篆" },
-                            { url: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Seal_%E4%BA%BA.svg/120px-Seal_%E4%BA%BA.svg.png", label: "隶书" }
-                        ]
-                    }
-                },
-                { 
-                    char: "口", 
-                    pinyin: "kǒu", 
-                    emoji: "👄", 
-                    image: "https://source.unsplash.com/featured/?mouth",
-                    isPictograph: true,
-                    pictograph: {
-                        origin: "甲骨文",
-                        description: "像嘴巴张开的形状",
-                        stages: [
-                            { url: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/U53e3_u53e3.svg/120px-U53e3_u53e3.svg.png", label: "甲骨文" },
-                            { url: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/%E5%8F%A3-seal.svg/120px-%E5%8F%A3-seal.svg.png", label: "小篆" }
-                        ]
-                    }
-                },
-                { char: "大", pinyin: "dà", emoji: "📏", image: "https://source.unsplash.com/featured/?big,large", isPictograph: false },
-                { char: "中", pinyin: "zhōng", emoji: "🎯", image: "https://source.unsplash.com/featured/?middle,center", isPictograph: false },
-                { char: "小", pinyin: "xiǎo", emoji: "🔬", image: "https://source.unsplash.com/featured/?small,little", isPictograph: false },
-                { char: "哭", pinyin: "kū", emoji: "😢", image: "https://source.unsplash.com/featured/?crying,sad", isPictograph: false },
-                { char: "笑", pinyin: "xiào", emoji: "😄", image: "https://source.unsplash.com/featured/?smile,happy", isPictograph: false },
-                { 
-                    char: "一", 
-                    pinyin: "yī", 
-                    emoji: "1️⃣", 
-                    image: "https://source.unsplash.com/featured/?one",
-                    isPictograph: true,
-                    pictograph: {
-                        origin: "指事字",
-                        description: "用一横表示数字一",
-                        stages: []
-                    }
-                },
-                { char: "上", pinyin: "shàng", emoji: "⬆️", image: "https://source.unsplash.com/featured/?up,above", isPictograph: false },
-                { char: "下", pinyin: "xià", emoji: "⬇️", image: "https://source.unsplash.com/featured/?down,below", isPictograph: false },
-                { char: "爸", pinyin: "bà", emoji: "👨", image: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=400&h=400&fit=crop", isPictograph: false },
-                { char: "妈", pinyin: "mā", emoji: "👩", image: "https://images.unsplash.com/photo-1544005313-94ddf02805df?w=400&h=400&fit=crop", isPictograph: false },
-                { char: "天", pinyin: "tiān", emoji: "🌤️", image: "https://images.unsplash.com/photo-1534088568595-a066f410bcda?w=400&h=400&fit=crop", isPictograph: false },
-                { char: "太", pinyin: "tài", emoji: "☀️", image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=400&fit=crop", isPictograph: false },
-                { 
-                    char: "月", 
-                    pinyin: "yuè", 
-                    emoji: "🌙", 
-                    image: "https://source.unsplash.com/featured/?moon",
-                    isPictograph: true,
-                    pictograph: {
-                        origin: "甲骨文",
-                        description: "像月亮弯弯的形状",
-                        stages: [
-                            { url: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/U6708_u6708.svg/120px-U6708_u6708.svg.png", label: "甲骨文" },
-                            { url: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/%E6%9C%88-seal.svg/120px-%E6%9C%88-seal.svg.png", label: "小篆" }
-                        ]
-                    }
-                },
-                { char: "二", pinyin: "èr", emoji: "2️⃣", image: "https://source.unsplash.com/featured/?two", isPictograph: false }
-            ],
-            lesson2: [
-                { char: "地", pinyin: "dì", emoji: "🌍", image: "https://source.unsplash.com/featured/?earth,ground" },
-                { char: "阳", pinyin: "yáng", emoji: "🌞", image: "https://source.unsplash.com/featured/?sunshine" },
-                { char: "亮", pinyin: "liàng", emoji: "💡", image: "https://source.unsplash.com/featured/?bright,light" },
-                { char: "星", pinyin: "xīng", emoji: "⭐", image: "https://source.unsplash.com/featured/?star,night" },
-                { char: "云", pinyin: "yún", emoji: "☁️", image: "https://source.unsplash.com/featured/?cloud,sky" },
-                { char: "火", pinyin: "huǒ", emoji: "🔥", image: "https://source.unsplash.com/featured/?fire,flame" },
-                { char: "水", pinyin: "shuǐ", emoji: "💧", image: "https://source.unsplash.com/featured/?water,blue" },
-                { char: "三", pinyin: "sān", emoji: "3️⃣", image: "https://source.unsplash.com/featured/?three" }
-            ],
-            lesson3: [
-                { char: "土", pinyin: "tǔ", emoji: "🏔️", image: "https://source.unsplash.com/featured/?soil,dirt" },
-                { char: "山", pinyin: "shān", emoji: "⛰️", image: "https://source.unsplash.com/featured/?mountain" },
-                { char: "石", pinyin: "shí", emoji: "🪨", image: "https://source.unsplash.com/featured/?rock,stone" },
-                { char: "木", pinyin: "mù", emoji: "🪵", image: "https://source.unsplash.com/featured/?wood,tree" },
-                { char: "我", pinyin: "wǒ", emoji: "🙋", image: "https://source.unsplash.com/featured/?me,person" },
-                { char: "好", pinyin: "hǎo", emoji: "👍", image: "https://source.unsplash.com/featured/?good,thumbs" },
-                { char: "有", pinyin: "yǒu", emoji: "✅", image: "https://source.unsplash.com/featured/?have,exist" },
-                { char: "田", pinyin: "tián", emoji: "🌾", image: "https://source.unsplash.com/featured/?field,farm" }
-            ],
-            lesson4: [
-                { char: "牛", pinyin: "niú", emoji: "🐄", image: "https://source.unsplash.com/featured/?cow" },
-                { char: "羊", pinyin: "yáng", emoji: "🐑", image: "https://source.unsplash.com/featured/?sheep" },
-                { char: "聪", pinyin: "cōng", emoji: "🧠", image: "https://source.unsplash.com/featured/?smart,intelligence" },
-                { char: "耳", pinyin: "ěr", emoji: "👂", image: "https://source.unsplash.com/featured/?ear" },
-                { char: "目", pinyin: "mù", emoji: "👁️", image: "https://source.unsplash.com/featured/?eye" },
-                { char: "心", pinyin: "xīn", emoji: "❤️", image: "https://source.unsplash.com/featured/?heart" },
-                { char: "和", pinyin: "hé", emoji: "🤝", image: "https://source.unsplash.com/featured/?together,and" },
-                { char: "四", pinyin: "sì", emoji: "4️⃣", image: "https://source.unsplash.com/featured/?four" }
-            ],
-            lesson5: [
-                { char: "明", pinyin: "míng", emoji: "✨", image: "https://source.unsplash.com/featured/?bright,shine" },
-                { char: "头", pinyin: "tóu", emoji: "🗣️", image: "https://source.unsplash.com/featured/?head" },
-                { char: "眉", pinyin: "méi", emoji: "😏", image: "https://source.unsplash.com/featured/?eyebrow" },
-                { char: "鼻", pinyin: "bí", emoji: "👃", image: "https://source.unsplash.com/featured/?nose" },
-                { char: "手", pinyin: "shǒu", emoji: "✋", image: "https://source.unsplash.com/featured/?hand" },
-                { char: "花", pinyin: "huā", emoji: "🌸", image: "https://source.unsplash.com/featured/?flower" },
-                { char: "树", pinyin: "shù", emoji: "🌳", image: "https://source.unsplash.com/featured/?tree" },
-                { char: "五", pinyin: "wǔ", emoji: "5️⃣", image: "https://source.unsplash.com/featured/?five" }
-            ],
-            lesson6: [
-                { char: "草", pinyin: "cǎo", emoji: "🌿", image: "https://source.unsplash.com/featured/?grass" },
-                { char: "叶", pinyin: "yè", emoji: "🍃", image: "https://source.unsplash.com/featured/?leaf" },
-                { char: "日", pinyin: "rì", emoji: "📅", image: "https://source.unsplash.com/featured/?sun,day" },
-                { char: "风", pinyin: "fēng", emoji: "💨", image: "https://source.unsplash.com/featured/?wind" },
-                { char: "雨", pinyin: "yǔ", emoji: "🌧️", image: "https://source.unsplash.com/featured/?rain" },
-                { char: "的", pinyin: "de", emoji: "📝", image: "https://source.unsplash.com/featured/?of,belong" },
-                { char: "孩", pinyin: "hái", emoji: "👶", image: "https://source.unsplash.com/featured/?child,kid" },
-                { char: "六", pinyin: "liù", emoji: "6️⃣", image: "https://source.unsplash.com/featured/?six" }
-            ]
-        };
+        // 句子跟读数据由 chineseData 中的例句动态构建
+        let sentenceData = {};
 
-        // 句子跟读数据 (扩充到50句)
-        const sentenceData = {
-            lesson1: [
-                { sentence: "我有好爸爸和好妈妈。", pinyin: "wǒ yǒu hǎo bà ba hé hǎo mā ma", length: 10 },
-                { sentence: "天上有太阳和月亮。", pinyin: "tiān shàng yǒu tài yáng hé yuè liàng", length: 9 },
-                { sentence: "爸爸上山，妈妈下山。", pinyin: "bà ba shàng shān mā ma xià shān", length: 8 },
-                { sentence: "大人哭，小人笑。", pinyin: "dà rén kū xiǎo rén xiào", length: 6 },
-                { sentence: "天上有一个大太阳。", pinyin: "tiān shàng yǒu yī gè dà tài yáng", length: 8 },
-                { sentence: "我爱我的爸爸妈妈。", pinyin: "wǒ ài wǒ de bà ba mā ma", length: 8 },
-                { sentence: "大人有大人的事。", pinyin: "dà rén yǒu dà rén de shì", length: 7 },
-                { sentence: "天上有小人吗？", pinyin: "tiān shàng yǒu xiǎo rén ma", length: 7 },
-                { sentence: "好妈妈和好爸爸。", pinyin: "hǎo mā ma hé hǎo bà ba", length: 7 }
-            ],
-            lesson2: [
-                { sentence: "天上有星星和月亮。", pinyin: "tiān shàng yǒu xīng xīng hé yuè liàng", length: 8 },
-                { sentence: "地上有水和火。", pinyin: "dì shàng yǒu shuǐ hé huǒ", length: 6 },
-                { sentence: "太阳出来了，天亮了。", pinyin: "tài yáng chū lái le tiān liàng le", length: 8 },
-                { sentence: "大火烧了三天。", pinyin: "dà huǒ shāo le sān tiān", length: 6 },
-                { sentence: "水田里有小鱼。", pinyin: "shuǐ tián lǐ yǒu xiǎo yú", length: 6 },
-                { sentence: "星星在天上发光。", pinyin: "xīng xīng zài tiān shàng fā guāng", length: 7 },
-                { sentence: "地上的火很热。", pinyin: "dì shàng de huǒ hěn rè", length: 6 },
-                { sentence: "水里有很多鱼。", pinyin: "shuǐ lǐ yǒu hěn duō yú", length: 6 },
-                { sentence: "月亮和星星在天上。", pinyin: "yuè liàng hé xīng xīng zài tiān shàng", length: 8 }
-            ],
-            lesson3: [
-                { sentence: "我有好的爸爸妈妈。", pinyin: "wǒ yǒu hǎo de bà ba mā ma", length: 8 },
-                { sentence: "山上有一棵大树。", pinyin: "shān shàng yǒu yī kē dà shù", length: 7 },
-                { sentence: "土星上有人吗？", pinyin: "tǔ xīng shàng yǒu rén ma", length: 6 },
-                { sentence: "田地里有水和石头。", pinyin: "tián dì lǐ yǒu shuǐ hé shí tou", length: 8 },
-                { sentence: "大树下有很多土。", pinyin: "dà shù xià yǒu hěn duō tǔ", length: 7 },
-                { sentence: "山上有石头和水。", pinyin: "shān shàng yǒu shí tou hé shuǐ", length: 7 },
-                { sentence: "田里的水很干净。", pinyin: "tián lǐ de shuǐ hěn gān jìng", length: 7 },
-                { sentence: "山上有一片草地。", pinyin: "shān shàng yǒu yī piàn cǎo dì", length: 7 },
-                { sentence: "土里有石头和树根。", pinyin: "tǔ lǐ yǒu shí tou hé shù gēn", length: 8 }
-            ],
-            lesson4: [
-                { sentence: "水牛和小羊在草地上。", pinyin: "shuǐ niú hé xiǎo yáng zài cǎo dì shàng", length: 9 },
-                { sentence: "爸爸和妈妈心中有我。", pinyin: "bà ba hé mā ma xīn zhōng yǒu wǒ", length: 9 },
-                { sentence: "山羊的耳朵很长。", pinyin: "shān yáng de ěr duo hěn cháng", length: 7 },
-                { sentence: "聪明的孩子有四只眼。", pinyin: "cōng míng de hái zi yǒu sì zhī yǎn", length: 9 },
-                { sentence: "小羊在吃草地上的草。", pinyin: "xiǎo yáng zài chī cǎo dì shàng de cǎo", length: 9 },
-                { sentence: "水牛在水里游泳。", pinyin: "shuǐ niú zài shuǐ lǐ yóu yǒng", length: 7 },
-                { sentence: "心中有很多快乐。", pinyin: "xīn zhōng yǒu hěn duō kuài lè", length: 7 },
-                { sentence: "聪明的孩子爱学习。", pinyin: "cōng míng de hái zi ài xué xí", length: 8 },
-                { sentence: "山羊和绵羊不一样。", pinyin: "shān yáng hé mián yáng bù yī yàng", length: 8 }
-            ],
-            lesson5: [
-                { sentence: "我的小手很聪明。", pinyin: "wǒ de xiǎo shǒu hěn cōng míng", length: 7 },
-                { sentence: "头上有眉毛和眼睛。", pinyin: "tóu shàng yǒu méi máo hé yǎn jīng", length: 8 },
-                { sentence: "树上有很多花和叶子。", pinyin: "shù shàng yǒu hěn duō huā hé yè zi", length: 9 },
-                { sentence: "明天的月亮会很圆。", pinyin: "míng tiān de yuè liàng huì hěn yuán", length: 8 },
-                { sentence: "聪明的小手会做事。", pinyin: "cōng míng de xiǎo shǒu huì zuò shì", length: 8 },
-                { sentence: "眉毛下面是眼睛。", pinyin: "méi máo xià miàn shì yǎn jīng", length: 7 },
-                { sentence: "树上的叶子很绿。", pinyin: "shù shàng de yè zi hěn lǜ", length: 7 },
-                { sentence: "明天的太阳会更亮。", pinyin: "míng tiān de tài yáng huì gèng liàng", length: 8 },
-                { sentence: "头上有黑头发。", pinyin: "tóu shàng yǒu hēi tóu fa", length: 6 }
-            ],
-            lesson6: [
-                { sentence: "小草在大树下睡觉。", pinyin: "xiǎo cǎo zài dà shù xià shuì jiào", length: 8 },
-                { sentence: "风吹来，雨落下来。", pinyin: "fēng chuī lái yǔ luò xià lái", length: 7 },
-                { sentence: "孩子的脸上有一个小鼻子。", pinyin: "hái zi de liǎn shàng yǒu yī gè xiǎo bí zi", length: 11 },
-                { sentence: "太阳和月亮都在天上。", pinyin: "tài yáng hé yuè liàng dōu zài tiān shàng", length: 9 },
-                { sentence: "大树下有小草和花。", pinyin: "dà shù xià yǒu xiǎo cǎo hé huā", length: 8 },
-                { sentence: "风和雨一起来了。", pinyin: "fēng hé yǔ yī qǐ lái le", length: 7 },
-                { sentence: "孩子的脸很可爱。", pinyin: "hái zi de liǎn hěn kě ài", length: 7 },
-                { sentence: "太阳比月亮更大。", pinyin: "tài yáng bǐ yuè liàng gèng dà", length: 7 },
-                { sentence: "睡觉的时候很安静。", pinyin: "shuì jiào de shí hou hěn ān jìng", length: 8 }
-            ]
-        };
+        function buildSentenceDataFromChinese() {
+            const data = {};
+            Object.keys(chineseData).forEach(lessonId => {
+                const sentences = [];
+                chineseData[lessonId].forEach(charItem => {
+                    if (charItem.sentences && charItem.sentences.length > 0) {
+                        charItem.sentences.forEach(sentence => {
+                            sentences.push({
+                                sentence: sentence,
+                                pinyin: '',
+                                length: sentence.length,
+                                sourceChar: charItem.char,
+                                lessonId: lessonId
+                            });
+                        });
+                    }
+                });
+                if (sentences.length > 0) {
+                    data[lessonId] = shuffleArray([...sentences]);
+                }
+            });
+            return data;
+        }
+
 
         // ===== 游戏状态管理 =====
         let currentGame = null;
@@ -6218,12 +6603,12 @@
                     startWordGame();
                     break;
                 case 'chinese':
-                    document.getElementById('chineseGame').classList.add('active');
-                    startChineseGame();
+                    document.getElementById('chineseHomePage').classList.add('active');
+                    initChineseHomePage();
                     break;
                 case 'sentence':
-                    document.getElementById('sentenceGame').classList.add('active');
-                    startSentenceReader();
+                    document.getElementById('chineseHomePage').classList.add('active');
+                    initChineseHomePage();
                     break;
                 case 'reading':
                     document.getElementById('readingGame').classList.add('active');
@@ -7091,12 +7476,196 @@
         let chineseQuestionsHistory = []; // 保存所有题目数据
         let currentChineseQuestionIndex = 0; // 当前题目索引
         
+        // ===== 汉字识字模块扩展 =====
+        let currentChineseLesson = 'lesson1';
+        let currentChineseCharIndex = 0;
+        let currentSentencePracticeLesson = 'lesson1';
+        let currentSentencePracticeIndex = 0;
+        let sentencePracticeMode = 'read';
+        let sentencePracticeOrder = [];
+        let currentTracingLesson = 'lesson1';
+        let currentTracingIndex = 0;
+        let isTracing = false;
+        let tracingCtx = null;
+
+        // 隐藏所有汉字相关页面
+        function hideAllChinesePages() {
+            const pages = ['chineseHomePage', 'chineseGame', 'chineseLessonPage', 'chineseDetailPage', 'chineseTracingPage', 'chineseSentencePracticePage'];
+            pages.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.classList.remove('active');
+            });
+        }
+
+        // 初始化汉字识字主页
+        function initChineseHomePage() {
+            const container = document.getElementById('chineseHomeLessonButtons');
+            if (!container) return;
+            container.innerHTML = chineseLessons.map((lesson, idx) => `
+                <button class="chinese-lesson-btn ${idx === 0 ? 'active' : ''}" onclick="selectChineseLessonFromHome('${lesson.id}')">${lesson.name}</button>
+            `).join('');
+            currentChineseLesson = 'lesson1';
+            document.getElementById('chineseHomeScore').textContent = gameState.chinese.score || 0;
+        }
+
+        function showChineseHomePage() {
+            hideAllChinesePages();
+            document.getElementById('chineseHomePage').classList.add('active');
+            initChineseHomePage();
+        }
+
+        function selectChineseLessonFromHome(lessonId) {
+            currentChineseLesson = lessonId;
+            document.querySelectorAll('#chineseHomeLessonButtons .chinese-lesson-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.textContent.includes(chineseLessons.find(l => l.id === lessonId).name.replace('第', '').replace('课', '')));
+            });
+            showChineseLessonPage(lessonId);
+        }
+
+        function showChineseLessonPage(lessonId) {
+            if (lessonId) currentChineseLesson = lessonId;
+            hideAllChinesePages();
+            document.getElementById('chineseLessonPage').classList.add('active');
+            renderChineseLessonPage(currentChineseLesson);
+        }
+
+        function renderChineseLessonPage(lessonId) {
+            const lesson = chineseLessons.find(l => l.id === lessonId) || chineseLessons[0];
+            const title = document.getElementById('chineseLessonTitle');
+            if (title) title.textContent = `📚 ${lesson.name} · ${lesson.title}`;
+
+            const grid = document.getElementById('chineseLessonGrid');
+            if (!grid) return;
+
+            const chars = chineseData[lessonId] || [];
+            grid.innerHTML = chars.map((char, idx) => `
+                <div class="chinese-char-card" onclick="showChineseDetailPage('${lessonId}', ${idx})">
+                    <span class="char">${char.char}</span>
+                    <div class="pinyin">${char.pinyin}</div>
+                    <div class="meaning">${char.meaning ? char.meaning.substring(0, 8) + (char.meaning.length > 8 ? '...' : '') : ''}</div>
+                </div>
+            `).join('');
+        }
+
+        function showChineseDetailPage(lessonId, charIndex) {
+            if (lessonId) {
+                currentChineseLesson = lessonId;
+                currentChineseCharIndex = charIndex;
+            }
+            hideAllChinesePages();
+            document.getElementById('chineseDetailPage').classList.add('active');
+            renderChineseDetailPage();
+        }
+
+        function renderChineseDetailPage() {
+            const chars = chineseData[currentChineseLesson] || [];
+            const charData = chars[currentChineseCharIndex];
+            if (!charData) return;
+
+            const panel = document.getElementById('chineseDetailPanel');
+            if (!panel) return;
+
+            let pictographHtml = '';
+            if (charData.isPictograph && charData.pictograph && charData.pictograph.stages && charData.pictograph.stages.length > 0) {
+                pictographHtml = `
+                    <div style="margin-top: 15px; text-align: center;">
+                        <h4 style="color: #666; margin-bottom: 10px;">📜 象形字演变</h4>
+                        <p style="color: #888; font-size: 14px; margin-bottom: 10px;">${charData.pictograph.origin || '象形字'}：${charData.pictograph.description || ''}</p>
+                        <div style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
+                            ${charData.pictograph.stages.map(s => `
+                                <div style="text-align: center;">
+                                    <img src="${s.url}" alt="${s.label}" style="height: 80px; border-radius: 8px; border: 1px solid #eee; background: white;">
+                                    <div style="font-size: 12px; color: #888; margin-top: 5px;">${s.label}</div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            }
+
+            const wordsHtml = charData.words && charData.words.length > 0
+                ? `<div class="chinese-words-list">${charData.words.map(w => `<span class="chinese-word-tag">${w}</span>`).join('')}</div>`
+                : '';
+
+            const sentencesHtml = charData.sentences && charData.sentences.length > 0
+                ? `<div style="margin-top: 15px;"><h4 style="color: #666; margin-bottom: 10px;">💬 例句</h4><ul class="chinese-sentences-list">${charData.sentences.map(s => `<li onclick="speak('${s}', 'zh-CN')">${s}</li>`).join('')}</ul></div>`
+                : '';
+
+            panel.innerHTML = `
+                <div class="chinese-detail-main">
+                    <div class="chinese-left-section" style="text-align: center;">
+                        <div class="pinyin-text" style="font-size: 28px; color: #666; margin-bottom: 10px;">${charData.pinyin}</div>
+                        <div class="chinese-detail-char" onclick="playChineseCharSound('${charData.char}')">${charData.char}</div>
+                        <p style="color: #888; font-size: 14px; margin-top: 10px;">💡 点击汉字听发音</p>
+                    </div>
+                    <div class="chinese-detail-info">
+                        <p><span class="label">部首：</span>${charData.radical || '无'}</p>
+                        <p><span class="label">笔画：</span>${charData.strokes || '？'} 画</p>
+                        <p><span class="label">释义：</span>${charData.meaning || '暂无释义'}</p>
+                        <p><span class="label">组词：</span></p>
+                        ${wordsHtml}
+                    </div>
+                </div>
+                ${pictographHtml}
+                ${sentencesHtml}
+                <div style="margin-top: 25px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+                    <button class="action-btn" onclick="playChineseCharSound('${charData.char}')">🔊 听发音</button>
+                    <button class="action-btn" onclick="showChineseTracing('${charData.char}')">✍️ 描红</button>
+                    <button class="action-btn" onclick="prevChineseChar()">← 上一个</button>
+                    <button class="action-btn" onclick="nextChineseChar()">下一个 →</button>
+                </div>
+            `;
+
+            // 加载笔画动画
+            setTimeout(() => {
+                animateCharacterStrokeForChar(charData.char);
+            }, 100);
+        }
+
+        function playChineseCharSound(char) {
+            speak(char, 'zh-CN');
+        }
+
+        function nextChineseChar() {
+            const chars = chineseData[currentChineseLesson] || [];
+            if (currentChineseCharIndex < chars.length - 1) {
+                currentChineseCharIndex++;
+            } else {
+                // 切换下一课
+                const lessons = Object.keys(chineseData);
+                const idx = lessons.indexOf(currentChineseLesson);
+                if (idx < lessons.length - 1) {
+                    currentChineseLesson = lessons[idx + 1];
+                    currentChineseCharIndex = 0;
+                }
+            }
+            renderChineseDetailPage();
+        }
+
+        function prevChineseChar() {
+            if (currentChineseCharIndex > 0) {
+                currentChineseCharIndex--;
+            } else {
+                const lessons = Object.keys(chineseData);
+                const idx = lessons.indexOf(currentChineseLesson);
+                if (idx > 0) {
+                    currentChineseLesson = lessons[idx - 1];
+                    currentChineseCharIndex = chineseData[currentChineseLesson].length - 1;
+                }
+            }
+            renderChineseDetailPage();
+        }
+
+        function showChineseGame() {
+            hideAllChinesePages();
+            document.getElementById('chineseGame').classList.add('active');
+            startChineseGame();
+        }
+
         function startChineseGame() {
-            // 重置题目历史
+            // 重置题目历史和状态
             chineseQuestionsHistory = [];
             currentChineseQuestionIndex = 0;
-            
-            // 初始化游戏状态
             gameState.chinese.hasAnswered = false;
             gameState.chinese.correct = 0;
             gameState.chinese.wrong = 0;
@@ -7104,22 +7673,20 @@
             
             // 初始化题目进度追踪器
             window.questionProgress.chinese = new QuestionProgressTracker('chinese', 'chineseQuestionProgress', 20);
-            
-            // 设置跳转回调
             window.questionProgress.chinese.triggerGoToQuestion = (index) => {
                 goToChineseQuestion(index);
             };
             
             // 预先生成20道题目
+            const lessons = Object.keys(chineseData);
             for (let i = 0; i < 20; i++) {
-                const lessons = Object.keys(chineseData);
                 const randomLesson = lessons[Math.floor(Math.random() * lessons.length)];
                 const characters = chineseData[randomLesson];
                 chineseQuestionsHistory.push(characters[Math.floor(Math.random() * characters.length)]);
             }
             
-            // 显示第一题
             showChineseQuestion(0);
+            updateChineseScoreBoard();
         }
 
         async function showChineseQuestion(index) {
@@ -7373,6 +7940,10 @@
             document.getElementById('chineseScore').textContent = gameState.chinese.score;
         }
 
+        function updateChineseScoreBoard() {
+            updateChineseScore();
+        }
+
         function restartChineseGame() {
             gameState.chinese = { correct: 0, wrong: 0, score: 0, hasAnswered: false };
             chineseQuestionsHistory = [];
@@ -7463,6 +8034,330 @@
                     dot.classList.add('active');
                 }
                 dotsContainer.appendChild(dot);
+            }
+        }
+
+        // ===== 读句子练识字 =====
+        let sentencePracticeItems = [];
+        let sentencePracticeBlankIndex = -1;
+        let sentencePracticeBlankChar = '';
+        let sentencePracticeAnswered = false;
+
+        function showChineseSentencePractice(lessonId) {
+            if (lessonId) currentSentencePracticeLesson = lessonId;
+            hideAllChinesePages();
+            document.getElementById('chineseSentencePracticePage').classList.add('active');
+            initSentencePractice();
+        }
+
+        function initSentencePractice() {
+            // 默认使用当前课程，没有则使用 lesson1
+            const lesson = currentSentencePracticeLesson || 'lesson1';
+            if (!sentenceData[lesson] || sentenceData[lesson].length === 0) {
+                sentenceData = buildSentenceDataFromChinese();
+            }
+            if (!sentenceData[lesson] || sentenceData[lesson].length === 0) return;
+
+            sentencePracticeOrder = shuffleArray([...sentenceData[lesson]]);
+            currentSentencePracticeIndex = 0;
+            sentencePracticeMode = 'read';
+            renderSentencePractice();
+            updateSentencePracticeDots();
+        }
+
+        function renderSentencePractice() {
+            const item = sentencePracticeOrder[currentSentencePracticeIndex];
+            if (!item) return;
+
+            const textContainer = document.getElementById('sentencePracticeText');
+            const pinyinContainer = document.getElementById('sentencePracticePinyin');
+            const choicesContainer = document.getElementById('sentenceBlankChoices');
+            const progressEl = document.getElementById('sentencePracticeProgress');
+
+            if (progressEl) {
+                progressEl.textContent = `${currentSentencePracticeIndex + 1}/${sentencePracticeOrder.length}`;
+            }
+
+            choicesContainer.innerHTML = '';
+            sentencePracticeAnswered = false;
+
+            if (sentencePracticeMode === 'read') {
+                // 朗读模式：逐字高亮显示
+                textContainer.innerHTML = item.sentence.split('').map((char, idx) =>
+                    `<span class="sentence-practice-char" onclick="highlightSentenceChar(this, '${char}')">${char}</span>`
+                ).join('');
+                pinyinContainer.textContent = '点击汉字可单独发音';
+            } else {
+                // 填空模式：随机挖空一个本课学过的汉字
+                const lessonChars = chineseData[item.lessonId || currentSentencePracticeLesson].map(c => c.char);
+                const indexes = [];
+                item.sentence.split('').forEach((char, idx) => {
+                    if (lessonChars.includes(char)) indexes.push(idx);
+                });
+
+                if (indexes.length === 0) {
+                    // 没有本课汉字则随机挖空
+                    for (let i = 0; i < item.sentence.length; i++) indexes.push(i);
+                }
+
+                sentencePracticeBlankIndex = indexes[Math.floor(Math.random() * indexes.length)];
+                sentencePracticeBlankChar = item.sentence[sentencePracticeBlankIndex];
+
+                textContainer.innerHTML = item.sentence.split('').map((char, idx) => {
+                    if (idx === sentencePracticeBlankIndex) {
+                        return `<span class="sentence-practice-char blank" id="sentenceBlank" data-char="${char}">?</span>`;
+                    }
+                    return `<span class="sentence-practice-char">${char}</span>`;
+                }).join('');
+
+                pinyinContainer.textContent = '请选择正确的汉字填空';
+
+                // 生成选项：1个正确 + 3个干扰
+                const allChars = lessonChars;
+                let choices = [sentencePracticeBlankChar];
+                const distractors = shuffleArray([...allChars.filter(c => c !== sentencePracticeBlankChar)]);
+                while (choices.length < 4 && distractors.length > 0) {
+                    choices.push(distractors.pop());
+                }
+                choices = shuffleArray(choices);
+
+                choices.forEach(choice => {
+                    const btn = document.createElement('button');
+                    btn.className = 'sentence-blank-choice';
+                    btn.textContent = choice;
+                    btn.onclick = () => selectSentenceBlankChoice(btn, choice);
+                    choicesContainer.appendChild(btn);
+                });
+            }
+        }
+
+        function highlightSentenceChar(el, char) {
+            // 移除其他高亮
+            document.querySelectorAll('.sentence-practice-char.active').forEach(e => e.classList.remove('active'));
+            el.classList.add('active');
+            speak(char, 'zh-CN');
+        }
+
+        function switchSentencePracticeMode(mode) {
+            sentencePracticeMode = mode;
+            document.querySelectorAll('.sentence-mode-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.mode === mode);
+            });
+            renderSentencePractice();
+        }
+
+        function selectSentenceBlankChoice(btn, choice) {
+            if (sentencePracticeAnswered) return;
+            const blank = document.getElementById('sentenceBlank');
+            if (!blank) return;
+
+            if (choice === sentencePracticeBlankChar) {
+                blank.textContent = choice;
+                blank.classList.add('filled');
+                btn.classList.add('used');
+                sentencePracticeAnswered = true;
+                showSuccessFeedback('zh-CN');
+                // 朗读完整句子
+                setTimeout(() => {
+                    speak(sentencePracticeOrder[currentSentencePracticeIndex].sentence, 'zh-CN');
+                }, 500);
+            } else {
+                btn.classList.add('wrong');
+                showErrorFeedback('zh-CN');
+                setTimeout(() => btn.classList.remove('wrong'), 500);
+            }
+        }
+
+        function playSentencePractice() {
+            const item = sentencePracticeOrder[currentSentencePracticeIndex];
+            if (item) speak(item.sentence, 'zh-CN');
+        }
+
+        function nextSentencePractice() {
+            currentSentencePracticeIndex++;
+            if (currentSentencePracticeIndex >= sentencePracticeOrder.length) {
+                currentSentencePracticeIndex = 0;
+                sentencePracticeOrder = shuffleArray([...sentenceData[currentSentencePracticeLesson]]);
+            }
+            renderSentencePractice();
+            updateSentencePracticeDots();
+        }
+
+        function updateSentencePracticeDots() {
+            const dotsContainer = document.getElementById('sentencePracticeDots');
+            if (!dotsContainer) return;
+            dotsContainer.innerHTML = '';
+            for (let i = 0; i < sentencePracticeOrder.length; i++) {
+                const dot = document.createElement('span');
+                dot.className = 'dot' + (i === currentSentencePracticeIndex ? ' active' : '');
+                dotsContainer.appendChild(dot);
+            }
+        }
+
+        // ===== 描红写字 =====
+        function openTracingFromDetail() {
+            const chars = chineseData[currentChineseLesson];
+            if (chars && chars[currentChineseCharIndex]) {
+                showChineseTracing(chars[currentChineseCharIndex].char);
+            } else {
+                showChineseTracing();
+            }
+        }
+
+        function showChineseTracing(char, lessonId, charIndex) {
+            if (lessonId) currentTracingLesson = lessonId;
+            if (charIndex !== undefined) currentTracingIndex = charIndex;
+            if (char) {
+                // 如果直接传入了汉字，找到它所在的课程
+                const found = findCharLocation(char);
+                if (found) {
+                    currentTracingLesson = found.lessonId;
+                    currentTracingIndex = found.index;
+                }
+            }
+            hideAllChinesePages();
+            document.getElementById('chineseTracingPage').classList.add('active');
+            initTracingCanvas();
+            renderTracingChar();
+        }
+
+        function findCharLocation(char) {
+            for (const lessonId of Object.keys(chineseData)) {
+                const idx = chineseData[lessonId].findIndex(c => c.char === char);
+                if (idx !== -1) return { lessonId, index: idx };
+            }
+            return null;
+        }
+
+        function getCurrentTracingChar() {
+            const lesson = chineseData[currentTracingLesson];
+            if (lesson && lesson[currentTracingIndex]) {
+                return lesson[currentTracingIndex];
+            }
+            return chineseData['lesson1'][0];
+        }
+
+        function renderTracingChar() {
+            const charData = getCurrentTracingChar();
+            document.getElementById('tracingCharDisplay').textContent = charData.char;
+            document.getElementById('tracingHint').textContent = charData.char;
+            clearTracingCanvas();
+        }
+
+        function initTracingCanvas() {
+            const canvas = document.getElementById('tracingCanvas');
+            if (!canvas) return;
+            tracingCtx = canvas.getContext('2d');
+            tracingCtx.lineCap = 'round';
+            tracingCtx.lineJoin = 'round';
+            tracingCtx.lineWidth = 12;
+            tracingCtx.strokeStyle = '#667eea';
+
+            let drawing = false;
+
+            function getPos(e) {
+                const rect = canvas.getBoundingClientRect();
+                const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+                const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+                return {
+                    x: (clientX - rect.left) * (canvas.width / rect.width),
+                    y: (clientY - rect.top) * (canvas.height / rect.height)
+                };
+            }
+
+            canvas.onmousedown = canvas.ontouchstart = (e) => {
+                e.preventDefault();
+                drawing = true;
+                const pos = getPos(e);
+                tracingCtx.beginPath();
+                tracingCtx.moveTo(pos.x, pos.y);
+            };
+
+            canvas.onmousemove = canvas.ontouchmove = (e) => {
+                e.preventDefault();
+                if (!drawing) return;
+                const pos = getPos(e);
+                tracingCtx.lineTo(pos.x, pos.y);
+                tracingCtx.stroke();
+            };
+
+            canvas.onmouseup = canvas.onmouseleave = canvas.ontouchend = () => {
+                drawing = false;
+            };
+        }
+
+        function clearTracingCanvas() {
+            const canvas = document.getElementById('tracingCanvas');
+            if (!canvas || !tracingCtx) return;
+            tracingCtx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+
+        function playTracingChar() {
+            const charData = getCurrentTracingChar();
+            speak(charData.char, 'zh-CN');
+        }
+
+        function showTracingStroke() {
+            const charData = getCurrentTracingChar();
+            animateCharacterStrokeForChar(charData.char);
+        }
+
+        function animateCharacterStrokeForChar(char) {
+            const container = document.getElementById('strokeAnimationContainer');
+            if (!container) return;
+            container.innerHTML = '';
+            if (typeof HanziWriter === 'undefined') {
+                container.innerHTML = '<p style="color:#999;text-align:center;padding:80px 20px;">笔画动画库未加载</p>';
+                return;
+            }
+            currentWriter = HanziWriter.create('strokeAnimationContainer', char, {
+                width: 200,
+                height: 200,
+                padding: 5,
+                strokeColor: '#f093fb',
+                radicalColor: '#f5576c',
+                strokeAnimationSpeed: 1,
+                delayBetweenStrokes: 300,
+                showOutline: true,
+                showCharacter: false,
+                outlineColor: '#e0e0e0',
+                drawingColor: '#667eea'
+            });
+            currentWriter.animateCharacter();
+        }
+
+        function checkTracing() {
+            const charData = getCurrentTracingChar();
+            showFeedback(`继续练习「${charData.char}」！`, '#667eea');
+            setTimeout(() => {
+                showSuccessFeedback('zh-CN');
+            }, 300);
+        }
+
+        function nextTracingChar() {
+            const lesson = chineseData[currentTracingLesson];
+            if (currentTracingIndex < lesson.length - 1) {
+                currentTracingIndex++;
+            } else {
+                const lessons = Object.keys(chineseData);
+                const idx = lessons.indexOf(currentTracingLesson);
+                if (idx < lessons.length - 1) {
+                    currentTracingLesson = lessons[idx + 1];
+                    currentTracingIndex = 0;
+                }
+            }
+            renderTracingChar();
+        }
+
+        function backFromTracing() {
+            // 优先返回到汉字详情页，否则返回课程页
+            const chars = chineseData[currentTracingLesson];
+            if (chars && chars[currentTracingIndex]) {
+                currentChineseLesson = currentTracingLesson;
+                currentChineseCharIndex = currentTracingIndex;
+                showChineseDetailPage();
+            } else {
+                showChineseLessonPage();
             }
         }
 
@@ -7857,6 +8752,8 @@
         // 初始化
         document.addEventListener('DOMContentLoaded', () => {
             console.log('儿童学习游戏平台已加载!');
+            // 构建汉字句子数据
+            sentenceData = buildSentenceDataFromChinese();
             // 加载并更新进度条
             updateHomeProgress();
             // 加载自定义emoji配置
@@ -8023,7 +8920,11 @@
                 'lesson3': '📖 第3课',
                 'lesson4': '📖 第4课',
                 'lesson5': '📖 第5课',
-                'lesson6': '📖 第6课'
+                'lesson6': '📖 第6课',
+                'lesson7': '📖 第7课',
+                'lesson8': '📖 第8课',
+                'lesson9': '📖 第9课',
+                'lesson10': '📖 第10课'
             };
             
             Object.entries(chineseData).forEach(([lesson, chars]) => {
