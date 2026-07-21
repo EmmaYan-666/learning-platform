@@ -3522,11 +3522,14 @@
                 <div class="game-card word" onclick="startGame('word')">
                     <span class="game-icon">📚</span>
                     <h3 class="game-title">英语单词游戏</h3>
-                    <p class="game-description">学习常用英语单词，图片选择练习</p>
+                    <p class="game-description">96个单词，11个分类</p>
                     <div class="game-progress">
                         <div class="game-progress-bar" id="wordProgressBar" style="width: 0%"></div>
                     </div>
-                    <button class="start-btn">开始学习</button>
+                    <div style="display:flex;gap:6px;margin-top:6px">
+                        <button class="start-btn" onclick="event.stopPropagation();startGame('word')">开始学习</button>
+                        <button class="start-btn" onclick="event.stopPropagation();startGame('word');setTimeout(()=>startWrongWordGame(),300)" style="background:#ff9800;font-size:11px;padding:3px 8px">❌ 易错</button>
+                    </div>
                 </div>
 
                 <!-- 汉字识字 -->
@@ -3746,7 +3749,6 @@
             <div class="game-header">
                 <button class="back-btn" onclick="goHome()">← 返回</button>
                 <h2>📚 英语单词游戏</h2>
-                <button class="config-btn" onclick="openWordConfig()">🎨 配置图片</button>
                 <div class="score-board">
                     <div class="score-item correct-count">
                         <span class="number" id="wordCorrect">0</span>
@@ -3760,8 +3762,26 @@
                         <span class="number" id="wordScore">0</span>
                         <span class="label">总分</span>
                     </div>
+                    <div class="score-item" style="cursor:pointer;background:#fff3cd" onclick="switchWordMode()" title="点击切换模式">
+                        <span class="number" id="wordModeLabel" style="font-size:12px;color:#856404">随机</span>
+                        <span class="label" style="font-size:10px">模式</span>
+                    </div>
                 </div>
             </div>
+            <div style="display:flex;gap:6px;padding:0 15px 8px;flex-wrap:wrap;align-items:center">
+                <button class="review-btn" onclick="startWordGame()" style="background:#4CAF50;color:white;border:none;padding:4px 12px;border-radius:12px;font-size:12px;cursor:pointer">🔄 新一局</button>
+                <button class="review-btn" onclick="startWrongWordGame()" style="background:#ff9800;color:white;border:none;padding:4px 12px;border-radius:12px;font-size:12px;cursor:pointer" id="wrongWordBtn">❌ 易错复习</button>
+                <button class="review-btn" onclick="showWeekReport()" style="background:#2196F3;color:white;border:none;padding:4px 12px;border-radius:12px;font-size:12px;cursor:pointer">📊 本周报告</button>
+                <span style="font-size:11px;color:#888" id="wrongWordCount"></span>
+                <span id="wordMasteryHint" style="font-size:11px;color:#999;margin-left:auto"></span>
+            </div>
+            <div style="display:flex;gap:6px;padding:0 15px 8px;flex-wrap:wrap">
+                <button onclick="startSentencePractice('greetings')" style="background:#2196F3;color:white;border:none;padding:4px 12px;border-radius:12px;font-size:11px;cursor:pointer">🤝 问候</button>
+                <button onclick="startSentencePractice('classroom')" style="background:#FF9800;color:white;border:none;padding:4px 12px;border-radius:12px;font-size:11px;cursor:pointer">🏫 课堂</button>
+                <button onclick="startSentencePractice('introduction')" style="background:#9C27B0;color:white;border:none;padding:4px 12px;border-radius:12px;font-size:11px;cursor:pointer">🧑 自我介绍</button>
+                <button onclick="startSentencePractice('classroom_needs')" style="background:#E91E63;color:white;border:none;padding:4px 12px;border-radius:12px;font-size:11px;cursor:pointer">🙋 课堂需求</button>
+                <button onclick="startSentencePractice('describe')" style="background:#009688;color:white;border:none;padding:4px 12px;border-radius:12px;font-size:11px;cursor:pointer">✏️ 描述物品</button>
+                <span style="font-size:10px;color:#aaa;line-height:28px">💡 点击句子听发音，边听边跟读</span>
 
             <div class="game-area">
                 <!-- 题目进度追踪器 -->
@@ -3775,6 +3795,20 @@
                 <div class="choices-grid" id="wordChoices">
                     <!-- 动态生成选择项 -->
                 </div>
+            </div>
+        </div>
+
+        <!-- ===== 句式练习弹窗 ===== -->
+        <div id="sentencePracticeOverlay" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:1000;justify-content:center;align-items:center">
+            <div style="background:white;border-radius:16px;width:90%;max-width:460px;max-height:85vh;overflow-y:auto;padding:20px;box-shadow:0 8px 30px rgba(0,0,0,0.2)">
+                <div id="sentencePracticeContent"></div>
+            </div>
+        </div>
+
+        <!-- ===== 每周报告弹窗 ===== -->
+        <div id="weekReportOverlay" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:1000;justify-content:center;align-items:center">
+            <div style="background:white;border-radius:16px;width:90%;max-width:420px;padding:20px;box-shadow:0 8px 30px rgba(0,0,0,0.2)">
+                <div id="weekReportContent"></div>
             </div>
         </div>
 
@@ -4639,30 +4673,205 @@
             }
         };
 
-        // 单词游戏数据（复用word_game_v3的数据）
+        // 单词游戏数据（96个单词，11个分类）
         const wordData = {
             "animals": [
-                { word: "Dog", emoji: "🐕", chinese: "狗", image: "https://source.unsplash.com/featured/?dog,cute" },
-                { word: "Cat", emoji: "🐱", chinese: "猫", image: "https://source.unsplash.com/featured/?cat,cute" },
-                { word: "Bird", emoji: "🐦", chinese: "鸟", image: "https://source.unsplash.com/featured/?bird" },
-                { word: "Fish", emoji: "🐟", chinese: "鱼", image: "https://source.unsplash.com/featured/?fish" },
-                { word: "Lion", emoji: "🦁", chinese: "狮子", image: "https://source.unsplash.com/featured/?lion" },
-                { word: "Tiger", emoji: "🐯", chinese: "老虎", image: "https://source.unsplash.com/featured/?tiger" },
-                { word: "Rabbit", emoji: "🐰", chinese: "兔子", image: "https://source.unsplash.com/featured/?rabbit" },
-                { word: "Elephant", emoji: "🐘", chinese: "大象", image: "https://source.unsplash.com/featured/?elephant" },
-                { word: "Monkey", emoji: "🐵", chinese: "猴子", image: "https://source.unsplash.com/featured/?monkey" }
+                { word: "Dog", emoji: "🐕", chinese: "小狗", difficulty: 1 },
+                { word: "Cat", emoji: "🐱", chinese: "小猫", difficulty: 1 },
+                { word: "Mouse", emoji: "🐭", chinese: "老鼠", difficulty: 1 },
+                { word: "Lion", emoji: "🦁", chinese: "狮子", difficulty: 2 },
+                { word: "Leopard", emoji: "🐆", chinese: "豹子", difficulty: 2 },
+                { word: "Elephant", emoji: "🐘", chinese: "大象", difficulty: 2 },
+                { word: "Bird", emoji: "🐦", chinese: "小鸟", difficulty: 1 },
+                { word: "Fish", emoji: "🐟", chinese: "鱼", difficulty: 1 },
+                { word: "Monkey", emoji: "🐒", chinese: "猴子", difficulty: 1 },
+                { word: "Horse", emoji: "🐴", chinese: "马", difficulty: 1 },
+                { word: "Snake", emoji: "🐍", chinese: "蛇", difficulty: 2 },
+                { word: "Zebra", emoji: "🦓", chinese: "斑马", difficulty: 2 },
+                { word: "Tiger", emoji: "🐯", chinese: "老虎", difficulty: 2 },
+                { word: "Butterfly", emoji: "🦋", chinese: "蝴蝶", difficulty: 2 },
+                { word: "Duck", emoji: "🦆", chinese: "鸭子", difficulty: 1 },
+                { word: "Chicken", emoji: "🐔", chinese: "鸡", difficulty: 1 },
+                { word: "Panda", emoji: "🐼", chinese: "熊猫", difficulty: 2 },
+                { word: "Seal", emoji: "🦭", chinese: "海豹", difficulty: 2 },
+                { word: "Owl", emoji: "🦉", chinese: "猫头鹰", difficulty: 2 },
+                { word: "Penguin", emoji: "🐧", chinese: "企鹅", difficulty: 2 }
             ],
             "food": [
-                { word: "Apple", emoji: "🍎", chinese: "苹果", image: "https://source.unsplash.com/featured/?apple" },
-                { word: "Banana", emoji: "🍌", chinese: "香蕉", image: "https://source.unsplash.com/featured/?banana" },
-                { word: "Orange", emoji: "🍊", chinese: "橙子", image: "https://source.unsplash.com/featured/?orange" },
-                { word: "Bread", emoji: "🍞", chinese: "面包", image: "https://source.unsplash.com/featured/?bread" },
-                { word: "Egg", emoji: "🥚", chinese: "鸡蛋", image: "https://source.unsplash.com/featured/?egg" },
-                { word: "Milk", emoji: "🥛", chinese: "牛奶", image: "https://source.unsplash.com/featured/?milk" },
-                { word: "Rice", emoji: "🍚", chinese: "米饭", image: "https://source.unsplash.com/featured/?rice" },
-                { word: "Cake", emoji: "🎂", chinese: "蛋糕", image: "https://source.unsplash.com/featured/?cake" }
+                { word: "Apple", emoji: "🍎", chinese: "苹果", difficulty: 1 },
+                { word: "Cheese", emoji: "🧀", chinese: "奶酪", difficulty: 1 },
+                { word: "Bread", emoji: "🍞", chinese: "面包", difficulty: 1 },
+                { word: "Lollipop", emoji: "🍭", chinese: "棒棒糖", difficulty: 1 },
+                { word: "Milk", emoji: "🥛", chinese: "牛奶", difficulty: 1 },
+                { word: "Yogurt", emoji: "🥄", chinese: "酸奶", difficulty: 1 },
+                { word: "Donut", emoji: "🍩", chinese: "甜甜圈", difficulty: 1 },
+                { word: "Banana", emoji: "🍌", chinese: "香蕉", difficulty: 1 },
+                { word: "Cake", emoji: "🎂", chinese: "蛋糕", difficulty: 1 },
+                { word: "Watermelon", emoji: "🍉", chinese: "西瓜", difficulty: 1 },
+                { word: "Water", emoji: "💧", chinese: "水", difficulty: 1 },
+                { word: "Rice", emoji: "🍚", chinese: "米饭", difficulty: 1 },
+                { word: "Biscuit", emoji: "🍪", chinese: "饼干", difficulty: 1 },
+                { word: "Lunch", emoji: "🍱", chinese: "午餐", difficulty: 1 },
+                { word: "Breakfast", emoji: "🥞", chinese: "早餐", difficulty: 1 },
+                { word: "Dinner", emoji: "🍽️", chinese: "晚餐", difficulty: 1 },
+                { word: "Cup", emoji: "🥤", chinese: "杯子", difficulty: 1 },
+                { word: "Plate", emoji: "🍽️", chinese: "盘子", difficulty: 1 }
+            ],
+            "family": [
+                { word: "Mom", emoji: "👩", chinese: "妈妈", difficulty: 1 },
+                { word: "Dad", emoji: "👨", chinese: "爸爸", difficulty: 1 },
+                { word: "Grandpa", emoji: "👴", chinese: "爷爷", difficulty: 1 },
+                { word: "Grandma", emoji: "👵", chinese: "奶奶", difficulty: 1 },
+                { word: "Baby", emoji: "👶", chinese: "宝宝", difficulty: 1 },
+                { word: "Sister", emoji: "👧", chinese: "姐妹", difficulty: 1 },
+                { word: "Brother", emoji: "👦", chinese: "兄弟", difficulty: 1 },
+                { word: "Uncle", emoji: "👨", chinese: "叔叔", difficulty: 1 },
+                { word: "Aunt", emoji: "👩", chinese: "阿姨", difficulty: 1 },
+                { word: "Family", emoji: "👪", chinese: "家庭", difficulty: 1 },
+                { word: "Me", emoji: "🧑", chinese: "我", difficulty: 1 }
+            ],
+            "colors": [
+                { word: "Red", emoji: "🔴", chinese: "红色", difficulty: 1 },
+                { word: "Green", emoji: "🟢", chinese: "绿色", difficulty: 1 },
+                { word: "Blue", emoji: "🔵", chinese: "蓝色", difficulty: 1 },
+                { word: "White", emoji: "⚪", chinese: "白色", difficulty: 1 },
+                { word: "Black", emoji: "⚫", chinese: "黑色", difficulty: 1 },
+                { word: "Brown", emoji: "🟤", chinese: "棕色", difficulty: 1 },
+                { word: "Yellow", emoji: "🟡", chinese: "黄色", difficulty: 1 },
+                { word: "Purple", emoji: "🟣", chinese: "紫色", difficulty: 1 },
+                { word: "Pink", emoji: "🩷", chinese: "粉色", difficulty: 1 },
+                { word: "Orange", emoji: "🟠", chinese: "橙色", difficulty: 1 }
+            ],
+            "adjectives": [
+                { word: "Big", emoji: "🐘", chinese: "大的", difficulty: 1 },
+                { word: "Small", emoji: "🐜", chinese: "小的", difficulty: 1 },
+                { word: "Tall", emoji: "🦒", chinese: "高的", difficulty: 1 },
+                { word: "Short", emoji: "🧸", chinese: "矮的/短的", difficulty: 1 },
+                { word: "Happy", emoji: "😊", chinese: "快乐的", difficulty: 1 },
+                { word: "Angry", emoji: "😡", chinese: "生气的", difficulty: 1 }
+            ],
+            "body": [
+                { word: "Ear", emoji: "👂", chinese: "耳朵", difficulty: 1 },
+                { word: "Eye", emoji: "👀", chinese: "眼睛", difficulty: 1 },
+                { word: "Head", emoji: "🧠", chinese: "头", difficulty: 1 },
+                { word: "Hand", emoji: "✋", chinese: "手", difficulty: 1 },
+                { word: "Leg", emoji: "🦵", chinese: "腿", difficulty: 1 },
+                { word: "Shoulder", emoji: "🏋️", chinese: "肩膀", difficulty: 2 },
+                { word: "Nose", emoji: "👃", chinese: "鼻子", difficulty: 1 },
+                { word: "Mouth", emoji: "👄", chinese: "嘴巴", difficulty: 1 },
+                { word: "Arm", emoji: "💪", chinese: "手臂", difficulty: 1 },
+                { word: "Foot", emoji: "🦶", chinese: "脚", difficulty: 1 },
+                { word: "Finger", emoji: "🤚", chinese: "手指", difficulty: 1 },
+                { word: "Knee", emoji: "🦵", chinese: "膝盖", difficulty: 1 },
+                { word: "Hair", emoji: "👱", chinese: "头发", difficulty: 1 },
+                { word: "Face", emoji: "😀", chinese: "脸", difficulty: 1 },
+                { word: "Neck", emoji: "🗣️", chinese: "脖子", difficulty: 1 }
+            ],
+            "clothing": [
+                { word: "Shoes", emoji: "👟", chinese: "鞋子", difficulty: 1 },
+                { word: "Coat", emoji: "🧥", chinese: "外套", difficulty: 1 },
+                { word: "Clothes", emoji: "👕", chinese: "衣服", difficulty: 1 },
+                { word: "Sweater", emoji: "🧶", chinese: "毛衣", difficulty: 2 }
+            ],
+            "house": [
+                { word: "House", emoji: "🏠", chinese: "房子", difficulty: 1 },
+                { word: "Door", emoji: "🚪", chinese: "门", difficulty: 1 },
+                { word: "Window", emoji: "🪟", chinese: "窗户", difficulty: 1 },
+                { word: "Bed", emoji: "🛏️", chinese: "床", difficulty: 1 },
+                { word: "Table", emoji: "🪑", chinese: "桌子", difficulty: 1 }
+            ],
+            "daily": [
+                { word: "Soap", emoji: "🧼", chinese: "肥皂", difficulty: 1 },
+                { word: "Towel", emoji: "🧴", chinese: "毛巾", difficulty: 1 },
+                { word: "Toothbrush", emoji: "🪥", chinese: "牙刷", difficulty: 2 },
+                { word: "Comb", emoji: "🪮", chinese: "梳子", difficulty: 2 }
+            ],
+            "weather": [
+                { word: "Snow", emoji: "❄️", chinese: "雪", difficulty: 1 },
+                { word: "Rain", emoji: "🌧️", chinese: "雨", difficulty: 1 }
+            ],
+            "tools": [
+                { word: "Tools", emoji: "🔧", chinese: "工具", difficulty: 2 }
             ]
         };
+
+        // ===== 常用句式数据（幼小衔接必备，44句5分类） =====
+        const commonSentences = {
+            greetings: {
+                name: "问候与礼貌", emoji: "🤝",
+                items: [
+                    { en: "Good morning!", cn: "早上好！", keyword: "Morning" },
+                    { en: "Good afternoon!", cn: "下午好！", keyword: "Afternoon" },
+                    { en: "Hello!", cn: "你好！", keyword: "Hello" },
+                    { en: "How are you?", cn: "你好吗？", keyword: "How" },
+                    { en: "I am fine, thank you.", cn: "我很好，谢谢。", keyword: "Fine" },
+                    { en: "Nice to meet you!", cn: "认识你很高兴！", keyword: "Nice" },
+                    { en: "Goodbye!", cn: "再见！", keyword: "Goodbye" },
+                    { en: "See you tomorrow!", cn: "明天见！", keyword: "See" },
+                    { en: "Thank you!", cn: "谢谢！", keyword: "Thank" },
+                    { en: "Sorry.", cn: "对不起。", keyword: "Sorry" },
+                    { en: "Excuse me.", cn: "打扰一下。", keyword: "Excuse" },
+                ]
+            },
+            classroom: {
+                name: "课堂指令", emoji: "🏫",
+                items: [
+                    { en: "Stand up, please.", cn: "请起立。", keyword: "Stand" },
+                    { en: "Sit down, please.", cn: "请坐下。", keyword: "Sit" },
+                    { en: "Open your book.", cn: "打开书。", keyword: "Book" },
+                    { en: "Close your book.", cn: "合上书。", keyword: "Close" },
+                    { en: "Listen carefully.", cn: "认真听。", keyword: "Listen" },
+                    { en: "Look at the blackboard.", cn: "看黑板。", keyword: "Look" },
+                    { en: "Hands up!", cn: "举手！", keyword: "Hand" },
+                    { en: "Repeat after me.", cn: "跟我读。", keyword: "Repeat" },
+                    { en: "Line up, please.", cn: "请排队。", keyword: "Line" },
+                    { en: "May I come in?", cn: "我可以进来吗？", keyword: "Come" },
+                    { en: "Class is over.", cn: "下课了。", keyword: "Class" },
+                ]
+            },
+            introduction: {
+                name: "自我介绍", emoji: "🧑",
+                items: [
+                    { en: "My name is Wang Jiayan.", cn: "我叫王佳颜。", keyword: "Name" },
+                    { en: "I am 5 years old.", cn: "我5岁了。", keyword: "Old" },
+                    { en: "I am a girl.", cn: "我是女孩。", keyword: "Girl" },
+                    { en: "I like apples.", cn: "我喜欢苹果。", keyword: "Apple" },
+                    { en: "I can read.", cn: "我会读书。", keyword: "Read" },
+                    { en: "I have a dog.", cn: "我有一只狗。", keyword: "Dog" },
+                    { en: "Me too!", cn: "我也是！", keyword: "Too" },
+                ]
+            },
+            classroom_needs: {
+                name: "课堂需求", emoji: "🙋",
+                items: [
+                    { en: "May I go to the bathroom?", cn: "我可以去厕所吗？", keyword: "Bathroom" },
+                    { en: "Can I drink some water?", cn: "我可以喝水吗？", keyword: "Water" },
+                    { en: "I don't understand.", cn: "我不明白。", keyword: "Understand" },
+                    { en: "Can you help me?", cn: "你能帮我吗？", keyword: "Help" },
+                    { en: "I don't know.", cn: "我不知道。", keyword: "Know" },
+                    { en: "Let me try!", cn: "让我试试！", keyword: "Try" },
+                ]
+            },
+            describe: {
+                name: "描述物品", emoji: "✏️",
+                items: [
+                    { en: "What is this?", cn: "这是什么？", keyword: "What" },
+                    { en: "It is a cat.", cn: "它是一只猫。", keyword: "Cat" },
+                    { en: "This is my pencil.", cn: "这是我的铅笔。", keyword: "Pencil" },
+                    { en: "It is red.", cn: "它是红色的。", keyword: "Red" },
+                    { en: "How many?", cn: "多少个？", keyword: "Many" },
+                    { en: "Here you are.", cn: "给你。", keyword: "Here" },
+                    { en: "It is big.", cn: "它很大。", keyword: "Big" },
+                    { en: "I see a bird.", cn: "我看见一只鸟。", keyword: "Bird" },
+                ]
+            },
+        };
+
+        function getAllSentences() {
+            const all = [];
+            Object.values(commonSentences).forEach(cat => cat.items.forEach(item => all.push(item)));
+            return all;
+        }
 
         // 汉字游戏数据 - 基于四五快读第一册（增强版：添加象形字信息和演变图片）
         // 句子跟读数据由 chineseData 中的例句动态构建
@@ -4690,6 +4899,154 @@
                 }
             });
             return data;
+        }
+
+        // ===== 每周学习追踪（基于wordProgress数据） =====
+        const WEEK_START_DAY = 1; // 周一
+
+        function getWeekId(date) {
+            const d = new Date(date);
+            const day = d.getDay();
+            const diff = (day < WEEK_START_DAY ? 7 : 0) + day - WEEK_START_DAY;
+            const monday = new Date(d);
+            monday.setDate(d.getDate() - diff);
+            return monday.toISOString().slice(0, 10);
+        }
+
+        function getWeekDays() {
+            const weekId = getWeekId(new Date().toISOString().slice(0, 10));
+            const days = [];
+            for (let i = 0; i < 7; i++) {
+                const d = new Date(weekId);
+                d.setDate(d.getDate() + i);
+                days.push(d.toISOString().slice(0, 10));
+            }
+            return days;
+        }
+
+        function getWeekStats() {
+            const weekDays = getWeekDays();
+            const p = loadWordProgress();
+            
+            // 统计本周每天学过的单词
+            const dayStats = {};
+            weekDays.forEach(day => { dayStats[day] = { words: 0, correct: 0, wrong: 0 }; });
+            
+            let weekCorrect = 0, weekWrong = 0, weekWords = new Set();
+            Object.entries(p).forEach(([word, data]) => {
+                if (data.lastSeen && weekDays.includes(data.lastSeen)) {
+                    const correct = data.correct || 0;
+                    const wrong = data.wrong || 0;
+                    weekCorrect += correct;
+                    weekWrong += wrong;
+                    weekWords.add(word);
+                    if (dayStats[data.lastSeen]) {
+                        dayStats[data.lastSeen].words++;
+                        dayStats[data.lastSeen].correct += correct;
+                        dayStats[data.lastSeen].wrong += wrong;
+                    }
+                }
+            });
+            
+            // 统计本周学习天数
+            const daysCompleted = Object.values(dayStats).filter(d => d.words > 0).length;
+            const totalQ = weekCorrect + weekWrong;
+            const acc = totalQ > 0 ? Math.round(weekCorrect / totalQ * 100) : 0;
+            
+            return { daysCompleted, totalQ: weekWords.size, accuracy: acc, dayStats };
+        }
+
+        function getMasteryProgress() {
+            const p = loadWordProgress();
+            let levels = {0: 0, 1: 0, 2: 0, 3: 0};
+            Object.keys(p).forEach(word => {
+                const lv = getWordMasteryLevel(word);
+                levels[lv] = (levels[lv] || 0) + 1;
+            });
+            // 加上未学的
+            let totalWords = 0;
+            Object.values(wordData).forEach(cat => totalWords += cat.length);
+            const learned = Object.keys(p).length;
+            levels[0] = totalWords - learned;
+            return { total: totalWords, learned, levels };
+        }
+
+        function showWeekReport() {
+            const stats = getWeekStats();
+            const mastery = getMasteryProgress();
+            const target = 4; // 每周目标4天
+            
+            const overlay = document.getElementById('weekReportOverlay');
+            const content = document.getElementById('weekReportContent');
+            if (!overlay || !content) return;
+            
+            const weekDays = getWeekDays();
+            const weekLabel = weekDays[0].slice(5).replace('-', '月') + '日 ~ ' + weekDays[6].slice(5).replace('-', '月') + '日';
+            
+            const barW = Math.min(100, Math.round(stats.daysCompleted / target * 100));
+            const progressBar = '<div style="background:#e0e0e0;border-radius:10px;height:20px;overflow:hidden">' +
+                '<div style="background:' + (barW >= 100 ? '#4CAF50' : '#FF9800') + ';width:' + barW + '%;height:100%;border-radius:10px;transition:0.3s"></div></div>';
+            
+            const accColor = stats.accuracy >= 80 ? '#4CAF50' : stats.accuracy >= 60 ? '#FF9800' : '#f44336';
+            
+            // 本周日历（标注已学天数）
+            const weekNames = ['周一', '周二', '周三', '周四', '周五', '周六', '周日'];
+            let calendarHTML = '<div style="display:flex;gap:6px;justify-content:center;margin-bottom:12px">';
+            weekDays.forEach((day, i) => {
+                const hasWord = stats.dayStats[day] && stats.dayStats[day].words > 0;
+                calendarHTML += `<div style="text-align:center">
+                    <div style="font-size:10px;color:#888">${weekNames[i]}</div>
+                    <div style="width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+                        font-size:12px;font-weight:bold;
+                        background:${hasWord ? '#4CAF50' : '#f0f0f0'};
+                        color:${hasWord ? 'white' : '#ccc'}">${hasWord ? '✓' : (i < 4 ? '○' : '—')}</div>
+                </div>`;
+            });
+            calendarHTML += '</div>';
+            
+            content.innerHTML = `
+                <div style="text-align:center;margin-bottom:12px">
+                    <span style="font-size:28px">📊</span>
+                    <h3 style="margin:6px 0;color:#1f7a3a">本周学习报告</h3>
+                    <div style="font-size:11px;color:#888">${weekLabel}</div>
+                </div>
+                
+                ${calendarHTML}
+                
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px">
+                    <div style="background:#e8f5e9;border-radius:12px;padding:12px;text-align:center">
+                        <div style="font-size:28px">${stats.daysCompleted}/${target}</div>
+                        <div style="font-size:11px;color:#666">本周学习天数</div>
+                        ${progressBar}
+                        <div style="font-size:10px;color:#888;margin-top:3px">${stats.daysCompleted >= target ? '🎉 达标！' : '还差' + (target - stats.daysCompleted) + '天'}</div>
+                    </div>
+                    <div style="background:${accColor}15;border-radius:12px;padding:12px;text-align:center">
+                        <div style="font-size:28px;color:${accColor}">${stats.accuracy}%</div>
+                        <div style="font-size:11px;color:#666">正确率</div>
+                        <div style="font-size:11px;color:#888">本周练了${stats.totalQ}个词</div>
+                    </div>
+                </div>
+                
+                <div style="background:#f3e5f5;border-radius:12px;padding:12px;margin-bottom:12px">
+                    <div style="font-size:13px;font-weight:bold;color:#7b1fa2;margin-bottom:8px">📈 单词掌握进度</div>
+                    <div style="display:flex;gap:6px;justify-content:center;flex-wrap:wrap">
+                        <span style="font-size:12px;background:#f0f0f0;padding:3px 10px;border-radius:10px">⚪ 未学 ${mastery.levels[0]}</span>
+                        <span style="font-size:12px;background:#fff3cd;padding:3px 10px;border-radius:10px">🟡 学习中 ${mastery.levels[1]}</span>
+                        <span style="font-size:12px;background:#d4edda;padding:3px 10px;border-radius:10px">🟢 已熟悉 ${mastery.levels[2]}</span>
+                        <span style="font-size:12px;background:#cce5ff;padding:3px 10px;border-radius:10px">⭐ 已掌握 ${mastery.levels[3]}</span>
+                    </div>
+                    <div style="font-size:11px;color:#888;text-align:center;margin-top:6px">
+                        已学 ${mastery.learned}/${mastery.total} 词
+                        ${mastery.levels[3] > 0 ? '· ⭐掌握' + mastery.levels[3] + '词' : ''}
+                    </div>
+                </div>
+                
+                <div style="text-align:center;display:flex;gap:8px;justify-content:center">
+                    <button onclick="document.getElementById('weekReportOverlay').style.display='none'"
+                        style="background:#1f7a3a;color:white;border:none;padding:8px 24px;border-radius:20px;font-size:13px;cursor:pointer">关闭</button>
+                </div>
+            `;
+            overlay.style.display = 'flex';
         }
 
 
@@ -4746,34 +5103,93 @@
             localStorage.setItem('learningProgress', JSON.stringify(progress));
         }
 
+        // ===== 单词熟练度追踪 =====
+        function loadWordProgress() {
+            const saved = localStorage.getItem('wordProgress');
+            if (saved) return JSON.parse(saved);
+            return {};
+        }
+
+        function saveWordProgress(progress) {
+            localStorage.setItem('wordProgress', JSON.stringify(progress));
+        }
+
+        function getWordMasteryLevel(word) {
+            const p = loadWordProgress();
+            const w = p[word];
+            if (!w) return 0; // 未学
+            const total = (w.correct || 0) + (w.wrong || 0);
+            if (total < 3) return 1; // 学习中
+            const rate = (w.correct || 0) / total;
+            if (rate >= 0.8 && total >= 5) return 3; // 掌握
+            if (rate >= 0.6) return 2; // 熟悉
+            return 1; // 学习中
+        }
+
+        function getWordMasteryEmoji(level) {
+            return ['⚪', '🟡', '🟢', '⭐'][level] || '⚪';
+        }
+
+        function updateWordMastery(word, isCorrect) {
+            const p = loadWordProgress();
+            if (!p[word]) p[word] = { correct: 0, wrong: 0, lastSeen: null, attempts: 0 };
+            if (isCorrect) p[word].correct = (p[word].correct || 0) + 1;
+            else p[word].wrong = (p[word].wrong || 0) + 1;
+            p[word].attempts = (p[word].attempts || 0) + 1;
+            p[word].lastSeen = new Date().toISOString().slice(0, 10);
+            saveWordProgress(p);
+        }
+
+        function getWrongWords() {
+            const p = loadWordProgress();
+            const wrong = [];
+            Object.entries(p).forEach(([word, data]) => {
+                if ((data.wrong || 0) > 0) {
+                    const total = (data.correct || 0) + (data.wrong || 0);
+                    const rate = (data.correct || 0) / total;
+                    if (rate < 0.8) wrong.push(word);
+                }
+            });
+            return wrong;
+        }
+
+        function getWrongWordsCount() {
+            return getWrongWords().length;
+        }
+
         // 更新首页进度条
         function updateHomeProgress() {
             const progress = loadProgress();
             
+            function setBar(id, rate) {
+                const el = document.getElementById(id);
+                if (el) el.style.width = rate + '%';
+            }
+            
             // 更新字母游戏进度
             const alphabetTotal = progress.alphabet.correct + progress.alphabet.wrong;
             const alphabetRate = alphabetTotal > 0 ? (progress.alphabet.correct / alphabetTotal * 100) : 0;
-            document.getElementById('alphabetProgressBar').style.width = alphabetRate + '%';
+            setBar('alphabetProgressBar', alphabetRate);
             
             // 更新单词游戏进度
             const wordTotal = progress.word.correct + progress.word.wrong;
             const wordRate = wordTotal > 0 ? (progress.word.correct / wordTotal * 100) : 0;
-            document.getElementById('wordProgressBar').style.width = wordRate + '%';
+            setBar('wordProgressBar', wordRate);
             
             // 更新汉字游戏进度
             const chineseTotal = progress.chinese.correct + progress.chinese.wrong;
             const chineseRate = chineseTotal > 0 ? (progress.chinese.correct / chineseTotal * 100) : 0;
-            document.getElementById('chineseProgressBar').style.width = chineseRate + '%';
+            setBar('chineseProgressBar', chineseRate);
             
-            // 更新句子跟读进度
-            const sentenceRate = (progress.sentence.completed / 50) * 100;
-            document.getElementById('sentenceProgressBar').style.width = Math.min(sentenceRate, 100) + '%';
-
+            // 更新睿丁欣研课程进度
+            const readingTotal = (progress.reading && progress.reading.completed) || 0;
+            const readingRate = Math.min(readingTotal, 100);
+            setBar('readingProgressBar', readingRate);
+            
             // 更新数字启蒙进度
             const dataTotal = (progress.data?.correct || 0) + (progress.data?.wrong || 0);
             const dataRate = dataTotal > 0 ? ((progress.data?.correct || 0) / dataTotal * 100) : 0;
-            const dataBar = document.getElementById('dataProgressBar');
-            if (dataBar) dataBar.style.width = dataRate + '%';
+            setBar('dataProgressBar', dataRate);
         }
 
         // ===== 音频管理 =====
@@ -4984,74 +5400,83 @@
 
         // 启动睿丁欣研模块
         function startReadingModule() {
-            renderCourseList();
+            try {
+                renderCourseList();
+            } catch (e) {
+                console.error('启动睿丁欣研模块失败:', e);
+            }
         }
 
         // 渲染课程列表
         function renderCourseList() {
             const courseListContainer = document.getElementById('courseList');
-            const courses = Object.values(readingCourses);
+            try {
+                const courses = Object.values(readingCourses);
 
-            if (courses.length === 0) {
-                courseListContainer.innerHTML = `
-                    <div style="text-align: center; padding: 50px; color: #999;">
-                        <p style="font-size: 48px; margin-bottom: 20px;">📭</p>
-                        <p style="font-size: 18px;">暂无课程，点击右上角"添加课程"按钮创建新课程</p>
-                    </div>
-                `;
-                return;
-            }
+                if (courses.length === 0) {
+                    courseListContainer.innerHTML = `
+                        <div style="text-align: center; padding: 50px; color: #999;">
+                            <p style="font-size: 48px; margin-bottom: 20px;">📭</p>
+                            <p style="font-size: 18px;">暂无课程，点击右上角"添加课程"按钮创建新课程</p>
+                        </div>
+                    `;
+                    return;
+                }
 
-            courseListContainer.innerHTML = courses.map(course => {
-                const progress = courseProgress[course.id] || {};
-                const needReview = progress.nextReview && new Date(progress.nextReview) <= new Date();
-                const lastStudy = progress.lastStudy ? new Date(progress.lastStudy).toLocaleDateString() : null;
-                const studyCount = progress.studyCount || 0;
-                const isStudied = studyCount > 0;
-                
-                return `
-                    <div class="course-card">
-                        ${needReview ? '<div class="review-badge">🔔 需要复习</div>' : ''}
-                        
-                        <!-- 右上角管理按钮 -->
-                        <div class="course-management">
-                            <button class="course-mgmt-btn edit" onclick="event.stopPropagation(); editCourse('${course.id}')" title="编辑">✏️</button>
-                            <button class="course-mgmt-btn delete" onclick="event.stopPropagation(); deleteCourse('${course.id}')" title="删除">🗑️</button>
-                        </div>
-                        
-                        <div class="course-header">
-                            <span class="course-id">${course.id}</span>
-                            <span class="course-date">${course.date}</span>
-                        </div>
-                        
-                        
-                        <div class="course-title">
-                            ${course.title}
-                            <span class="study-status-badge ${isStudied ? 'studied' : 'not-studied'}">
-                                ${isStudied ? '✅ 已学习' : '📖 未学习'}
-                            </span>
-                        </div>
-                        
-                        <div class="course-stats">
-                            <div class="course-stat">📝 ${course.words.length} 个单词</div>
-                            <div class="course-stat">💬 ${course.phrases.length} 个短语</div>
-                            ${course.videos && course.videos.length > 0 ? `<div class="course-stat">🎬 ${course.videos.length} 个视频</div>` : ''}
-                        </div>
-                        
-                        <div class="course-progress-info">
-                            ${lastStudy ? `<div class="progress-item">
-                                <span class="progress-label">📅 上次学习：</span>
-                                <span class="progress-value">${lastStudy}</span>
-                            </div>` : ''}
-                            ${studyCount > 0 ? `<div class="progress-item">
-                                <span class="progress-label">🔄 学习次数：</span>
-                                <span class="progress-value">${studyCount} 次</span>
-                            </div>` : ''}
-                            ${progress.wordsCorrect !== undefined ? `<div class="progress-item">
-                                <span class="progress-label">📊 单词正确率：</span>
-                                <span class="progress-value">${Math.round(progress.wordsCorrect / (progress.wordsCorrect + progress.wordsWrong) * 100)}%</span>
-                            </div>` : ''}
-                        </div>
+                courseListContainer.innerHTML = courses.map(course => {
+                    if (!course || !course.id) return '';
+                    const progress = courseProgress[course.id] || {};
+                    const needReview = progress.nextReview && new Date(progress.nextReview) <= new Date();
+                    const lastStudy = progress.lastStudy ? new Date(progress.lastStudy).toLocaleDateString() : null;
+                    const studyCount = progress.studyCount || 0;
+                    const isStudied = studyCount > 0;
+                    const wordCount = (course.words && course.words.length) || 0;
+                    const phraseCount = (course.phrases && course.phrases.length) || 0;
+                    const videoCount = (course.videos && course.videos.length) || 0;
+                    
+                    return `
+                        <div class="course-card">
+                            ${needReview ? '<div class="review-badge">🔔 需要复习</div>' : ''}
+                            
+                            <!-- 右上角管理按钮 -->
+                            <div class="course-management">
+                                <button class="course-mgmt-btn edit" onclick="event.stopPropagation(); editCourse('${course.id}')" title="编辑">✏️</button>
+                                <button class="course-mgmt-btn delete" onclick="event.stopPropagation(); deleteCourse('${course.id}')" title="删除">🗑️</button>
+                            </div>
+                            
+                            <div class="course-header">
+                                <span class="course-id">${course.id}</span>
+                                <span class="course-date">${course.date || ''}</span>
+                            </div>
+                            
+                            
+                            <div class="course-title">
+                                ${course.title || ''}
+                                <span class="study-status-badge ${isStudied ? 'studied' : 'not-studied'}">
+                                    ${isStudied ? '✅ 已学习' : '📖 未学习'}
+                                </span>
+                            </div>
+                            
+                            <div class="course-stats">
+                                <div class="course-stat">📝 ${wordCount} 个单词</div>
+                                <div class="course-stat">💬 ${phraseCount} 个短语</div>
+                                ${videoCount > 0 ? `<div class="course-stat">🎬 ${videoCount} 个视频</div>` : ''}
+                            </div>
+                            
+                            <div class="course-progress-info">
+                                ${lastStudy ? `<div class="progress-item">
+                                    <span class="progress-label">📅 上次学习：</span>
+                                    <span class="progress-value">${lastStudy}</span>
+                                </div>` : ''}
+                                ${studyCount > 0 ? `<div class="progress-item">
+                                    <span class="progress-label">🔄 学习次数：</span>
+                                    <span class="progress-value">${studyCount} 次</span>
+                                </div>` : ''}
+                                ${(progress.wordsCorrect || 0) + (progress.wordsWrong || 0) > 0 ? `<div class="progress-item">
+                                    <span class="progress-label">📊 单词正确率：</span>
+                                    <span class="progress-value">${Math.round(progress.wordsCorrect / (progress.wordsCorrect + progress.wordsWrong) * 100)}%</span>
+                                </div>` : ''}
+                            </div>
                         
                         <div class="course-actions">
                             <button class="course-action-btn study" onclick="startCourseStudy('${course.id}')">🚀 开始学习</button>
@@ -5059,6 +5484,10 @@
                     </div>
                 `;
             }).join('');
+            } catch (e) {
+                console.error('渲染课程列表失败:', e);
+                courseListContainer.innerHTML = '<div style="text-align:center;padding:40px;color:#f44336"><p>😵 课程数据异常</p><p style="font-size:13px;margin-top:8px">可点击下方按钮重置</p><button onclick="localStorage.removeItem(\'readingCourses\');location.reload()" style="margin-top:10px;padding:6px 20px;background:#4CAF50;color:white;border:none;border-radius:8px;cursor:pointer">🔄 重置课程数据</button></div>';
+            }
         }
 
         // 显示添加课程模态框
@@ -5252,78 +5681,79 @@
 
         // 渲染课程详情
         function renderCourseDetail(course) {
-            console.log('渲染课程详情:', course);
-            document.getElementById('courseDetailTitle').textContent = `📚 ${course.id} - ${course.title}`;
-            
-            // 渲染单词和短语整合内容
-            const contentContainer = document.getElementById('wordPhraseContent');
-            console.log('内容容器:', contentContainer);
-            
-            if (!contentContainer) {
-                console.error('找不到wordPhraseContent容器！');
-                return;
-            }
-            
-            let html = '';
-            
-            // 渲染单词（卡片形式）
-            if (course.words && course.words.length > 0) {
-                console.log('渲染单词:', course.words.length);
-                html += `
-                    <div style="margin-bottom: 30px;">
-                        <h4 style="font-size: 18px; color: #56ab2f; margin-bottom: 15px; font-weight: 600;">🔤 单词 (${course.words.length}个)</h4>
-                        <div class="word-grid">
-                            ${course.words.map(word => `
-                                <div class="word-card" onclick="speak('${word.word}', 'en-US')">
-                                    <span class="word-emoji">${word.emoji}</span>
-                                    <div class="word-text">${word.word}</div>
-                                    <div class="word-chinese">${word.chinese}</div>
-                                </div>
-                            `).join('')}
+            try {
+                if (!course) return;
+                console.log('渲染课程详情:', course);
+                const titleEl = document.getElementById('courseDetailTitle');
+                if (titleEl) titleEl.textContent = `📚 ${course.id} - ${course.title || ''}`;
+                
+                // 渲染单词和短语整合内容
+                const contentContainer = document.getElementById('wordPhraseContent');
+                if (!contentContainer) {
+                    console.error('找不到wordPhraseContent容器！');
+                    return;
+                }
+                
+                let html = '';
+                
+                // 渲染单词（卡片形式）
+                if (course.words && course.words.length > 0) {
+                    html += `
+                        <div style="margin-bottom: 30px;">
+                            <h4 style="font-size: 18px; color: #56ab2f; margin-bottom: 15px; font-weight: 600;">🔤 单词 (${course.words.length}个)</h4>
+                            <div class="word-grid">
+                                ${course.words.map(word => `
+                                    <div class="word-card" onclick="speak('${(word.word || '').replace(/'/g, "\\'")}', 'en-US')">
+                                        <span class="word-emoji">${word.emoji || '📝'}</span>
+                                        <div class="word-text">${word.word || ''}</div>
+                                        <div class="word-chinese">${word.chinese || ''}</div>
+                                    </div>
+                                `).join('')}
+                            </div>
                         </div>
-                    </div>
-                `;
-            }
-            
-            // 渲染短语（列表形式）
-            if (course.phrases && course.phrases.length > 0) {
-                console.log('渲染短语:', course.phrases.length);
-                html += `
-                    <div style="margin-top: 20px;">
-                        <h4 style="font-size: 18px; color: #56ab2f; margin-bottom: 15px; font-weight: 600;">💬 短语句式 (${course.phrases.length}句)</h4>
-                        <div class="phrase-list">
-                            ${course.phrases.map(phrase => `
-                                <div class="phrase-item" onclick="speak('${phrase.english}', 'en-US')">
-                                    <span class="phrase-english">${phrase.english}</span>
-                                    <span class="phrase-chinese">${phrase.chinese}</span>
-                                </div>
-                            `).join('')}
+                    `;
+                }
+                
+                // 渲染短语（列表形式）
+                if (course.phrases && course.phrases.length > 0) {
+                    html += `
+                        <div style="margin-top: 20px;">
+                            <h4 style="font-size: 18px; color: #56ab2f; margin-bottom: 15px; font-weight: 600;">💬 短语句式 (${course.phrases.length}句)</h4>
+                            <div class="phrase-list">
+                                ${course.phrases.map(phrase => `
+                                    <div class="phrase-item" onclick="speak('${(phrase.english || '').replace(/'/g, "\\'")}', 'en-US')">
+                                        <span class="phrase-english">${phrase.english || ''}</span>
+                                        <span class="phrase-chinese">${phrase.chinese || ''}</span>
+                                    </div>
+                                `).join('')}
+                            </div>
                         </div>
-                    </div>
-                `;
-            }
-            
-            console.log('生成的HTML长度:', html.length);
-            contentContainer.innerHTML = html;
+                    `;
+                }
+                
+                contentContainer.innerHTML = html;
 
-            // 渲染视频
-            const videoContainer = document.getElementById('videoContainer');
-            const videoSection = document.getElementById('videoSection');
-            
-            if (course.videos && course.videos.length > 0) {
-                videoSection.style.display = 'block';
-                videoContainer.innerHTML = course.videos.map(video => `
-                    <video controls preload="metadata" style="width: 100%; border-radius: 15px;">
-                        <source src="${video.url}" type="video/mp4">
-                        您的浏览器不支持视频播放
-                    </video>
-                `).join('');
-            } else {
-                videoSection.style.display = 'none';
-            }
+                // 渲染视频
+                const videoContainer = document.getElementById('videoContainer');
+                const videoSection = document.getElementById('videoSection');
+                
+                if (course.videos && course.videos.length > 0 && videoContainer && videoSection) {
+                    videoSection.style.display = 'block';
+                    videoContainer.innerHTML = course.videos.map(video => `
+                        <video controls preload="metadata" style="width: 100%; border-radius: 15px;">
+                            <source src="${video.url || ''}" type="video/mp4">
+                            您的浏览器不支持视频播放
+                        </video>
+                    `).join('');
+                } else if (videoSection) {
+                    videoSection.style.display = 'none';
+                }
 
-            // 渲染扩展词汇
-            renderExtendedWords(course);
+                // 渲染扩展词汇
+                renderExtendedWords(course);
+            } catch (e) {
+                console.error('渲染课程详情失败:', e);
+            }
         }
 
         // 渲染扩展词汇
@@ -6012,12 +6442,19 @@
 
         // ===== 数据模块入口 =====
         function startDataGameMenu() {
-            hideDataNextBtn();
-            document.getElementById('dataGameMenu').style.display = 'block';
-            document.getElementById('dataQuestionProgress').style.display = 'none';
-            document.getElementById('dataQuestionArea').style.display = 'none';
-            updateDataScoreBoard();
-            initMathLanguage();
+            try {
+                hideDataNextBtn();
+                const menu = document.getElementById('dataGameMenu');
+                if (menu) menu.style.display = 'block';
+                const prog = document.getElementById('dataQuestionProgress');
+                if (prog) prog.style.display = 'none';
+                const area = document.getElementById('dataQuestionArea');
+                if (area) area.style.display = 'none';
+                updateDataScoreBoard();
+                initMathLanguage();
+            } catch (e) {
+                console.error('启动数字启蒙菜单失败:', e);
+            }
         }
 
         function updateDataScoreBoard() {
@@ -6029,43 +6466,50 @@
 
         // 启动具体的子游戏
         function startDataGame(gameType) {
-            hideDataNextBtn();
-            gameState.data.currentGame = gameType;
-            gameState.data.currentQuestion = 0;
-            gameState.data.hasAnswered = false;
-            mathCountedItems = 0;
-            document.getElementById('dataGameMenu').style.display = 'none';
-            document.getElementById('dataQuestionProgress').style.display = 'flex';
-            document.getElementById('dataQuestionArea').style.display = 'block';
+            try {
+                hideDataNextBtn();
+                gameState.data.currentGame = gameType;
+                gameState.data.currentQuestion = 0;
+                gameState.data.hasAnswered = false;
+                mathCountedItems = 0;
+                const menu = document.getElementById('dataGameMenu');
+                if (menu) menu.style.display = 'none';
+                const prog = document.getElementById('dataQuestionProgress');
+                if (prog) prog.style.display = 'flex';
+                const area = document.getElementById('dataQuestionArea');
+                if (area) area.style.display = 'block';
 
-            // 初始化进度条(数据模块10题一轮)
-            if (!window.questionProgress) window.questionProgress = {};
-            if (!window.questionProgress.data) {
-                window.questionProgress.data = new QuestionProgressTracker('data', 'dataQuestionProgress', 10);
-                window.questionProgress.data.triggerGoToQuestion = (index) => {
-                    gameState.data.currentQuestion = index;
-                    gameState.data.hasAnswered = false;
-                    if (gameType === 'listen') showListenQuestion();
-                    else if (gameType === 'count') showCountQuestion();
-                    else if (gameType === 'balance') showBalanceQuestion();
-                    else if (gameType === 'pick') showPickQuestion();
-                };
-            } else {
-                window.questionProgress.data.reset();
-                window.questionProgress.data.triggerGoToQuestion = (index) => {
-                    gameState.data.currentQuestion = index;
-                    gameState.data.hasAnswered = false;
-                    if (gameType === 'listen') showListenQuestion();
-                    else if (gameType === 'count') showCountQuestion();
-                    else if (gameType === 'balance') showBalanceQuestion();
-                    else if (gameType === 'pick') showPickQuestion();
-                };
+                // 初始化进度条(数据模块10题一轮)
+                if (!window.questionProgress) window.questionProgress = {};
+                if (!window.questionProgress.data) {
+                    window.questionProgress.data = new QuestionProgressTracker('data', 'dataQuestionProgress', 10);
+                    window.questionProgress.data.triggerGoToQuestion = (index) => {
+                        gameState.data.currentQuestion = index;
+                        gameState.data.hasAnswered = false;
+                        if (gameType === 'listen') showListenQuestion();
+                        else if (gameType === 'count') showCountQuestion();
+                        else if (gameType === 'balance') showBalanceQuestion();
+                        else if (gameType === 'pick') showPickQuestion();
+                    };
+                } else {
+                    window.questionProgress.data.reset();
+                    window.questionProgress.data.triggerGoToQuestion = (index) => {
+                        gameState.data.currentQuestion = index;
+                        gameState.data.hasAnswered = false;
+                        if (gameType === 'listen') showListenQuestion();
+                        else if (gameType === 'count') showCountQuestion();
+                        else if (gameType === 'balance') showBalanceQuestion();
+                        else if (gameType === 'pick') showPickQuestion();
+                    };
+                }
+
+                if (gameType === 'listen') showListenQuestion();
+                else if (gameType === 'count') showCountQuestion();
+                else if (gameType === 'balance') showBalanceQuestion();
+                else if (gameType === 'pick') showPickQuestion();
+            } catch (e) {
+                console.error('启动数字启蒙子游戏失败:', e);
             }
-
-            if (gameType === 'listen') showListenQuestion();
-            else if (gameType === 'count') showCountQuestion();
-            else if (gameType === 'balance') showBalanceQuestion();
-            else if (gameType === 'pick') showPickQuestion();
         }
 
         // 通用: 答对反馈
@@ -6711,9 +7155,9 @@
             // 显示弹窗
             document.getElementById('letterDetailModal').style.display = 'flex';
 
-            // 自动发音
+            // 自动发音（用小写字母，避免TTS读"capital A"）
             setTimeout(() => {
-                speak(letter, 'en-US');
+                speak(letter.toLowerCase(), 'en-US');
             }, 300);
         }
         
@@ -6852,9 +7296,8 @@
             document.getElementById('letterDetailModal').style.display = 'none';
         }
 
-        // 播放字母发音
+        // 播放字母发音（用小写避免TTS读出"capital"）
         function playLetterSound() {
-            // 直接读字母，不区分大小写
             speak(currentDetailLetter.toLowerCase(), 'en-US');
         }
 
@@ -6902,13 +7345,13 @@
         // 播放快闪字母发音
         function playFlashLetter() {
             const letter = document.getElementById('flashLetter').textContent;
-            speak(letter, 'en-US');
+            speak(letter.toLowerCase(), 'en-US');
         }
 
         // 播放投篮字母发音
         function playMatchLetter() {
             const letter = document.getElementById('targetLetter').textContent;
-            speak(letter, 'en-US');
+            speak(letter.toLowerCase(), 'en-US');
         }
 
         function startFlashGame() {
@@ -6952,9 +7395,9 @@
             const letterElement = document.getElementById('flashLetter');
             letterElement.textContent = targetLetter;
 
-            // 自动发音
+            // 自动发音（用小写避免TTS读"capital"）
             setTimeout(() => {
-                speak(targetLetter, 'en-US');
+                speak(targetLetter.toLowerCase(), 'en-US');
             }, 300);
 
             // 生成选项（包含正确答案和3个干扰项）
@@ -7063,7 +7506,7 @@
 
             // 自动发音
             setTimeout(() => {
-                speak(targetLetter, 'en-US');
+                speak(targetLetter.toLowerCase(), 'en-US');
             }, 300);
 
             // 生成小写字母选项
@@ -7094,7 +7537,7 @@
 
         function checkMatchAnswer(selected, target, element) {
             // 先播放选中字母的发音
-            speak(selected.toUpperCase(), 'en-US');
+            speak(selected, 'en-US');
 
             if (selected === target) {
                 // 正确：禁用所有选项
@@ -7291,7 +7734,7 @@
 
         function playCurrentLetter() {
             const letterText = document.getElementById('alphabetLetter').textContent;
-            speak(letterText.charAt(0), 'en-US');
+            speak(letterText.charAt(0).toLowerCase(), 'en-US');
         }
 
         function updateAlphabetScore() {
@@ -7313,39 +7756,92 @@
         }
 
         // ===== 单词游戏逻辑 =====
-        let currentWordData = null; // 当前单词数据
-        let wordQuestionsHistory = []; // 保存所有题目数据
-        let currentWordQuestionIndex = 0; // 当前题目索引
-        
+        let currentWordData = null;
+        let wordQuestionsHistory = [];
+        let currentWordQuestionIndex = 0;
+        let wordGameMode = 'random'; // 'random' 或 'wrong'
+
         function startWordGame() {
-            // 重置题目历史
+            wordGameMode = 'random';
+            document.getElementById('wordModeLabel').textContent = '随机';
+            startWordGameWithWords(null);
+        }
+
+        function startWrongWordGame() {
+            const wrongWords = getWrongWords();
+            if (wrongWords.length === 0) {
+                alert('🎉 没有易错单词！所有单词都掌握得很好！');
+                return;
+            }
+            wordGameMode = 'wrong';
+            document.getElementById('wordModeLabel').textContent = '纠错';
+            startWordGameWithWords(wrongWords);
+        }
+
+        function switchWordMode() {
+            if (wordGameMode === 'random') {
+                startWrongWordGame();
+            } else {
+                startWordGame();
+            }
+        }
+
+        function startWordGameWithWords(focusWords) {
             wordQuestionsHistory = [];
             currentWordQuestionIndex = 0;
-            
-            // 初始化游戏状态
+
             gameState.word.hasAnswered = false;
             gameState.word.correct = 0;
             gameState.word.wrong = 0;
             gameState.word.score = 0;
-            
-            // 初始化题目进度追踪器
+
             window.questionProgress.word = new QuestionProgressTracker('word', 'wordQuestionProgress', 20);
-            
-            // 设置跳转回调
             window.questionProgress.word.triggerGoToQuestion = (index) => {
                 goToWordQuestion(index);
             };
-            
-            // 预先生成20道题目
-            for (let i = 0; i < 20; i++) {
-                const categories = Object.keys(wordData);
-                const randomCategory = categories[Math.floor(Math.random() * categories.length)];
-                const words = wordData[randomCategory];
-                wordQuestionsHistory.push(words[Math.floor(Math.random() * words.length)]);
+
+            // 生成题目
+            let pool = [];
+            if (focusWords) {
+                // 只从指定单词中选题
+                Object.values(wordData).forEach(cat => {
+                    cat.forEach(w => {
+                        if (focusWords.includes(w.word)) pool.push(w);
+                    });
+                });
+                if (pool.length === 0) pool = getAllWords();
+            } else {
+                pool = getAllWords();
             }
-            
-            // 显示第一题
+
+            for (let i = 0; i < Math.min(20, pool.length); i++) {
+                if (pool.length === 0) break;
+                const idx = Math.floor(Math.random() * pool.length);
+                wordQuestionsHistory.push(pool[idx]);
+                pool.splice(idx, 1);
+            }
+            // 如果不够20个，重复补充
+            while (wordQuestionsHistory.length < 20 && wordQuestionsHistory.length > 0) {
+                wordQuestionsHistory.push(wordQuestionsHistory[Math.floor(Math.random() * wordQuestionsHistory.length)]);
+            }
+
+            // 更新错误计数
+            updateWrongWordCount();
             showWordQuestion(0);
+        }
+
+        function getAllWords() {
+            const all = [];
+            Object.values(wordData).forEach(cat => {
+                cat.forEach(w => all.push(w));
+            });
+            return all;
+        }
+
+        function updateWrongWordCount() {
+            const count = getWrongWordsCount();
+            const el = document.getElementById('wrongWordCount');
+            if (el) el.textContent = count > 0 ? `📝 ${count}个易错词待复习` : '✅ 无易错词';
         }
 
         function showWordQuestion(index) {
@@ -7357,6 +7853,13 @@
             
             // 显示单词
             document.getElementById('wordDisplay').textContent = currentWordData.word;
+            
+            // 显示熟练度
+            const mastery = getWordMasteryLevel(currentWordData.word);
+            const masteryEmoji = getWordMasteryEmoji(mastery);
+            const masteryText = ['未学', '学习中', '已熟悉', '已掌握'][mastery] || '未学';
+            const hint = document.getElementById('wordMasteryHint');
+            if (hint) hint.textContent = masteryEmoji + ' ' + masteryText;
             
             // 生成选择项
             generateWordChoices();
@@ -7384,57 +7887,46 @@
         function generateWordChoices() {
             const choicesGrid = document.getElementById('wordChoices');
             choicesGrid.innerHTML = '';
-            
+
             // 收集所有单词用于生成干扰项
             let allWords = [];
-            Object.entries(wordData).forEach(([category, words]) => {
-                words.forEach(word => {
-                    const key = `word|${category}|${word.word}`;
-                    allWords.push({
-                        ...word,
-                        emoji: getCustomEmoji(key, word.emoji)
-                    });
-                });
+            Object.values(wordData).forEach(words => {
+                words.forEach(w => allWords.push(w));
             });
-            
-            // 获取当前单词的自定义emoji
-            const currentCategory = Object.keys(wordData).find(cat => 
-                wordData[cat].some(w => w.word === currentWordData.word)
-            );
-            const currentKey = `word|${currentCategory}|${currentWordData.word}`;
-            const currentEmoji = getCustomEmoji(currentKey, currentWordData.emoji);
-            
+
             // 生成4个选项（包含正确答案）
-            let choices = [{
-                ...currentWordData,
-                emoji: currentEmoji
-            }];
+            let choices = [{ ...currentWordData }];
             let availableWords = allWords.filter(w => w.word !== currentWordData.word);
-            
+
             while (choices.length < 4 && availableWords.length > 0) {
                 const randomIndex = Math.floor(Math.random() * availableWords.length);
                 choices.push(availableWords.splice(randomIndex, 1)[0]);
             }
-            
+
             // 打乱顺序
             choices = shuffleArray(choices);
-            
+
             // 生成选择卡片
             choices.forEach(choice => {
                 const card = document.createElement('div');
                 card.className = 'choice-card';
                 card.onclick = () => selectWordChoice(card, choice.word === currentWordData.word);
-                
+
                 card.innerHTML = `
                     <span class="choice-image">${choice.emoji}</span>
                     <span class="choice-text">${choice.word}</span>
                 `;
-                
+
                 choicesGrid.appendChild(card);
             });
         }
 
         function selectWordChoice(card, isCorrect) {
+            // 记录单词熟练度
+            if (currentWordData && currentWordData.word) {
+                updateWordMastery(currentWordData.word, isCorrect);
+            }
+            
             // 使用统一交互系统
             handleChoiceInteraction({
                 card: card,
@@ -7442,7 +7934,10 @@
                 gameType: 'word',
                 lang: 'en-US',
                 onNextRound: nextWordRound,
-                onUpdateScore: updateWordScore
+                onUpdateScore: function() {
+                    updateWordScore();
+                    updateWrongWordCount();
+                }
             });
         }
 
@@ -7463,11 +7958,89 @@
             currentWordQuestionIndex = 0;
             updateWordScore();
             startWordGame();
+            updateWrongWordCount();
         }
         
         // 单词游戏跳转方法（供进度追踪器调用）
         function goToWordQuestion(index) {
             showWordQuestion(index);
+        }
+
+        // ===== 句式练习功能 =====
+        let currentSentenceCategory = null;
+
+        function showRelatedSentence() {
+            // 找当前单词对应的句子
+            if (!currentWordData || !currentWordData.word) return;
+            const word = currentWordData.word.toLowerCase();
+            let found = null;
+            for (const cat of Object.values(commonSentences)) {
+                for (const item of cat.items) {
+                    if (item.en.toLowerCase().includes(word)) {
+                        found = item; break;
+                    }
+                }
+                if (found) break;
+            }
+            if (!found) return;
+            
+            const el = document.createElement('div');
+            el.className = 'sentence-flash';
+            el.innerHTML = `
+                <div style="background:#e8f5e9;border:2px solid #4CAF50;border-radius:12px;padding:10px 16px;margin:10px 0;text-align:center;font-size:16px;animation:fadeInDown 0.3s">
+                    <div style="color:#2e7d32;font-weight:bold;font-size:13px;margin-bottom:4px">💬 常用句式</div>
+                    <div style="font-size:18px;color:#1b5e20">${found.en}</div>
+                    <div style="font-size:13px;color:#666;margin-top:3px">${found.cn}</div>
+                </div>
+            `;
+            const choicesGrid = document.getElementById('wordChoices');
+            if (choicesGrid) {
+                choicesGrid.appendChild(el);
+                setTimeout(() => { if (el.parentNode) el.remove(); }, 1800);
+            }
+        }
+
+        function startSentencePractice(categoryId) {
+            currentSentenceCategory = categoryId;
+            // 弹出句式学习模式
+            const container = document.getElementById('sentencePracticeOverlay');
+            if (container) {
+                container.style.display = 'flex';
+                renderSentenceCategory(categoryId);
+            }
+        }
+
+        function renderSentenceCategory(catId) {
+            const cat = commonSentences[catId];
+            if (!cat) return;
+            const container = document.getElementById('sentencePracticeContent');
+            if (!container) return;
+
+            let html = `<div style="text-align:center;margin-bottom:12px">
+                <span style="font-size:28px">${cat.emoji}</span>
+                <h3 style="margin:6px 0;color:#1f7a3a">${cat.name}（${cat.items.length}句）</h3>
+            </div><div class="sentence-list">`;
+
+            cat.items.forEach((item, idx) => {
+                html += `
+                    <div class="sentence-card" onclick="speak('${item.en.replace(/'/g, "\\'")}', 'en-US')" style="cursor:pointer;background:#f9f9f9;border:1px solid #e0e0e0;border-radius:10px;padding:10px 14px;margin:6px 0;transition:0.2s" onmouseover="this.style.background='#e8f5e9'" onmouseout="this.style.background='#f9f9f9'">
+                        <div style="display:flex;justify-content:space-between;align-items:center">
+                            <div>
+                                <div style="font-size:16px;font-weight:bold;color:#333">${idx+1}. ${item.en}</div>
+                                <div style="font-size:13px;color:#888;margin-top:2px">${item.cn}</div>
+                            </div>
+                            <div style="font-size:20px">🔊</div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            html += '</div>';
+            html += `<div style="text-align:center;margin-top:12px">
+                <button onclick="document.getElementById('sentencePracticeOverlay').style.display='none'"
+                    style="background:#1f7a3a;color:white;border:none;padding:8px 28px;border-radius:20px;font-size:14px;cursor:pointer">关闭</button>
+            </div>`;
+            container.innerHTML = html;
         }
 
         // ===== 汉字游戏逻辑 =====
@@ -8508,6 +9081,11 @@
                     window.questionProgress[gameType].recordAnswer(true);
                 }
                 
+                // 句式提示：答对后显示一句相关英语句子
+                if (gameType === 'word') {
+                    showRelatedSentence();
+                }
+                
                 // 2秒后自动跳转到下一题
                 setTimeout(() => {
                     if (onNextRound) onNextRound();
@@ -8772,11 +9350,16 @@
             if (savedCourses) {
                 try {
                     const parsed = JSON.parse(savedCourses);
-                    // 合并默认课程和保存的课程
-                    readingCourses = { ...readingCourses, ...parsed };
-                    console.log('课程数据已加载:', Object.keys(readingCourses));
+                    if (parsed && typeof parsed === 'object' && !Array.isArray(parsed)) {
+                        // 只合并对象类型的课程数据
+                        readingCourses = { ...readingCourses, ...parsed };
+                    } else {
+                        console.warn('课程数据格式异常，已忽略localStorage数据');
+                        localStorage.removeItem('readingCourses');
+                    }
                 } catch (e) {
-                    console.error('加载课程数据失败:', e);
+                    console.error('加载课程数据失败，已重置:', e);
+                    localStorage.removeItem('readingCourses');
                 }
             }
         }

@@ -1,8 +1,8 @@
 {
   "metadata": {
     "created_at": "2026-03-18 18:45:10",
-    "last_updated": "2026-03-24 16:56:28",
-    "total_words": 53
+    "last_updated": "2026-07-20 10:36",
+    "total_words": 96
   },
   "words": {
     "Dog": {
@@ -618,7 +618,7 @@
     "Small": {
       "chinese": "小的",
       "category": "adjectives",
-      "emoji": "🐭",
+      "emoji": "🐜",
       "color": "#E74C3C",
       "bg": "FADBD8",
       "difficulty": 1,
@@ -1013,6 +1013,823 @@
         "Your neck is beautiful."
       ],
       "added_at": "2026-03-24"
+    },
+    "Horse": {
+      "chinese": "马",
+      "category": "animals",
+      "emoji": "🐴",
+      "color": "#8B4513",
+      "bg": "FFF5E6",
+      "difficulty": 1,
+      "phrases": [
+        "This is a horse.",
+        "I see a horse.",
+        "Look at the horse!"
+      ],
+      "sentences": [
+        "Can you say horse?",
+        "I like horse.",
+        "What color is the horse?"
+      ],
+      "added_at": "2026-07-20"
+    },
+    "Snake": {
+      "chinese": "蛇",
+      "category": "animals",
+      "emoji": "🐍",
+      "color": "#2E8B57",
+      "bg": "F0FFF0",
+      "difficulty": 2,
+      "phrases": [
+        "This is a snake.",
+        "I see a snake.",
+        "Look at the snake!"
+      ],
+      "sentences": [
+        "Can you say snake?",
+        "I like snake.",
+        "What color is the snake?"
+      ],
+      "added_at": "2026-07-20"
+    },
+    "Zebra": {
+      "chinese": "斑马",
+      "category": "animals",
+      "emoji": "🦓",
+      "color": "#696969",
+      "bg": "F5F5F5",
+      "difficulty": 2,
+      "phrases": [
+        "This is a zebra.",
+        "I see a zebra.",
+        "Look at the zebra!"
+      ],
+      "sentences": [
+        "Can you say zebra?",
+        "I like zebra.",
+        "What color is the zebra?"
+      ],
+      "added_at": "2026-07-20"
+    },
+    "Tiger": {
+      "chinese": "老虎",
+      "category": "animals",
+      "emoji": "🐯",
+      "color": "#FF6347",
+      "bg": "FFF8F0",
+      "difficulty": 2,
+      "phrases": [
+        "This is a tiger.",
+        "I see a tiger.",
+        "Look at the tiger!"
+      ],
+      "sentences": [
+        "Can you say tiger?",
+        "I like tiger.",
+        "What color is the tiger?"
+      ],
+      "added_at": "2026-07-20"
+    },
+    "Butterfly": {
+      "chinese": "蝴蝶",
+      "category": "animals",
+      "emoji": "🦋",
+      "color": "#DA70D6",
+      "bg": "FFF0FF",
+      "difficulty": 2,
+      "phrases": [
+        "This is a butterfly.",
+        "I see a butterfly.",
+        "Look at the butterfly!"
+      ],
+      "sentences": [
+        "Can you say butterfly?",
+        "I like butterfly.",
+        "What color is the butterfly?"
+      ],
+      "added_at": "2026-07-20"
+    },
+    "Duck": {
+      "chinese": "鸭子",
+      "category": "animals",
+      "emoji": "🦆",
+      "color": "#FFD700",
+      "bg": "FFFFF0",
+      "difficulty": 1,
+      "phrases": [
+        "This is a duck.",
+        "I see a duck.",
+        "Look at the duck!"
+      ],
+      "sentences": [
+        "Can you say duck?",
+        "I like duck.",
+        "What color is the duck?"
+      ],
+      "added_at": "2026-07-20"
+    },
+    "Chicken": {
+      "chinese": "鸡",
+      "category": "animals",
+      "emoji": "🐔",
+      "color": "#FFA500",
+      "bg": "FFF5E6",
+      "difficulty": 1,
+      "phrases": [
+        "This is a chicken.",
+        "I see a chicken.",
+        "Look at the chicken!"
+      ],
+      "sentences": [
+        "Can you say chicken?",
+        "I like chicken.",
+        "What color is the chicken?"
+      ],
+      "added_at": "2026-07-20"
+    },
+    "Panda": {
+      "chinese": "熊猫",
+      "category": "animals",
+      "emoji": "🐼",
+      "color": "#2F4F4F",
+      "bg": "F5FFFA",
+      "difficulty": 2,
+      "phrases": [
+        "This is a panda.",
+        "I see a panda.",
+        "Look at the panda!"
+      ],
+      "sentences": [
+        "Can you say panda?",
+        "I like panda.",
+        "What color is the panda?"
+      ],
+      "added_at": "2026-07-20"
+    },
+    "Seal": {
+      "chinese": "海豹",
+      "category": "animals",
+      "emoji": "🦭",
+      "color": "#708090",
+      "bg": "F0F8FF",
+      "difficulty": 2,
+      "phrases": [
+        "This is a seal.",
+        "I see a seal.",
+        "Look at the seal!"
+      ],
+      "sentences": [
+        "Can you say seal?",
+        "I like seal.",
+        "What color is the seal?"
+      ],
+      "added_at": "2026-07-20"
+    },
+    "Owl": {
+      "chinese": "猫头鹰",
+      "category": "animals",
+      "emoji": "🦉",
+      "color": "#8B7355",
+      "bg": "FFF8DC",
+      "difficulty": 2,
+      "phrases": [
+        "This is a owl.",
+        "I see a owl.",
+        "Look at the owl!"
+      ],
+      "sentences": [
+        "Can you say owl?",
+        "I like owl.",
+        "What color is the owl?"
+      ],
+      "added_at": "2026-07-20"
+    },
+    "Penguin": {
+      "chinese": "企鹅",
+      "category": "animals",
+      "emoji": "🐧",
+      "color": "#4682B4",
+      "bg": "F0F8FF",
+      "difficulty": 2,
+      "phrases": [
+        "This is a penguin.",
+        "I see a penguin.",
+        "Look at the penguin!"
+      ],
+      "sentences": [
+        "Can you say penguin?",
+        "I like penguin.",
+        "What color is the penguin?"
+      ],
+      "added_at": "2026-07-20"
+    },
+    "Biscuit": {
+      "chinese": "饼干",
+      "category": "food",
+      "emoji": "🍪",
+      "color": "#D2691E",
+      "bg": "FFF5E6",
+      "difficulty": 1,
+      "phrases": [
+        "This is a biscuit.",
+        "I see a biscuit.",
+        "Look at the biscuit!"
+      ],
+      "sentences": [
+        "Can you say biscuit?",
+        "I like biscuit.",
+        "What color is the biscuit?"
+      ],
+      "added_at": "2026-07-20"
+    },
+    "Lunch": {
+      "chinese": "午餐",
+      "category": "food",
+      "emoji": "🍱",
+      "color": "#CD853F",
+      "bg": "FFF8DC",
+      "difficulty": 1,
+      "phrases": [
+        "This is a lunch.",
+        "I see a lunch.",
+        "Look at the lunch!"
+      ],
+      "sentences": [
+        "Can you say lunch?",
+        "I like lunch.",
+        "What color is the lunch?"
+      ],
+      "added_at": "2026-07-20"
+    },
+    "Breakfast": {
+      "chinese": "早餐",
+      "category": "food",
+      "emoji": "🥞",
+      "color": "#FFA07A",
+      "bg": "FFF5F0",
+      "difficulty": 1,
+      "phrases": [
+        "This is a breakfast.",
+        "I see a breakfast.",
+        "Look at the breakfast!"
+      ],
+      "sentences": [
+        "Can you say breakfast?",
+        "I like breakfast.",
+        "What color is the breakfast?"
+      ],
+      "added_at": "2026-07-20"
+    },
+    "Dinner": {
+      "chinese": "晚餐",
+      "category": "food",
+      "emoji": "🍽️",
+      "color": "#8B0000",
+      "bg": "FFF5F0",
+      "difficulty": 1,
+      "phrases": [
+        "This is a dinner.",
+        "I see a dinner.",
+        "Look at the dinner!"
+      ],
+      "sentences": [
+        "Can you say dinner?",
+        "I like dinner.",
+        "What color is the dinner?"
+      ],
+      "added_at": "2026-07-20"
+    },
+    "Cup": {
+      "chinese": "杯子",
+      "category": "food",
+      "emoji": "🥤",
+      "color": "#6495ED",
+      "bg": "F0F8FF",
+      "difficulty": 1,
+      "phrases": [
+        "This is a cup.",
+        "I see a cup.",
+        "Look at the cup!"
+      ],
+      "sentences": [
+        "Can you say cup?",
+        "I like cup.",
+        "What color is the cup?"
+      ],
+      "added_at": "2026-07-20"
+    },
+    "Plate": {
+      "chinese": "盘子",
+      "category": "food",
+      "emoji": "🍽️",
+      "color": "#C0C0C0",
+      "bg": "FAFAFA",
+      "difficulty": 1,
+      "phrases": [
+        "This is a plate.",
+        "I see a plate.",
+        "Look at the plate!"
+      ],
+      "sentences": [
+        "Can you say plate?",
+        "I like plate.",
+        "What color is the plate?"
+      ],
+      "added_at": "2026-07-20"
+    },
+    "Sister": {
+      "chinese": "姐妹",
+      "category": "family",
+      "emoji": "👧",
+      "color": "#FF69B4",
+      "bg": "FFF0F5",
+      "difficulty": 1,
+      "phrases": [
+        "This is a sister.",
+        "I see a sister.",
+        "Look at the sister!"
+      ],
+      "sentences": [
+        "Can you say sister?",
+        "I like sister.",
+        "What color is the sister?"
+      ],
+      "added_at": "2026-07-20"
+    },
+    "Brother": {
+      "chinese": "兄弟",
+      "category": "family",
+      "emoji": "👦",
+      "color": "#4169E1",
+      "bg": "F0F8FF",
+      "difficulty": 1,
+      "phrases": [
+        "This is a brother.",
+        "I see a brother.",
+        "Look at the brother!"
+      ],
+      "sentences": [
+        "Can you say brother?",
+        "I like brother.",
+        "What color is the brother?"
+      ],
+      "added_at": "2026-07-20"
+    },
+    "Uncle": {
+      "chinese": "叔叔",
+      "category": "family",
+      "emoji": "👨",
+      "color": "#2F4F4F",
+      "bg": "F5FFFA",
+      "difficulty": 1,
+      "phrases": [
+        "This is a uncle.",
+        "I see a uncle.",
+        "Look at the uncle!"
+      ],
+      "sentences": [
+        "Can you say uncle?",
+        "I like uncle.",
+        "What color is the uncle?"
+      ],
+      "added_at": "2026-07-20"
+    },
+    "Aunt": {
+      "chinese": "阿姨",
+      "category": "family",
+      "emoji": "👩",
+      "color": "#C71585",
+      "bg": "FFF0F5",
+      "difficulty": 1,
+      "phrases": [
+        "This is a aunt.",
+        "I see a aunt.",
+        "Look at the aunt!"
+      ],
+      "sentences": [
+        "Can you say aunt?",
+        "I like aunt.",
+        "What color is the aunt?"
+      ],
+      "added_at": "2026-07-20"
+    },
+    "Family": {
+      "chinese": "家庭",
+      "category": "family",
+      "emoji": "👪",
+      "color": "#20B2AA",
+      "bg": "F0FFF0",
+      "difficulty": 1,
+      "phrases": [
+        "This is a family.",
+        "I see a family.",
+        "Look at the family!"
+      ],
+      "sentences": [
+        "Can you say family?",
+        "I like family.",
+        "What color is the family?"
+      ],
+      "added_at": "2026-07-20"
+    },
+    "Me": {
+      "chinese": "我",
+      "category": "family",
+      "emoji": "🧑",
+      "color": "#87CEEB",
+      "bg": "F0F8FF",
+      "difficulty": 1,
+      "phrases": [
+        "This is a me.",
+        "I see a me.",
+        "Look at the me!"
+      ],
+      "sentences": [
+        "Can you say me?",
+        "I like me.",
+        "What color is the me?"
+      ],
+      "added_at": "2026-07-20"
+    },
+    "Pink": {
+      "chinese": "粉色",
+      "category": "colors",
+      "emoji": "🩷",
+      "color": "#FF69B4",
+      "bg": "FFF0F5",
+      "difficulty": 1,
+      "phrases": [
+        "This is a pink.",
+        "I see a pink.",
+        "Look at the pink!"
+      ],
+      "sentences": [
+        "Can you say pink?",
+        "I like pink.",
+        "What color is the pink?"
+      ],
+      "added_at": "2026-07-20"
+    },
+    "Orange": {
+      "chinese": "橙色",
+      "category": "colors",
+      "emoji": "🟠",
+      "color": "#FF8C00",
+      "bg": "FFF8DC",
+      "difficulty": 1,
+      "phrases": [
+        "This is a orange.",
+        "I see a orange.",
+        "Look at the orange!"
+      ],
+      "sentences": [
+        "Can you say orange?",
+        "I like orange.",
+        "What color is the orange?"
+      ],
+      "added_at": "2026-07-20"
+    },
+    "Happy": {
+      "chinese": "快乐的",
+      "category": "adjectives",
+      "emoji": "😊",
+      "color": "#FFD700",
+      "bg": "FFFEF0",
+      "difficulty": 1,
+      "phrases": [
+        "This is a happy.",
+        "I see a happy.",
+        "Look at the happy!"
+      ],
+      "sentences": [
+        "Can you say happy?",
+        "I like happy.",
+        "What color is the happy?"
+      ],
+      "added_at": "2026-07-20"
+    },
+    "Angry": {
+      "chinese": "生气的",
+      "category": "adjectives",
+      "emoji": "😡",
+      "color": "#DC143C",
+      "bg": "FFF0F0",
+      "difficulty": 1,
+      "phrases": [
+        "This is a angry.",
+        "I see a angry.",
+        "Look at the angry!"
+      ],
+      "sentences": [
+        "Can you say angry?",
+        "I like angry.",
+        "What color is the angry?"
+      ],
+      "added_at": "2026-07-20"
+    },
+    "Shoes": {
+      "chinese": "鞋子",
+      "category": "clothing",
+      "emoji": "👟",
+      "color": "#8B4513",
+      "bg": "FAF0E6",
+      "difficulty": 1,
+      "phrases": [
+        "This is a shoes.",
+        "I see a shoes.",
+        "Look at the shoes!"
+      ],
+      "sentences": [
+        "Can you say shoes?",
+        "I like shoes.",
+        "What color is the shoes?"
+      ],
+      "added_at": "2026-07-20"
+    },
+    "Coat": {
+      "chinese": "外套",
+      "category": "clothing",
+      "emoji": "🧥",
+      "color": "#4682B4",
+      "bg": "F0F8FF",
+      "difficulty": 1,
+      "phrases": [
+        "This is a coat.",
+        "I see a coat.",
+        "Look at the coat!"
+      ],
+      "sentences": [
+        "Can you say coat?",
+        "I like coat.",
+        "What color is the coat?"
+      ],
+      "added_at": "2026-07-20"
+    },
+    "Clothes": {
+      "chinese": "衣服",
+      "category": "clothing",
+      "emoji": "👕",
+      "color": "#DB7093",
+      "bg": "FFF0F5",
+      "difficulty": 1,
+      "phrases": [
+        "This is a clothes.",
+        "I see a clothes.",
+        "Look at the clothes!"
+      ],
+      "sentences": [
+        "Can you say clothes?",
+        "I like clothes.",
+        "What color is the clothes?"
+      ],
+      "added_at": "2026-07-20"
+    },
+    "Sweater": {
+      "chinese": "毛衣",
+      "category": "clothing",
+      "emoji": "🧶",
+      "color": "#B22222",
+      "bg": "FFF5F0",
+      "difficulty": 2,
+      "phrases": [
+        "This is a sweater.",
+        "I see a sweater.",
+        "Look at the sweater!"
+      ],
+      "sentences": [
+        "Can you say sweater?",
+        "I like sweater.",
+        "What color is the sweater?"
+      ],
+      "added_at": "2026-07-20"
+    },
+    "House": {
+      "chinese": "房子",
+      "category": "house",
+      "emoji": "🏠",
+      "color": "#CD853F",
+      "bg": "FFF8DC",
+      "difficulty": 1,
+      "phrases": [
+        "This is a house.",
+        "I see a house.",
+        "Look at the house!"
+      ],
+      "sentences": [
+        "Can you say house?",
+        "I like house.",
+        "What color is the house?"
+      ],
+      "added_at": "2026-07-20"
+    },
+    "Door": {
+      "chinese": "门",
+      "category": "house",
+      "emoji": "🚪",
+      "color": "#8B4513",
+      "bg": "FAF0E6",
+      "difficulty": 1,
+      "phrases": [
+        "This is a door.",
+        "I see a door.",
+        "Look at the door!"
+      ],
+      "sentences": [
+        "Can you say door?",
+        "I like door.",
+        "What color is the door?"
+      ],
+      "added_at": "2026-07-20"
+    },
+    "Window": {
+      "chinese": "窗户",
+      "category": "house",
+      "emoji": "🪟",
+      "color": "#87CEEB",
+      "bg": "F0F8FF",
+      "difficulty": 1,
+      "phrases": [
+        "This is a window.",
+        "I see a window.",
+        "Look at the window!"
+      ],
+      "sentences": [
+        "Can you say window?",
+        "I like window.",
+        "What color is the window?"
+      ],
+      "added_at": "2026-07-20"
+    },
+    "Bed": {
+      "chinese": "床",
+      "category": "house",
+      "emoji": "🛏️",
+      "color": "#DEB887",
+      "bg": "FFF8F0",
+      "difficulty": 1,
+      "phrases": [
+        "This is a bed.",
+        "I see a bed.",
+        "Look at the bed!"
+      ],
+      "sentences": [
+        "Can you say bed?",
+        "I like bed.",
+        "What color is the bed?"
+      ],
+      "added_at": "2026-07-20"
+    },
+    "Table": {
+      "chinese": "桌子",
+      "category": "house",
+      "emoji": "🪑",
+      "color": "#8B7355",
+      "bg": "FFF5E6",
+      "difficulty": 1,
+      "phrases": [
+        "This is a table.",
+        "I see a table.",
+        "Look at the table!"
+      ],
+      "sentences": [
+        "Can you say table?",
+        "I like table.",
+        "What color is the table?"
+      ],
+      "added_at": "2026-07-20"
+    },
+    "Soap": {
+      "chinese": "肥皂",
+      "category": "daily",
+      "emoji": "🧼",
+      "color": "#87CEEB",
+      "bg": "F0F8FF",
+      "difficulty": 1,
+      "phrases": [
+        "This is a soap.",
+        "I see a soap.",
+        "Look at the soap!"
+      ],
+      "sentences": [
+        "Can you say soap?",
+        "I like soap.",
+        "What color is the soap?"
+      ],
+      "added_at": "2026-07-20"
+    },
+    "Towel": {
+      "chinese": "毛巾",
+      "category": "daily",
+      "emoji": "🧴",
+      "color": "#FFDAB9",
+      "bg": "FFF5F0",
+      "difficulty": 1,
+      "phrases": [
+        "This is a towel.",
+        "I see a towel.",
+        "Look at the towel!"
+      ],
+      "sentences": [
+        "Can you say towel?",
+        "I like towel.",
+        "What color is the towel?"
+      ],
+      "added_at": "2026-07-20"
+    },
+    "Toothbrush": {
+      "chinese": "牙刷",
+      "category": "daily",
+      "emoji": "🪥",
+      "color": "#00CED1",
+      "bg": "F0FFFF",
+      "difficulty": 2,
+      "phrases": [
+        "This is a toothbrush.",
+        "I see a toothbrush.",
+        "Look at the toothbrush!"
+      ],
+      "sentences": [
+        "Can you say toothbrush?",
+        "I like toothbrush.",
+        "What color is the toothbrush?"
+      ],
+      "added_at": "2026-07-20"
+    },
+    "Comb": {
+      "chinese": "梳子",
+      "category": "daily",
+      "emoji": "🪮",
+      "color": "#DDA0DD",
+      "bg": "FFF0FF",
+      "difficulty": 2,
+      "phrases": [
+        "This is a comb.",
+        "I see a comb.",
+        "Look at the comb!"
+      ],
+      "sentences": [
+        "Can you say comb?",
+        "I like comb.",
+        "What color is the comb?"
+      ],
+      "added_at": "2026-07-20"
+    },
+    "Snow": {
+      "chinese": "雪",
+      "category": "weather",
+      "emoji": "❄️",
+      "color": "#E0FFFF",
+      "bg": "F0FFFF",
+      "difficulty": 1,
+      "phrases": [
+        "This is a snow.",
+        "I see a snow.",
+        "Look at the snow!"
+      ],
+      "sentences": [
+        "Can you say snow?",
+        "I like snow.",
+        "What color is the snow?"
+      ],
+      "added_at": "2026-07-20"
+    },
+    "Rain": {
+      "chinese": "雨",
+      "category": "weather",
+      "emoji": "🌧️",
+      "color": "#4682B4",
+      "bg": "F0F8FF",
+      "difficulty": 1,
+      "phrases": [
+        "This is a rain.",
+        "I see a rain.",
+        "Look at the rain!"
+      ],
+      "sentences": [
+        "Can you say rain?",
+        "I like rain.",
+        "What color is the rain?"
+      ],
+      "added_at": "2026-07-20"
+    },
+    "Tools": {
+      "chinese": "工具",
+      "category": "tools",
+      "emoji": "🔧",
+      "color": "#696969",
+      "bg": "F5F5F5",
+      "difficulty": 2,
+      "phrases": [
+        "This is a tools.",
+        "I see a tools.",
+        "Look at the tools!"
+      ],
+      "sentences": [
+        "Can you say tools?",
+        "I like tools.",
+        "What color is the tools?"
+      ],
+      "added_at": "2026-07-20"
     }
   }
 }
