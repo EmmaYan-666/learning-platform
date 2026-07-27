@@ -9329,19 +9329,23 @@
 
         // 初始化
         document.addEventListener('DOMContentLoaded', () => {
-            console.log('儿童学习游戏平台已加载!');
-            // 构建汉字句子数据
-            sentenceData = buildSentenceDataFromChinese();
-            // 加载并更新进度条
-            updateHomeProgress();
-            // 加载自定义emoji配置
-            loadCustomEmojis();
-            // 加载语音设置
-            loadVoiceSettings();
-            // 加载课程数据
-            loadCourses();
-            // 加载课程进度
-            loadCourseProgress();
+            try {
+                console.log('儿童学习游戏平台已加载!');
+                // 构建汉字句子数据
+                sentenceData = buildSentenceDataFromChinese();
+                // 加载并更新进度条
+                updateHomeProgress();
+                // 加载自定义emoji配置
+                loadCustomEmojis();
+                // 加载语音设置
+                loadVoiceSettings();
+                // 加载课程数据
+                loadCourses();
+                // 加载课程进度
+                loadCourseProgress();
+            } catch (e) {
+                console.error('页面初始化异常:', e);
+            }
         });
 
         // 加载课程数据
